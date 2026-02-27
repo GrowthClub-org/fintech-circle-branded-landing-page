@@ -504,7 +504,12 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 0;
       margin-top: 3rem;
+      margin-bottom: 4rem;
       border: 1px solid rgba(198, 200, 201, 0.3);
+    }
+
+    .dark-section .insight-grid {
+      margin-bottom: 4rem;
     }
 
     .insight-item {
@@ -674,109 +679,173 @@
       border-left: 3px solid var(--sky);
     }
 
-    /* ROADMAP */
-    /* ROADMAP VISUALIZATION */
-    .roadmap-list {
-      margin-top: 5rem;
+    /* ===== ROADMAP (HORIZONTAL WAVE TIMELINE) ===== */
+    .roadmap-wave{
       position: relative;
-      padding-left: 4.5rem;
-    }
-
-    .roadmap-line {
-      position: absolute;
-      left: 1.5rem;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--sky) 0%, rgba(34, 193, 201, 0.1) 100%);
-      box-shadow: 0 0 15px rgba(34, 193, 201, 0.4);
-    }
-
-    .roadmap-item {
-      position: relative;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      padding: 2.5rem 3rem;
-      margin-bottom: 2.5rem;
-      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      margin-top: 3.5rem;
+      padding: 2rem 0 1rem;
       display: grid;
-      grid-template-columns: 80px 1fr;
-      gap: 2rem;
-      align-items: center;
-      backdrop-filter: blur(10px);
+      grid-template-columns: repeat(6, minmax(190px, 1fr));
+      gap: 1.25rem;
+      --node: 86px;          /* node diameter */
+      --node-center: calc(var(--node) / 2);
+      padding-top: 2rem;
     }
 
-    .roadmap-item:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(34, 193, 201, 0.3);
-      transform: translateX(10px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    }
-
-    .roadmap-dot {
+    /* the connecting line */
+    .roadmap-wave-track{
       position: absolute;
-      left: -3rem;
-      /* Aligned with the line at 1.5rem from left padding */
-      top: 50%;
-      transform: translateY(-50%);
-      width: 12px;
-      height: 12px;
-      background: var(--sky);
-      border-radius: 50%;
-      box-shadow: 0 0 15px var(--sky);
+      left: 0;
+      right: 0;
+      top: calc(2rem + var(--node-center)); /* aligns through the center of nodes */
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(
+        90deg,
+       rgba(34,193,201,0.15),
+       rgba(34,193,201,0.55),
+       rgba(114,79,194,0.35),
+       rgba(34,193,201,0.25)
+      );
+      box-shadow: 0 0 18px rgba(34,193,201,0.15);
+      z-index: 1;
+    }
+
+    /* each step column */
+    .roadmap-wave-item{
+      position: relative;
+      display: grid;
+      grid-template-rows: auto auto;
+      align-items: start;
+      justify-items: center;
+    }
+
+    /* alternate layout */
+    .roadmap-wave-item.is-down{
+      padding-top: 110px; /* pushes the card down */
+    }
+    .roadmap-wave-item:not(.is-down){
+      padding-bottom: 110px; /* gives space above track */
+    }
+
+    /* node */
+    .roadmap-wave-node{
+      width: var(--node);
+      height: var(--node);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.10);
+      backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+      position: relative;
       z-index: 2;
     }
 
-    .roadmap-step {
+    /* small connector “stem” to card */
+    .roadmap-wave-node::after{
+      content: "";
+      position: absolute;
+      left: 50%;
+      width: 2px;
+      height: 34px;
+      background: rgba(34,193,201,0.35);
+      transform: translateX(-50%);
+    }
+    .roadmap-wave-item.is-down .roadmap-wave-node::after{
+      top: 100%;
+    }
+    .roadmap-wave-item:not(.is-down) .roadmap-wave-card{
+      transform: translateY(-6px);
+    }
+    .roadmap-wave-item:not(.is-down) .roadmap-wave-node::after{
+      bottom: 100%;
+    }
+
+    /* number inside node */
+    .roadmap-wave-num{
       font-family: var(--font-heading);
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: rgba(34, 193, 201, 0.4);
-      line-height: 1;
-      letter-spacing: -0.02em;
+      font-weight: 800;
+      font-size: 1.35rem;
+      letter-spacing: 0.08em;
+      color: rgba(34,193,201,0.9);
+      text-shadow: 0 0 18px rgba(34,193,201,0.25);
     }
 
-    .roadmap-content h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.6rem;
-      color: var(--white);
+    /* card */
+    .roadmap-wave-card{
+      width: 100%;
+      max-width: 320px;
+      border-radius: 16px;
+      padding: 1.25rem 1.25rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+      min-height: 240px;
     }
 
-    .roadmap-content p {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      color: var(--muted);
+    .roadmap-wave-card h3{
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .roadmap-wave-card p{
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.70);
       max-width: none;
+      display: -webkit-box;
+      -webkit-line-clamp: 8;     /* clamps long text */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
-    @keyframes lineGrow {
-      from {
-        height: 0;
-      }
-
-      to {
-        height: 100%;
-      }
+    /* hover polish */
+    .roadmap-wave-item:hover .roadmap-wave-node{
+      border-color: rgba(34,193,201,0.22);
+      transform: translateY(-2px);
+      transition: 220ms ease;
+    }
+    .roadmap-wave-item:hover .roadmap-wave-card{
+      border-color: rgba(34,193,201,0.18);
+      transition: 220ms ease;
     }
 
-    .roadmap-line {
-      animation: lineGrow 2s ease-out forwards;
-      transform-origin: top;
-    }
-
-    .fade-in-right {
-      opacity: 0;
-      transform: translateX(20px);
-      animation: fadeInRight 0.8s ease-out forwards;
-    }
-
-    @keyframes fadeInRight {
-      to {
-        opacity: 1;
-        transform: translateX(0);
+    /* responsive: collapse to vertical cards on smaller screens */
+    @media (max-width: 1100px){
+      .roadmap-wave{
+        grid-template-columns: repeat(3, minmax(180px, 1fr));
+        gap: 1.25rem;
       }
     }
+
+    @media (max-width: 780px){
+      .roadmap-wave{
+        grid-template-columns: 1fr;
+      }
+      .roadmap-wave-track{
+        top: 104px;
+        height: 4px;
+        opacity: 0.75;
+      }
+      .roadmap-wave-item,
+      .roadmap-wave-item.is-down{
+        padding: 0;
+        justify-items: start;
+        grid-template-columns: 86px 1fr;
+        grid-template-rows: auto;
+        column-gap: 1rem;
+        align-items: start;
+      }
+      .roadmap-wave-node::after{
+        display: none;
+      }
+      .roadmap-wave-card{
+        max-width: none;
+      }
+        }
 
     /* PROGRAMME */
     .programme-box {
@@ -1384,7 +1453,7 @@
         </div>
       </div>
 
-      <h3>Selective Access</h3>
+      <h3 style="margin-top:4rem;">Selective Access</h3>
       <p>Most UK fintech board roles are filled through closed networks, existing relationships, and specialist
         headhunters. The published market is a fraction of actual appointment activity.</p>
     </div>
@@ -1394,82 +1463,70 @@
 
 
   <!-- ROADMAP -->
-  <div class="section-full dark-section">
-    <div class="mesh-grid"></div>
-    <div class="glow-bg"
-      style="background: radial-gradient(circle at 90% 80%, rgba(114, 79, 194, 0.1) 0%, transparent 50%);"></div>
-    <div class="section-inner">
-      <div class="section-rule" style="background:var(--gold);"></div>
-      <p class="section-label">Masterclass Content</p>
-      <h2>The 6-Step <em>Insider Board Roadmap</em></h2>
-      <p style="max-width:580px;">Six strategic frameworks, built from direct board experience. Each step maps a
-        dimension of board readiness that most executives overlook entirely.</p>
+  <div class="section-full dark-section"> <div class="mesh-grid"></div> <div class="glow-bg" style="background: radial-gradient(circle at 90% 80%, rgba(114, 79, 194, 0.1) 0%, transparent 50%);"></div> <div class="section-inner"> <div class="section-rule" style="background:var(--gold);"></div> <p class="section-label">Masterclass Content</p> <h2>The 6-Step <em>Insider Board Roadmap</em></h2> <p style="max-width:580px;">Six strategic frameworks, built from direct board experience. Each step maps a dimension of board readiness that most executives overlook entirely.</p>
+  <div class="roadmap-wave">
+    <div class="roadmap-wave-track"></div>
 
-      <div class="roadmap-list">
-        <div class="roadmap-line"></div>
-
-        <div class="roadmap-item fade-in-right" style="animation-delay: 0.2s;">
-          <div class="roadmap-dot"></div>
-          <div class="roadmap-step">01</div>
-          <div class="roadmap-content">
-            <h3>Understanding the Real Role of the Board</h3>
-            <p>The board's function is frequently misunderstood - even by experienced executives. This session clarifies
-              fiduciary duties, the boundaries of strategic oversight versus operational management, and what investors
-              genuinely expect from a high-functioning board.</p>
-          </div>
-        </div>
-
-        <div class="roadmap-item fade-in-right" style="animation-delay: 0.4s;">
-          <div class="roadmap-dot"></div>
-          <div class="roadmap-step">02</div>
-          <div class="roadmap-content">
-            <h3>Portfolio Career Architecture</h3>
-            <p>A plural board career requires deliberate design. We map how to sequence mandates, manage conflicts, and
-              build a cohesive portfolio that compounds rather than dilutes your professional reputation.</p>
-          </div>
-        </div>
-
-        <div class="roadmap-item fade-in-right" style="animation-delay: 0.6s;">
-          <div class="roadmap-dot"></div>
-          <div class="roadmap-step">03</div>
-          <div class="roadmap-content">
-            <h3>Positioning in the Fintech NED Landscape</h3>
-            <p>Where demand genuinely sits in 2026, how founders and VCs evaluate NED credibility, and how to articulate
-              your value proposition in the language boards and headhunters actually respond to.</p>
-          </div>
-        </div>
-
-        <div class="roadmap-item fade-in-right" style="animation-delay: 0.8s;">
-          <div class="roadmap-dot"></div>
-          <div class="roadmap-step">04</div>
-          <div class="roadmap-content">
-            <h3>Fundraising Governance Literacy</h3>
-            <p>NEDs who understand capital markets - raise readiness, unit economics, 3–5x return expectations - provide
-              exponentially more board value. This module builds the financial fluency investors require.</p>
-          </div>
-        </div>
-
-        <div class="roadmap-item fade-in-right" style="animation-delay: 1.0s;">
-          <div class="roadmap-dot"></div>
-          <div class="roadmap-step">05</div>
-          <div class="roadmap-content">
-            <h3>Regulatory and Reputational Protection</h3>
-            <p>SMCR, FCA and PRA expectations, D&O insurance, and fiduciary exposure. We address the legal and
-              regulatory landscape required to protect your professional status and mitigate board-level risk before you
-              accept an appointment.</p>
-          </div>
-        </div>
-
-        <div class="roadmap-item fade-in-right" style="animation-delay: 1.2s;">
-          <div class="roadmap-dot"></div>
-          <div class="roadmap-step">06</div>
-          <div class="roadmap-content">
-            <h3>AI Governance Literacy for Board Directors</h3>
-            <p>Machine learning versus generative AI risk profiles, board-level oversight responsibilities, and how to
-              engage constructively on technology governance without becoming a technical expert.</p>
-          </div>
-        </div>
+    <div class="roadmap-wave-item">
+      <div class="roadmap-wave-node">
+        <div class="roadmap-wave-num">01</div>
       </div>
+      <div class="roadmap-wave-card">
+        <h3>Understanding the Real Role of the Board</h3>
+        <p>The board's function is frequently misunderstood - even by experienced executives.</p>
+      </div>
+    </div>
+
+    <div class="roadmap-wave-item is-down">
+      <div class="roadmap-wave-node">
+        <div class="roadmap-wave-num">02</div>
+      </div>
+      <div class="roadmap-wave-card">
+        <h3>Portfolio Career Architecture</h3>
+        <p>We map how to sequence mandates, manage conflicts, & build a cohesive portfolio.</p>
+      </div>
+    </div>
+
+    <div class="roadmap-wave-item">
+      <div class="roadmap-wave-node">
+        <div class="roadmap-wave-num">03</div>
+      </div>
+      <div class="roadmap-wave-card">
+        <h3>Positioning in the Fintech NED Landscape</h3>
+        <p>Where demand genuinely sits in 2026, how founders and VCs evaluate NED credibility, and articulate your value proposition.</p>
+      </div>
+    </div>
+
+    <div class="roadmap-wave-item is-down">
+      <div class="roadmap-wave-node">
+        <div class="roadmap-wave-num">04</div>
+      </div>
+      <div class="roadmap-wave-card">
+        <h3>Fundraising Governance Literacy</h3>
+        <p>NEDs who understand capital markets - raise readiness, unit economics, 3–5x return expectations - provide exponentially more board value.</p>
+      </div>
+    </div>
+
+    <div class="roadmap-wave-item">
+      <div class="roadmap-wave-node">
+        <div class="roadmap-wave-num">05</div>
+      </div>
+      <div class="roadmap-wave-card">
+        <h3>Regulatory and Reputational Protection</h3>
+        <p>SMCR, FCA & PRA expectations, D&O insurance, & fiduciary exposure. We address the legal & regulatory landscape required to protect your professional status and mitigate board-level risk before you accept an appointment.</p>
+      </div>
+    </div>
+
+    <div class="roadmap-wave-item is-down">
+      <div class="roadmap-wave-node">
+        <div class="roadmap-wave-num">06</div>
+      </div>
+      <div class="roadmap-wave-card">
+        <h3>AI Governance Literacy for Board Directors</h3>
+        <p>Machine learning versus generative AI risk profiles, board-level oversight responsibilities, and how to engage constructively on technology governance without becoming a technical expert.</p>
+      </div>
+    </div>
+  </div>
 
       <div style="text-align: center; margin-top: 4rem;">
         <a href="#register" class="cta-primary" style="padding: 1.2rem 3rem; font-size: 0.85rem;">REGISTER FOR EXCLUSIVE
