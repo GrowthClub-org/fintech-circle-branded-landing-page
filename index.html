@@ -65,9 +65,8 @@
       background-image:
         radial-gradient(circle at 10% 20%, rgba(34, 193, 201, 0.05) 0%, transparent 40%),
         radial-gradient(circle at 90% 80%, rgba(114, 79, 194, 0.05) 0%, transparent 40%),
-        linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-        url('abstract_fintech_network_bg.png');
-      background-size: cover, cover, cover, 1000px;
+        linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+      background-size: cover;
       background-attachment: fixed;
       color: var(--ink);
       font-family: var(--font-body);
@@ -1127,10 +1126,15 @@
       padding-top: 120px !important;
     }
 
+    /* ===== RESPONSIVE REFINEMENTS ===== */
     @media (max-width: 900px) {
       nav {
         padding: 1rem 1.5rem;
         top: 40px !important;
+      }
+
+      .nav-brand {
+        font-size: 1.1rem;
       }
 
       .hero {
@@ -1138,11 +1142,16 @@
       }
 
       .hero-left {
-        padding: 5rem 1.5rem 3rem;
+        padding: 4rem 1.5rem 2rem;
+        text-align: center;
       }
 
       .hero-right {
-        padding: 3rem 1.5rem;
+        padding: 2rem 1.5rem 4rem;
+      }
+
+      .hero-title {
+        font-size: clamp(2.2rem, 10vw, 3.5rem);
       }
 
       section {
@@ -1150,18 +1159,16 @@
       }
 
       .section-inner {
-        padding: 0 1.5rem;
+        padding: 0;
       }
 
       .audience-grid {
         grid-template-columns: 1fr;
+        border-right: none;
       }
 
-      .audience-item:nth-child(even) {
-        border-right: 1px solid var(--rule);
-      }
-
-      .audience-item:nth-last-child(-n+2) {
+      .audience-item {
+        border-right: none !important;
         border-bottom: 1px solid var(--rule);
       }
 
@@ -1173,12 +1180,9 @@
         grid-template-columns: 1fr;
       }
 
-      .insight-item:nth-child(3n) {
-        border-right: 1px solid rgba(198, 200, 201, 0.3);
-      }
-
-      .insight-item:nth-last-child(-n+3) {
-        border-bottom: 1px solid rgba(198, 200, 201, 0.3);
+      .insight-item {
+        border-right: none !important;
+        border-bottom: 1px solid rgba(198, 200, 201, 0.2);
       }
 
       .insight-item:last-child {
@@ -1187,45 +1191,69 @@
 
       .host-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 2.5rem;
       }
 
       .host-portrait {
-        aspect-ratio: 4/3;
-        max-height: 260px;
+        aspect-ratio: 1/1;
+        max-width: 300px;
+        margin: 0 auto;
       }
-
-      .programme-box {
-        padding: 2rem;
-      }
-
-      .programme-header {
-        flex-direction: column;
-        gap: 1rem;
-      }
-
 
       .faculty-grid {
         grid-template-columns: 1fr 1fr;
       }
 
-      .bonus-box {
-        grid-template-columns: 1fr;
+      .authority-numbers {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+    }
+
+    /* Small Mobile Optimization */
+    @media (max-width: 600px) {
+      html {
+        font-size: 16px;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .roadmap-wave {
+        gap: 2rem;
+      }
+
+      .roadmap-wave-item {
         gap: 1.5rem;
       }
 
-      .authority-numbers {
-        grid-template-columns: 1fr 1fr;
+      .roadmap-wave-card {
+        padding: 1.5rem;
+      }
+
+      .roadmap-wave-card h3 {
+        font-size: 1.25rem;
+      }
+
+      .faculty-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .programme-box {
+        padding: 1.5rem;
+      }
+
+      .bonus-box {
+        padding: 2rem 1.5rem;
+      }
+
+      .final-cta h2 {
+        font-size: 1.8rem;
       }
 
       .final-cta {
-        padding: 5rem 1.5rem;
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
+        padding: 4rem 1rem;
       }
     }
   </style>
@@ -1394,7 +1422,7 @@
       experience in banking, insurance, or top-tier audit, transitioning into the next chapter of fractional, advisory,
       and non-executive leadership.</p>
 
-    <div class="audience-grid" style="grid-template-columns: 1fr 1fr;">
+    <div class="audience-grid">
       <div class="audience-item">
         <i data-lucide="trending-up" style="color:var(--sky); margin-bottom:1rem; display:block;"></i>
         <h3>The Transitioning C-Suite</h3>
@@ -1580,7 +1608,7 @@
     <p style="margin-bottom:3rem;">Private board appointments operate through channels that are largely invisible to
       those who have not yet been inside them. This session maps the actual landscape.</p>
 
-    <div class="audience-grid" style="grid-template-columns: 1fr 1fr;">
+    <div class="audience-grid">
       <div class="audience-item">
         <h3>Private vs. Public Board Search</h3>
         <p>The process, timeline, and selection criteria differ significantly between PE-backed private companies and
@@ -1669,7 +1697,7 @@
           record required for senior appointments.</p>
       </div>
       <div>
-        <a href="#register" class="bonus-cta">Reserve My Seat &amp; Secure My Placement</a>
+        <a href="#register" class="bonus-cta">Secure My Placement</a>
         <p class="bonus-note">Places for the board placement cohort are strictly limited to ensure quality of
           experience. Reservations are prioritised on a first-qualified basis.</p>
       </div>
