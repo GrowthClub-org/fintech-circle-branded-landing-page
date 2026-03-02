@@ -225,20 +225,25 @@
     .cta-primary {
       display: inline-block;
       font-family: var(--font-accent);
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--onyx);
-      background: var(--gold);
-      padding: 1rem 2.5rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: none;
+      color: #002231;
+      background: var(--sky);
+      padding: 1rem 3.5rem;
       text-decoration: none;
       width: fit-content;
-      transition: background 0.2s, transform 0.2s;
+      border-radius: 99px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(34, 193, 201, 0.2);
     }
 
     .cta-primary:hover {
-      background: var(--gold-light);
-      transform: translateY(-1px);
+      background: var(--ocean);
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 107, 220, 0.3);
     }
 
     .hero-indicators {
@@ -680,39 +685,39 @@
     }
 
     /* ===== ROADMAP (HORIZONTAL WAVE TIMELINE) ===== */
-    .roadmap-wave{
+    .roadmap-wave {
       position: relative;
       margin-top: 3.5rem;
       padding: 2rem 0 1rem;
       display: grid;
       grid-template-columns: repeat(6, minmax(190px, 1fr));
       gap: 1.25rem;
-      --node: 86px;          /* node diameter */
+      --node: 86px;
+      /* node diameter */
       --node-center: calc(var(--node) / 2);
       padding-top: 2rem;
     }
 
     /* the connecting line */
-    .roadmap-wave-track{
+    .roadmap-wave-track {
       position: absolute;
       left: 0;
       right: 0;
-      top: calc(2rem + var(--node-center)); /* aligns through the center of nodes */
+      top: calc(2rem + var(--node-center));
+      /* aligns through the center of nodes */
       height: 6px;
       border-radius: 999px;
-      background: linear-gradient(
-        90deg,
-       rgba(34,193,201,0.15),
-       rgba(34,193,201,0.55),
-       rgba(114,79,194,0.35),
-       rgba(34,193,201,0.25)
-      );
-      box-shadow: 0 0 18px rgba(34,193,201,0.15);
+      background: linear-gradient(90deg,
+          rgba(34, 193, 201, 0.15),
+          rgba(34, 193, 201, 0.55),
+          rgba(114, 79, 194, 0.35),
+          rgba(34, 193, 201, 0.25));
+      box-shadow: 0 0 18px rgba(34, 193, 201, 0.15);
       z-index: 1;
     }
 
     /* each step column */
-    .roadmap-wave-item{
+    .roadmap-wave-item {
       position: relative;
       display: grid;
       grid-template-rows: auto auto;
@@ -721,117 +726,127 @@
     }
 
     /* alternate layout */
-    .roadmap-wave-item.is-down{
-      padding-top: 110px; /* pushes the card down */
+    .roadmap-wave-item.is-down {
+      padding-top: 110px;
+      /* pushes the card down */
     }
-    .roadmap-wave-item:not(.is-down){
-      padding-bottom: 110px; /* gives space above track */
+
+    .roadmap-wave-item:not(.is-down) {
+      padding-bottom: 110px;
+      /* gives space above track */
     }
 
     /* node */
-    .roadmap-wave-node{
+    .roadmap-wave-node {
       width: var(--node);
       height: var(--node);
       border-radius: 999px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.10);
       backdrop-filter: blur(10px);
       display: grid;
       place-items: center;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
       position: relative;
       z-index: 2;
     }
 
     /* small connector “stem” to card */
-    .roadmap-wave-node::after{
+    .roadmap-wave-node::after {
       content: "";
       position: absolute;
       left: 50%;
       width: 2px;
       height: 34px;
-      background: rgba(34,193,201,0.35);
+      background: rgba(34, 193, 201, 0.35);
       transform: translateX(-50%);
     }
-    .roadmap-wave-item.is-down .roadmap-wave-node::after{
+
+    .roadmap-wave-item.is-down .roadmap-wave-node::after {
       top: 100%;
     }
-    .roadmap-wave-item:not(.is-down) .roadmap-wave-card{
+
+    .roadmap-wave-item:not(.is-down) .roadmap-wave-card {
       transform: translateY(-6px);
     }
-    .roadmap-wave-item:not(.is-down) .roadmap-wave-node::after{
+
+    .roadmap-wave-item:not(.is-down) .roadmap-wave-node::after {
       bottom: 100%;
     }
 
     /* number inside node */
-    .roadmap-wave-num{
+    .roadmap-wave-num {
       font-family: var(--font-heading);
       font-weight: 800;
       font-size: 1.35rem;
       letter-spacing: 0.08em;
-      color: rgba(34,193,201,0.9);
-      text-shadow: 0 0 18px rgba(34,193,201,0.25);
+      color: rgba(34, 193, 201, 0.9);
+      text-shadow: 0 0 18px rgba(34, 193, 201, 0.25);
     }
 
     /* card */
-    .roadmap-wave-card{
+    .roadmap-wave-card {
       width: 100%;
       max-width: 320px;
       border-radius: 16px;
       padding: 1.25rem 1.25rem;
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 16px 36px rgba(0,0,0,0.35);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
       backdrop-filter: blur(10px);
       min-height: 240px;
     }
 
-    .roadmap-wave-card h3{
+    .roadmap-wave-card h3 {
       font-size: 1rem;
       margin-bottom: 0.5rem;
     }
 
-    .roadmap-wave-card p{
+    .roadmap-wave-card p {
       font-size: 0.85rem;
       line-height: 1.55;
-      color: rgba(255,255,255,0.70);
+      color: rgba(255, 255, 255, 0.70);
       max-width: none;
       display: -webkit-box;
-      -webkit-line-clamp: 8;     /* clamps long text */
+      -webkit-line-clamp: 8;
+      /* clamps long text */
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
 
     /* hover polish */
-    .roadmap-wave-item:hover .roadmap-wave-node{
-      border-color: rgba(34,193,201,0.22);
+    .roadmap-wave-item:hover .roadmap-wave-node {
+      border-color: rgba(34, 193, 201, 0.22);
       transform: translateY(-2px);
       transition: 220ms ease;
     }
-    .roadmap-wave-item:hover .roadmap-wave-card{
-      border-color: rgba(34,193,201,0.18);
+
+    .roadmap-wave-item:hover .roadmap-wave-card {
+      border-color: rgba(34, 193, 201, 0.18);
       transition: 220ms ease;
     }
 
     /* responsive: collapse to vertical cards on smaller screens */
-    @media (max-width: 1100px){
-      .roadmap-wave{
+    @media (max-width: 1100px) {
+      .roadmap-wave {
         grid-template-columns: repeat(3, minmax(180px, 1fr));
         gap: 1.25rem;
       }
     }
 
-    @media (max-width: 780px){
-      .roadmap-wave{
+    @media (max-width: 780px) {
+      .roadmap-wave {
         grid-template-columns: 1fr;
       }
-      .roadmap-wave-track{
+
+      .roadmap-wave-track {
         top: 104px;
         height: 4px;
         opacity: 0.75;
       }
+
       .roadmap-wave-item,
-      .roadmap-wave-item.is-down{
+      .roadmap-wave-item.is-down {
         padding: 0;
         justify-items: start;
         grid-template-columns: 86px 1fr;
@@ -839,13 +854,15 @@
         column-gap: 1rem;
         align-items: start;
       }
-      .roadmap-wave-node::after{
+
+      .roadmap-wave-node::after {
         display: none;
       }
-      .roadmap-wave-card{
+
+      .roadmap-wave-card {
         max-width: none;
       }
-        }
+    }
 
     /* PROGRAMME */
     .programme-box {
@@ -933,18 +950,22 @@
     .bonus-cta {
       display: inline-block;
       font-family: var(--font-accent);
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--white);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: none;
+      color: #002231;
       background: var(--sky);
-      padding: 1rem 2rem;
+      padding: 1rem 2.5rem;
       text-decoration: none;
-      transition: background 0.2s;
+      border-radius: 99px;
+      transition: all 0.3s ease;
     }
 
     .bonus-cta:hover {
-      background: var(--slate);
+      background: var(--ocean);
+      color: var(--white);
+      transform: translateY(-2px);
     }
 
     .bonus-note {
@@ -1040,19 +1061,21 @@
 
     .cta-ghost {
       font-family: var(--font-accent);
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      border: 1px solid rgba(34, 193, 201, 0.4);
-      padding: 1rem 2rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: none;
+      color: var(--sky);
+      border: 2px solid var(--sky);
+      padding: 1rem 2.5rem;
       text-decoration: none;
-      transition: border-color 0.2s, color 0.2s;
+      border-radius: 99px;
+      transition: all 0.3s ease;
     }
 
     .cta-ghost:hover {
-      border-color: var(--gold);
-      color: var(--gold-light);
+      background: var(--sky);
+      color: var(--onyx);
     }
 
     /* FOOTER */
@@ -1117,9 +1140,63 @@
       animation-delay: 0.7s;
     }
 
+    /* COUNTDOWN BAR */
+    .countdown-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--sky);
+      color: var(--white);
+      text-align: center;
+      padding: 0.6rem;
+      font-family: var(--font-accent);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.5s ease;
+    }
+
+    #countdown {
+      display: inline-block;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Adjust Navigation to compensate for countdown bar */
+    nav {
+      top: 40px !important;
+    }
+
+    /* Adjust Hero for the shift */
+    .hero {
+      padding-top: 120px !important;
+    }
+
     @media (max-width: 900px) {
       nav {
         padding: 1rem 1.5rem;
+        top: 40px !important;
       }
 
       .hero {
@@ -1221,6 +1298,9 @@
 </head>
 
 <body>
+  <div class="countdown-bar">
+    <div id="countdown">LOADING...</div>
+  </div>
 
   <!-- NAV -->
   <nav>
@@ -1258,26 +1338,20 @@
         <h2 class="event-title" style="font-size:1.35rem; margin-bottom:1.8rem;">Join the Exclusive 2026 Masterclass
         </h2>
 
-        <form class="reg-form">
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">First Name</label>
-              <input type="text" class="form-input" placeholder="First Name" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Last Name</label>
-              <input type="text" class="form-input" placeholder="Last Name" required>
-            </div>
+        <form class="reg-form" id="registrationForm">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" id="name" class="form-input" placeholder="Your Full Name" required>
           </div>
           <div class="form-group">
             <label class="form-label">Email Address</label>
-            <input type="email" class="form-input" placeholder="name@company.com" required>
+            <input type="email" id="email" class="form-input" placeholder="name@company.com" required>
           </div>
           <div class="form-group">
             <label class="form-label">Company Name</label>
             <input type="text" class="form-input" placeholder="Company Ltd." required>
           </div>
-          <button type="submit" class="cta-primary form-submit" style="width:100%;">Reserve My Seat</button>
+          <button type="submit" class="cta-primary form-submit cta-button" style="width:100%;">Reserve My Seat</button>
         </form>
 
         <div class="event-rule" style="margin: 2rem 0 1.5rem;"></div>
@@ -1463,73 +1537,88 @@
 
 
   <!-- ROADMAP -->
-  <div class="section-full dark-section"> <div class="mesh-grid"></div> <div class="glow-bg" style="background: radial-gradient(circle at 90% 80%, rgba(114, 79, 194, 0.1) 0%, transparent 50%);"></div> <div class="section-inner"> <div class="section-rule" style="background:var(--gold);"></div> <p class="section-label">Masterclass Content</p> <h2>The 6-Step <em>Insider Board Roadmap</em></h2> <p style="max-width:580px;">Six strategic frameworks, built from direct board experience. Each step maps a dimension of board readiness that most executives overlook entirely.</p>
-  <div class="roadmap-wave">
-    <div class="roadmap-wave-track"></div>
+  <div class="section-full dark-section">
+    <div class="mesh-grid"></div>
+    <div class="glow-bg"
+      style="background: radial-gradient(circle at 90% 80%, rgba(114, 79, 194, 0.1) 0%, transparent 50%);"></div>
+    <div class="section-inner">
+      <div class="section-rule" style="background:var(--gold);"></div>
+      <p class="section-label">Masterclass Content</p>
+      <h2>The 6-Step <em>Insider Board Roadmap</em></h2>
+      <p style="max-width:580px;">Six strategic frameworks, built from direct board experience. Each step maps a
+        dimension of board readiness that most executives overlook entirely.</p>
+      <div class="roadmap-wave">
+        <div class="roadmap-wave-track"></div>
 
-    <div class="roadmap-wave-item">
-      <div class="roadmap-wave-node">
-        <div class="roadmap-wave-num">01</div>
-      </div>
-      <div class="roadmap-wave-card">
-        <h3>Understanding the Real Role of the Board</h3>
-        <p>The board's function is frequently misunderstood - even by experienced executives.</p>
-      </div>
-    </div>
+        <div class="roadmap-wave-item">
+          <div class="roadmap-wave-node">
+            <div class="roadmap-wave-num">01</div>
+          </div>
+          <div class="roadmap-wave-card">
+            <h3>Understanding the Real Role of the Board</h3>
+            <p>The board's function is frequently misunderstood - even by experienced executives.</p>
+          </div>
+        </div>
 
-    <div class="roadmap-wave-item is-down">
-      <div class="roadmap-wave-node">
-        <div class="roadmap-wave-num">02</div>
-      </div>
-      <div class="roadmap-wave-card">
-        <h3>Portfolio Career Architecture</h3>
-        <p>We map how to sequence mandates, manage conflicts, & build a cohesive portfolio.</p>
-      </div>
-    </div>
+        <div class="roadmap-wave-item is-down">
+          <div class="roadmap-wave-node">
+            <div class="roadmap-wave-num">02</div>
+          </div>
+          <div class="roadmap-wave-card">
+            <h3>Portfolio Career Architecture</h3>
+            <p>We map how to sequence mandates, manage conflicts, & build a cohesive portfolio.</p>
+          </div>
+        </div>
 
-    <div class="roadmap-wave-item">
-      <div class="roadmap-wave-node">
-        <div class="roadmap-wave-num">03</div>
-      </div>
-      <div class="roadmap-wave-card">
-        <h3>Positioning in the Fintech NED Landscape</h3>
-        <p>Where demand genuinely sits in 2026, how founders and VCs evaluate NED credibility, and articulate your value proposition.</p>
-      </div>
-    </div>
+        <div class="roadmap-wave-item">
+          <div class="roadmap-wave-node">
+            <div class="roadmap-wave-num">03</div>
+          </div>
+          <div class="roadmap-wave-card">
+            <h3>Positioning in the Fintech NED Landscape</h3>
+            <p>Where demand genuinely sits in 2026, how founders and VCs evaluate NED credibility, and articulate your
+              value proposition.</p>
+          </div>
+        </div>
 
-    <div class="roadmap-wave-item is-down">
-      <div class="roadmap-wave-node">
-        <div class="roadmap-wave-num">04</div>
-      </div>
-      <div class="roadmap-wave-card">
-        <h3>Fundraising Governance Literacy</h3>
-        <p>NEDs who understand capital markets - raise readiness, unit economics, 3–5x return expectations - provide exponentially more board value.</p>
-      </div>
-    </div>
+        <div class="roadmap-wave-item is-down">
+          <div class="roadmap-wave-node">
+            <div class="roadmap-wave-num">04</div>
+          </div>
+          <div class="roadmap-wave-card">
+            <h3>Fundraising Governance Literacy</h3>
+            <p>NEDs who understand capital markets - raise readiness, unit economics, 3–5x return expectations - provide
+              exponentially more board value.</p>
+          </div>
+        </div>
 
-    <div class="roadmap-wave-item">
-      <div class="roadmap-wave-node">
-        <div class="roadmap-wave-num">05</div>
-      </div>
-      <div class="roadmap-wave-card">
-        <h3>Regulatory and Reputational Protection</h3>
-        <p>SMCR, FCA & PRA expectations, D&O insurance, & fiduciary exposure. We address the legal & regulatory landscape required to protect your professional status and mitigate board-level risk before you accept an appointment.</p>
-      </div>
-    </div>
+        <div class="roadmap-wave-item">
+          <div class="roadmap-wave-node">
+            <div class="roadmap-wave-num">05</div>
+          </div>
+          <div class="roadmap-wave-card">
+            <h3>Regulatory and Reputational Protection</h3>
+            <p>SMCR, FCA & PRA expectations, D&O insurance, & fiduciary exposure. We address the legal & regulatory
+              landscape required to protect your professional status and mitigate board-level risk before you accept an
+              appointment.</p>
+          </div>
+        </div>
 
-    <div class="roadmap-wave-item is-down">
-      <div class="roadmap-wave-node">
-        <div class="roadmap-wave-num">06</div>
+        <div class="roadmap-wave-item is-down">
+          <div class="roadmap-wave-node">
+            <div class="roadmap-wave-num">06</div>
+          </div>
+          <div class="roadmap-wave-card">
+            <h3>AI Governance Literacy for Board Directors</h3>
+            <p>Machine learning versus generative AI risk profiles, board-level oversight responsibilities, and how to
+              engage constructively on technology governance without becoming a technical expert.</p>
+          </div>
+        </div>
       </div>
-      <div class="roadmap-wave-card">
-        <h3>AI Governance Literacy for Board Directors</h3>
-        <p>Machine learning versus generative AI risk profiles, board-level oversight responsibilities, and how to engage constructively on technology governance without becoming a technical expert.</p>
-      </div>
-    </div>
-  </div>
 
       <div style="text-align: center; margin-top: 4rem;">
-        <a href="#register" class="cta-primary" style="padding: 1.2rem 3rem; font-size: 0.85rem;">REGISTER FOR EXCLUSIVE
+        <a href="#register" id="scrollToFormBtn" class="cta-primary"
+          style="padding: 1.2rem 3rem; font-size: 0.85rem;">REGISTER FOR EXCLUSIVE
           MASTERCLASS</a>
 
       </div>
@@ -1650,7 +1739,7 @@
 
     <div class="final-cta-buttons">
       <a href="#register" class="cta-primary" style="font-size:0.72rem;">Secure My Place Now</a>
-      <a href="#programme" class="cta-ghost">Learn About the Board Programme</a>
+      <a href="https://fintechcircle.com/" target="_blank" class="cta-ghost">Learn more about Fintech Circle</a>
     </div>
   </div>
 
@@ -1661,6 +1750,176 @@
   </footer>
 
   <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Backend URL - update for production deployment
+      const backendUrl = 'https://api.revopstrack.com'; // Change this to your production backend URL
+      const CLIENT_ID = 'fintech-circle';
+
+      let targetDate = null;
+
+      // Function to fetch broadcast data and set countdown date
+      async function initializeCountdown() {
+        try {
+          const response = await fetch(`${backendUrl}/api/v1/broadcast/upcoming-broadcast?clientId=${encodeURIComponent(CLIENT_ID)}`);
+          if (response.ok) {
+            const data = await response.json();
+            if (data.broadcast_data && data.broadcast_data.date) {
+              // Convert Unix timestamp to milliseconds
+              targetDate = data.broadcast_data.date * 1000;
+              console.log('Broadcast date loaded:', new Date(targetDate).toISOString());
+            }
+          }
+        } catch (error) {
+          console.warn('Could not fetch broadcast data, using fallback date:', error);
+        }
+
+        // Fallback to hardcoded date if API fails
+        if (!targetDate) {
+          targetDate = new Date('2026-03-05T12:00:00Z').getTime(); // Updated to match the page content
+          console.log('Using fallback countdown date');
+        }
+
+        // Start countdown
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+      }
+
+      function updateCountdown() {
+        if (!targetDate) return; // Wait for targetDate to be set
+
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance > 0) {
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          document.getElementById('countdown').innerHTML =
+            String(days).padStart(2, '0') + ' d: ' +
+            String(hours).padStart(2, '0') + ' h: ' +
+            String(minutes).padStart(2, '0') + ' m: ' +
+            String(seconds).padStart(2, '0') + ' s';
+        } else {
+          document.getElementById('countdown').innerHTML = 'LIVE NOW!';
+          document.querySelector('.countdown-bar').style.backgroundColor = '#ff3b30';
+        }
+      }
+
+      // Initialize countdown with API data
+      initializeCountdown();
+
+      // Smooth scroll to form function
+      function scrollToForm() {
+        const formElement = document.getElementById('registrationForm');
+        if (formElement) {
+          formElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }
+
+      // Add click event listener to scroll button
+      const scrollToFormBtn = document.getElementById('scrollToFormBtn');
+      if (scrollToFormBtn) {
+        scrollToFormBtn.addEventListener('click', scrollToForm);
+      }
+
+      // Form submission handler
+      const registrationForm = document.getElementById('registrationForm');
+      if (registrationForm) {
+        registrationForm.addEventListener('submit', async function (e) {
+          e.preventDefault();
+
+          // Get form data
+          const name = document.getElementById('name').value.trim();
+          const email = document.getElementById('email').value.trim();
+
+          if (!email) {
+            alert('Please enter your email address');
+            return;
+          }
+
+          // Show loading state
+          const submitButton = document.querySelector('.cta-button');
+          const originalText = submitButton.innerHTML;
+          submitButton.innerHTML = '<div class="loading-spinner"></div><span class="button-text">REGISTERING...</span>';
+          submitButton.disabled = true;
+
+          try {
+            // First, fetch broadcast data to get the broadcast_id
+            let broadcastData = null;
+            try {
+              const broadcastResponse = await fetch(`${backendUrl}/api/v1/broadcast/upcoming-broadcast?clientId=${encodeURIComponent(CLIENT_ID)}`);
+              if (broadcastResponse.ok) {
+                broadcastData = await broadcastResponse.json();
+              }
+            } catch (broadcastError) {
+              console.warn('Could not fetch broadcast data:', broadcastError);
+            }
+
+            // Prepare registration data
+            const registrationData = {
+              name: name,
+              email: email,
+              submittedFromUrl: window.location.href,
+              terms: true // Assuming they agree by submitting
+            };
+
+            // Include broadcast_id if available
+            if (broadcastData && broadcastData.broadcast_id) {
+              registrationData.broadcastId = broadcastData.broadcast_id;
+              console.log('Including broadcast_id in registration:', broadcastData.broadcast_id);
+            }
+
+            // Make API call
+            const response = await fetch(`${backendUrl}/api/v1/webinar/register`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({
+                ...registrationData,
+                clientId: CLIENT_ID
+              })
+            });
+
+            if (!response.ok) {
+              throw new Error(`Registration failed: ${response.status}`);
+            }
+
+            const result = await response.json();
+
+            if (result.success) {
+              // Store registration data in sessionStorage for thank-you page
+              sessionStorage.setItem('registrationData', JSON.stringify(result));
+
+              // Store broadcast data if we fetched it
+              if (broadcastData) {
+                sessionStorage.setItem('broadcastData', JSON.stringify(broadcastData));
+              }
+
+              // Redirect to thank-you page
+              window.location.href = 'thank-you.html';
+            } else {
+              throw new Error(result.message || 'Registration failed');
+            }
+
+          } catch (error) {
+            console.error('Registration error:', error);
+            alert('Registration failed. Please try again or contact support.');
+
+            // Reset button
+            submitButton.innerHTML = originalText;
+            submitButton.disabled = false;
+          }
+        });
+      }
+    });
+
     lucide.createIcons();
   </script>
 </body>

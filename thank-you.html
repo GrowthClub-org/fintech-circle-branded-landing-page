@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You're Registered! | FINTECH Circle Masterclass 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Heebo:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            /* Brand Colors */
+            --onyx: #000000;
+            --cloud: #C6C8C9;
+            --sky: #22C1C9;
+            --ocean: #006BDC;
+            --dusk: #724FC2;
+            --sun: #FF9A48;
+
+            /* Semantic Variables - Dark Theme */
+            --ink: #ffffff;
+            --ivory: var(--onyx);
+            --gold: var(--sky);
+            --gold-light: var(--ocean);
+            --slate: #121212;
+            --muted: #a0a0a0;
+            --rule: rgba(198, 200, 201, 0.15);
+            --white: #ffffff;
+            --card-bg: rgba(26, 26, 26, 0.8);
+
+            /* Layout */
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-accent: 'Heebo', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #000000;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(34, 193, 201, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(114, 79, 194, 0.05) 0%, transparent 40%),
+                linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+            background-size: cover;
+            background-attachment: fixed;
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .mesh-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem 4rem;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .nav-brand {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        .nav-brand span {
+            color: var(--cloud);
+        }
+
+        .thank-you-container {
+            max-width: 800px;
+            margin: 120px auto 80px;
+            padding: 0 1.5rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            color: var(--sky);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(34, 193, 201, 0.3);
+        }
+
+        .hero-sub {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--white);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-weight: 500;
+        }
+
+        .hero-sub span {
+            color: var(--sun);
+        }
+
+        .bookmark-hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-accent);
+            font-size: 0.85rem;
+            color: var(--sun);
+            background: rgba(255, 154, 72, 0.1);
+            padding: 0.5rem 1.2rem;
+            border-radius: 99px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 3rem;
+        }
+
+        .steps-section-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            color: var(--white);
+        }
+
+        .step-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card:hover {
+            border-color: rgba(34, 193, 201, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .step-badge {
+            display: inline-block;
+            font-family: var(--font-accent);
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--onyx);
+            background: var(--sky);
+            padding: 0.4rem 1rem;
+            border-radius: 99px;
+            margin-bottom: 1.25rem;
+        }
+
+        .step-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .step-card p {
+            font-size: 0.95rem;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .step-card .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            font-family: var(--font-accent);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            border-radius: 99px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-sky {
+            background: var(--sky);
+            color: var(--onyx);
+        }
+
+        .btn-sky:hover {
+            background: var(--ocean);
+            color: var(--white);
+        }
+
+        .btn-sun {
+            background: var(--sun);
+            color: var(--onyx);
+        }
+
+        .btn-sun:hover {
+            background: #e68a3d;
+        }
+
+        .step-card.special {
+            border: 1px solid rgba(255, 154, 72, 0.3);
+        }
+
+        .step-card.special .step-badge {
+            background: var(--sun);
+        }
+
+        .final-message {
+            margin-top: 5rem;
+            text-align: center;
+        }
+
+        .final-message h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: var(--sky);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .final-message p {
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 600px) {
+            .thank-you-container {
+                margin-top: 100px;
+            }
+
+            .step-card {
+                padding: 1.5rem;
+            }
+        }
+
+        .glow {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(34, 193, 201, 0.15) 0%, transparent 70%);
+            top: -50px;
+            right: -50px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mesh-grid"></div>
+
+    <nav>
+        <a href="index.html" class="nav-brand">FINTECH <span>Circle</span></a>
+    </nav>
+
+    <main class="thank-you-container">
+        <div class="fade-up">
+            <h1 class="hero-title">You're Registered!</h1>
+            <p class="hero-sub">Ensure you make this your most transformational <span>Fintech Board Leadership</span>
+                journey.</p>
+
+            <div class="bookmark-hint">
+                <i data-lucide="bookmark"></i>
+                Bookmark this page. You'll need it later.
+            </div>
+
+            <h2 class="steps-section-title">Take 4 Steps:</h2>
+
+            <!-- STEP 1 -->
+            <div class="step-card">
+                <div class="glow"></div>
+                <span class="step-badge">Step 1</span>
+                <h3>Secure Your Direct Masterclass Entry</h3>
+                <p>Save this link to your calendar. This is where you will join Susanne Chishti and the board faculty
+                    live on Thursday, 5th March.</p>
+                <a href="#" id="watchLink" class="cta-btn btn-sky">
+                    <i data-lucide="external-link"></i>
+                    Access Webinar Seat
+                </a>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="step-card">
+                <span class="step-badge">Step 2</span>
+                <h3>Email Confirmation Sent</h3>
+                <p>Check your email for your formal seat confirmation and Masterclass details. Don't forget to check
+                    your spam folder just in case.</p>
+            </div>
+
+
+
+            <!-- STEP 3 -->
+            <div class="step-card">
+                <span class="step-badge">Step 3</span>
+                <h3>Signal Your Thought Leadership</h3>
+                <p>Share that you're attending the 2026 Roadmap Masterclass on LinkedIn. Tag FINTECH Circle to get
+                    featured to our 260K+ global community.</p>
+                <a href="https://www.linkedin.com/preload/sharebox/?shareUrl=https%3A%2F%2Fwww.linkedin.com%2Fevents%2F7434148978688192512&lipi=urn%3Ali%3Apage%3Ad_flagship3_event_manage%3BPYXjYawVQ3WWwroHMgzrxg%3D%3D"
+                    target="_blank" class="cta-btn btn-sky">
+                    <i data-lucide="linkedin"></i>
+                    Share on LinkedIn
+                </a>
+            </div>
+
+            <!-- STEP 4 -->
+            <div class="step-card special">
+                <span class="step-badge">Step 4</span>
+                <h3>Apply for the 2026 Board Programme</h3>
+                <p>Ready to move from candidate to confirmed director? Schedule a 15-minute Board Strategy Audit with
+                    our faculty to see if the full 10-hour programme is your next step.</p>
+                <a href="https://calendly.com/boards-fintechcircle/30min?month=2026-03" target="_blank"
+                    class="cta-btn btn-sun">
+                    <i data-lucide="calendar"></i>
+                    Schedule Strategy Call
+                </a>
+            </div>
+
+            <div class="final-message">
+                <h2>See you on the webinar!</h2>
+                <p>We've also sent a confirmation to your email. Check your spam folder if you don't see it in the next
+                    2 minutes. 🚀</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        // Logic to handle watch link from sessionStorage if available
+        document.addEventListener('DOMContentLoaded', function () {
+            const registrationData = JSON.parse(sessionStorage.getItem('registrationData'));
+            const watchLink = document.getElementById('watchLink');
+
+            if (registrationData && registrationData.watchLink) {
+                watchLink.href = registrationData.watchLink;
+                console.log('Watch link loaded from session:', registrationData.watchLink);
+            } else {
+                // Check for broadcastData fallback
+                const broadcastData = JSON.parse(sessionStorage.getItem('broadcastData'));
+                if (broadcastData && broadcastData.broadcast_data && broadcastData.broadcast_data.public_replay_link) {
+                    watchLink.href = broadcastData.broadcast_data.public_replay_link;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
