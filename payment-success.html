@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5MFP65RH');</script>
+    <!-- End Google Tag Manager -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the Cohort | FINTECH Circle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Heebo:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            /* Brand Colors */
+            --onyx: #000000;
+            --cloud: #C6C8C9;
+            --sky: #22C1C9;
+            --ocean: #006BDC;
+            --dusk: #724FC2;
+            --sun: #FF9A48;
+
+            /* Semantic Variables - Dark Theme */
+            --ink: #ffffff;
+            --ivory: var(--onyx);
+            --gold: var(--sky);
+            --gold-light: var(--ocean);
+            --slate: #121212;
+            --muted: #a0a0a0;
+            --rule: rgba(198, 200, 201, 0.15);
+            --white: #ffffff;
+            --card-bg: rgba(26, 26, 26, 0.8);
+
+            /* Layout */
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-accent: 'Heebo', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 18px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #000000;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(34, 193, 201, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(114, 79, 194, 0.05) 0%, transparent 40%),
+                linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+            background-size: cover;
+            background-attachment: fixed;
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mesh-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.1rem 4rem;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .nav-brand {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.35rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        .nav-brand span {
+            color: var(--cloud);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 120px 1.5rem 80px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .fade-up {
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            color: var(--sky);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 30px rgba(34, 193, 201, 0.3);
+        }
+
+        .hero-sub {
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            color: var(--white);
+            max-width: 750px;
+            margin: 0 auto 3rem;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .hero-sub span {
+            color: var(--sun);
+        }
+
+        .application-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 2rem;
+            text-align: left;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .glow {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(34, 193, 201, 0.2) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            pointer-events: none;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .step-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(34, 193, 201, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--sky);
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-content p {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.1rem 3.5rem;
+            font-family: var(--font-accent);
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            border-radius: 99px;
+            transition: all 0.3s ease;
+            margin-top: 4rem;
+            background: var(--sky);
+            color: var(--onyx);
+        }
+
+        .cta-btn:hover {
+            background: var(--ocean);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            html {
+                font-size: 16px;
+            }
+
+            .container {
+                padding-top: 100px;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .application-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .step-item {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MFP65RH" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="mesh-grid"></div>
+
+    <nav>
+        <a href="index.html" class="nav-brand">FINTECH <span>Circle</span></a>
+    </nav>
+
+    <main class="container">
+        <div class="fade-up">
+            <h1 class="hero-title">Payment Received.</h1>
+            <p class="hero-sub">Welcome to the <span>April 2026 Cohort</span>. Your place in the FINTECH Circle Board
+                Programme is now confirmed.</p>
+
+            <div class="application-card">
+                <div class="glow"></div>
+
+                <div class="step-item">
+                    <div class="step-icon">
+                        <i data-lucide="mail"></i>
+                    </div>
+                    <div class="step-content">
+                        <h3>Stay Tuned</h3>
+                        <p>We are currently finalizing the onboarding dashboard. You will receive a formal welcome email
+                            shortly with all the necessary details.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-icon">
+                        <i data-lucide="link"></i>
+                    </div>
+                    <div class="step-content">
+                        <h3>Joining Link</h3>
+                        <p>Our team will be sending the direct link to join the cohort via email soon. Make sure to
+                            whitelist <strong>@fintechcirclepro.com</strong> to ensure you don't miss it.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-icon">
+                        <i data-lucide="calendar"></i>
+                    </div>
+                    <div class="step-content">
+                        <h3>Calendar Invitation</h3>
+                        <p>Block out your diary for the upcoming sessions. A calendar invite with the full curriculum
+                            schedule will be landing in your inbox within 24 hours.</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="index.html" class="cta-btn">
+                Return to Homepage
+            </a>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

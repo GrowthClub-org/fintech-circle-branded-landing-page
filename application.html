@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5MFP65RH');</script>
+    <!-- End Google Tag Manager -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass Application | FINTECH Circle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Heebo:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            /* Brand Colors */
+            --onyx: #000000;
+            --cloud: #C6C8C9;
+            --sky: #22C1C9;
+            --ocean: #006BDC;
+            --dusk: #724FC2;
+            --sun: #FF9A48;
+
+            /* Semantic Variables - Dark Theme */
+            --ink: #ffffff;
+            --ivory: var(--onyx);
+            --gold: var(--sky);
+            --gold-light: var(--ocean);
+            --slate: #121212;
+            --muted: #a0a0a0;
+            --rule: rgba(198, 200, 201, 0.15);
+            --white: #ffffff;
+            --card-bg: rgba(26, 26, 26, 0.8);
+
+            /* Layout */
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-accent: 'Heebo', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 18px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #000000;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(34, 193, 201, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(114, 79, 194, 0.05) 0%, transparent 40%),
+                linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+            background-size: cover;
+            background-attachment: fixed;
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .mesh-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem 4rem;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .nav-brand {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.35rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        .nav-brand span {
+            color: var(--cloud);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 120px auto 80px;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: var(--sky);
+            margin-bottom: 1.25rem;
+            text-shadow: 0 0 30px rgba(34, 193, 201, 0.3);
+        }
+
+        .hero-sub {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--white);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 500;
+        }
+
+        /* FORM STYLES */
+        .application-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .reg-form {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .form-section-title {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            color: var(--sun);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 154, 72, 0.2);
+            padding-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-label {
+            font-family: var(--font-accent);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--muted);
+        }
+
+        .form-input,
+        .form-select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.1rem 1.25rem;
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all 0.2s;
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2rem;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--sky);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 15px rgba(34, 193, 201, 0.2);
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            color: var(--white);
+            font-size: 1rem;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .radio-option:hover {
+            border-color: rgba(34, 193, 201, 0.4);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .radio-option input[type="radio"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .radio-option input[type="radio"]:checked {
+            border-color: var(--sky);
+            background: var(--sky);
+            box-shadow: inset 0 0 0 4px var(--card-bg);
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.25rem 3.5rem;
+            font-family: var(--font-accent);
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            border-radius: 99px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            background: var(--sky);
+            color: var(--onyx);
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            background: var(--ocean);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* PROCESSING OVERLAY */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .loading-spinner-large {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(34, 193, 201, 0.1);
+            border-left: 4px solid var(--sky);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 2rem;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* REVIEWING VIEW */
+        #reviewingView {
+            display: none;
+        }
+
+        .fade-up {
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .application-card {
+                padding: 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mesh-grid"></div>
+
+    <nav>
+        <a href="index.html" class="nav-brand">FINTECH <span>Circle</span></a>
+    </nav>
+
+    <!-- FORM VIEW -->
+    <div class="container" id="formView">
+        <div class="hero-header">
+            <h1 class="hero-title">Programme Application</h1>
+            <p class="hero-sub">Complete your professional screening for the 2026 FINTECH Circle Board Programme.</p>
+        </div>
+
+        <div class="application-card">
+            <form class="reg-form" id="applicationForm">
+                <!-- Basic Information -->
+                <div class="form-section">
+                    <h3 class="form-section-title">Basic Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">First Name</label>
+                            <input type="text" id="firstName" class="form-input" placeholder="e.g. Jane" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" id="lastName" class="form-input" placeholder="e.g. Smith" required>
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin-top: 1.5rem;">
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" id="email" class="form-input" placeholder="jane@company.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" id="phone" class="form-input" placeholder="+44 7000 000000" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Professional Screening -->
+                <div class="form-section">
+                    <h3 class="form-section-title">Professional Screening</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Current Role</label>
+                            <select id="role" class="form-select" required>
+                                <option value="" disabled selected>Select your role...</option>
+                                <option value="Non-Executive Director">Non-Executive Director</option>
+                                <option value="Advisory Board Member">Advisory Board Member</option>
+                                <option value="Fractional Executive">Fractional Executive</option>
+                                <option value="CFO">CFO</option>
+                                <option value="CRO">CRO</option>
+                                <option value="COO">COO</option>
+                                <option value="Senior Leader">Senior Leader</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="otherRoleGroup" style="display: none; margin-top: 0.5rem;">
+                            <label class="form-label">Please Specify Role</label>
+                            <input type="text" id="otherRole" class="form-input" placeholder="Your specific role">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Years of Experience</label>
+                            <select id="experience" class="form-select" required>
+                                <option value="" disabled selected>Select experience...</option>
+                                <option value="10–15">10–15 Years</option>
+                                <option value="15–20">15–20 Years</option>
+                                <option value="20+">20+ Years</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin-top: 1.5rem;">
+                        <div class="form-group">
+                            <label class="form-label">Industry</label>
+                            <select id="industry" class="form-select" required>
+                                <option value="" disabled selected>Select industry...</option>
+                                <option value="Fintech">Fintech</option>
+                                <option value="Banking">Banking</option>
+                                <option value="Payments">Payments</option>
+                                <option value="Regulated Industry">Regulated Industry</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="otherIndustryGroup" style="display: none; margin-top: 0.5rem;">
+                            <label class="form-label">Please Specify Industry</label>
+                            <input type="text" id="otherIndustry" class="form-input"
+                                placeholder="Your specific industry">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">LinkedIn Profile URL</label>
+                            <input type="url" id="linkedin" class="form-input"
+                                placeholder="https://linkedin.com/in/username" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Commitment -->
+                <div class="form-section">
+                    <h3 class="form-section-title">Commitment</h3>
+                    <div class="form-group">
+                        <label class="form-label" style="color: var(--sky);">Are you prepared to invest £1,950 to
+                            participate in the April
+                            cohort?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="investment" value="Yes" required>
+                                <span>Yes, I am prepared to invest.</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="investment" value="No">
+                                <span>No, not at this stage.</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="cta-button">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- PROCESSING OVERLAY -->
+    <div class="overlay" id="processingOverlay">
+        <div class="fade-up">
+            <div class="loading-spinner-large"></div>
+            <h2 class="hero-title" style="font-size: 2rem;">Analyzing Profile</h2>
+            <p class="hero-sub" style="font-size: 1rem; opacity: 0.7;">Cross-referencing your experience with cohort
+                requirements...</p>
+        </div>
+    </div>
+
+    <!-- REVIEWING VIEW -->
+    <div class="container" id="reviewingView">
+        <div class="fade-up" style="text-align: center;">
+            <h1 class="hero-title">Application Received</h1>
+            <p class="hero-sub">Thank you for your interest in the 2026 cohort. We are currently <span>reviewing your
+                    professional profile</span>.</p>
+
+            <div class="application-card" style="margin-top: 3rem; text-align: left;">
+                <p>To maintain the highest standards of peer-to-peer learning, our faculty reviews every application
+                    manually. Our team will verify your experience and alignment with current board vacancies.</p>
+                <p style="margin-top: 1.5rem;">You will receive an update via email regarding your qualification status
+                    within 24–48 hours.</p>
+            </div>
+
+            <a href="index.html" class="cta-button" style="margin-top: 4rem;">Return to Homepage</a>
+        </div>
+    </div>
+
+    <!-- SUCCESS VIEW (CONGRATULATIONS) -->
+    <div class="container" id="successView" style="display:none;">
+        <div class="fade-up" style="text-align: center;">
+            <h1 class="hero-title">Congratulations!</h1>
+            <p class="hero-sub">Based on your professional profile, you are <span>pre-qualified</span> for the April
+                cohort of the Board Programme.</p>
+
+            <div class="application-card"
+                style="margin-top: 3rem; text-align: left; border-color: rgba(34, 193, 201, 0.4);">
+                <div class="glow"></div>
+                <h3 style="color: var(--sky); margin-bottom: 1rem;">Next Step: Secure Your Seat</h3>
+                <p>We are now redirecting you to our secure payment gateway to finalize your registration and guarantee
+                    your placement in the upcoming cohort.</p>
+                <p style="margin-top: 1rem; color: rgba(255,255,255,0.7); font-style: italic;">Redirecting in
+                    progress...</p>
+            </div>
+
+            <a id="manualPaymentBtn" href="#" class="cta-button" style="margin-top: 4rem;">Secure My Seat Now</a>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Handle "Other" selection for Role
+        const roleSelect = document.getElementById('role');
+        const otherRoleGroup = document.getElementById('otherRoleGroup');
+        const otherRoleInput = document.getElementById('otherRole');
+
+        roleSelect.addEventListener('change', function () {
+            if (this.value === 'Other') {
+                otherRoleGroup.style.display = 'flex';
+                otherRoleInput.required = true;
+            } else {
+                otherRoleGroup.style.display = 'none';
+                otherRoleInput.required = false;
+            }
+        });
+
+        // Handle "Other" selection for Industry
+        const industrySelect = document.getElementById('industry');
+        const otherIndustryGroup = document.getElementById('otherIndustryGroup');
+        const otherIndustryInput = document.getElementById('otherIndustry');
+
+        industrySelect.addEventListener('change', function () {
+            if (this.value === 'Other') {
+                otherIndustryGroup.style.display = 'flex';
+                otherIndustryInput.required = true;
+            } else {
+                otherIndustryGroup.style.display = 'none';
+                otherIndustryInput.required = false;
+            }
+        });
+
+        document.getElementById('applicationForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get form values
+            const experience = document.getElementById('experience').value;
+            const investment = document.querySelector('input[name="investment"]:checked').value;
+            const email = document.getElementById('email').value;
+
+            // Show processing overlay
+            document.getElementById('formView').style.display = 'none';
+            document.getElementById('processingOverlay').style.display = 'flex';
+
+            // Payment Gateway URL for qualified candidates
+            const paymentUrl = "https://secure.fintechcirclepro.com/" + encodeURIComponent(email);
+
+            // Logic processing
+            setTimeout(() => {
+                document.getElementById('processingOverlay').style.display = 'none';
+
+                const isQualified = (experience === "15–20" || experience === "20+") && investment === "Yes";
+
+                if (isQualified) {
+                    // Show success view
+                    document.getElementById('successView').style.display = 'block';
+                    document.getElementById('manualPaymentBtn').href = paymentUrl;
+
+                    // Redirect after a short delay to allow "Congratulations" to be seen
+                    setTimeout(() => {
+                        window.location.href = paymentUrl;
+                    }, 3000);
+                } else {
+                    // Show reviewing view
+                    document.getElementById('reviewingView').style.display = 'block';
+                }
+            }, 2500); // Artificial delay for "Executive processing" feel
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5MFP65RH');</script>
+    <!-- End Google Tag Manager -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing Your Application | FINTECH Circle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Heebo:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            /* Brand Colors */
+            --onyx: #000000;
+            --cloud: #C6C8C9;
+            --sky: #22C1C9;
+            --ocean: #006BDC;
+            --dusk: #724FC2;
+            --sun: #FF9A48;
+
+            /* Semantic Variables - Dark Theme */
+            --ink: #ffffff;
+            --ivory: var(--onyx);
+            --gold: var(--sky);
+            --gold-light: var(--ocean);
+            --slate: #121212;
+            --muted: #a0a0a0;
+            --rule: rgba(198, 200, 201, 0.15);
+            --white: #ffffff;
+            --card-bg: rgba(26, 26, 26, 0.8);
+
+            /* Layout */
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-accent: 'Heebo', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 18px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #000000;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(34, 193, 201, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(114, 79, 194, 0.05) 0%, transparent 40%),
+                linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+            background-size: cover;
+            background-attachment: fixed;
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mesh-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem 4rem;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .nav-brand {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.35rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        .nav-brand span {
+            color: var(--cloud);
+        }
+
+        .thank-you-container {
+            max-width: 900px;
+            margin: auto;
+            padding: 120px 1.5rem 80px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .fade-up {
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: var(--sky);
+            margin-bottom: 1.25rem;
+            text-shadow: 0 0 30px rgba(34, 193, 201, 0.3);
+        }
+
+        .hero-sub {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--white);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .hero-sub span {
+            color: var(--sun);
+        }
+
+        .loading-spinner-container {
+            margin: 3rem auto;
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+        .loading-spinner-large {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(34, 193, 201, 0.1);
+            border-left: 4px solid var(--sky);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .step-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            text-align: left;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .glow {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(34, 193, 201, 0.15) 0%, transparent 70%);
+            top: -50px;
+            right: -50px;
+            pointer-events: none;
+        }
+
+        .step-card p {
+            font-size: 1.1rem;
+            color: var(--white);
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.1rem 3.5rem;
+            font-family: var(--font-accent);
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            border-radius: 99px;
+            transition: all 0.3s ease;
+            margin-top: 2.5rem;
+            background: var(--sky);
+            color: var(--onyx);
+        }
+
+        .cta-btn:hover {
+            background: var(--ocean);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            html {
+                font-size: 16px;
+            }
+
+            .thank-you-container {
+                padding-top: 100px;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .step-card {
+                padding: 1.5rem;
+            }
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MFP65RH" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="mesh-grid"></div>
+
+    <nav>
+        <a href="index.html" class="nav-brand">FINTECH <span>Circle</span></a>
+    </nav>
+
+    <main class="thank-you-container">
+        <div class="fade-up">
+            <div id="processingSection">
+                <h1 class="hero-title">Verifying Your Application</h1>
+                <p class="hero-sub">Please hold on while we process your request through our secure systems.</p>
+                <div class="loading-spinner-container">
+                    <div class="loading-spinner-large"></div>
+                </div>
+                <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">Do not refresh this page.</p>
+            </div>
+
+            <div id="reviewingSection" style="display:none;">
+                <h1 class="hero-title">Application Received</h1>
+                <p class="hero-sub">Thank you for your interest in the 2026 cohort. We are currently <span>reviewing
+                        your
+                        professional profile</span>.</p>
+
+                <div class="step-card">
+                    <div class="glow"></div>
+                    <p>To maintain the highest standards of peer-to-peer learning, our faculty reviews every application
+                        manually. You will receive an update via email regarding your qualification status within 24–48
+                        hours.</p>
+                </div>
+
+                <a href="index.html" class="cta-btn">
+                    Return to Homepage
+                </a>
+            </div>
+
+            <div id="errorSection" style="display:none;">
+                <h1 class="hero-title" style="color: #ff3b30;">Oops! Something went wrong</h1>
+                <p class="hero-sub">We couldn't retrieve your application status at this time.</p>
+                <a href="index.html" class="cta-btn">Try Again</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        document.addEventListener('DOMContentLoaded', async function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const email = urlParams.get('email');
+            const contactId = urlParams.get('contact_id');
+            const backendUrl = 'https://api.revopstrack.com';
+            const clientId = 'fintech-circle';
+
+            // Function to show/hide sections
+            function showSection(id) {
+                document.getElementById('processingSection').style.display = 'none';
+                document.getElementById('reviewingSection').style.display = 'none';
+                document.getElementById('errorSection').style.display = 'none';
+                document.getElementById(id).style.display = 'block';
+            }
+
+            // Logic to check status
+            async function checkApplicationStatus() {
+                if (!email && !contactId) {
+                    // Fallback to reviewing section if no identifiers found (unlikely but safe)
+                    setTimeout(() => showSection('reviewingSection'), 1500);
+                    return;
+                }
+
+                try {
+                    // This is a placeholder for the actual GHL/Backend logic
+                    // In a real scenario, this would call an API that checks the contact's custom fields/tags
+                    const response = await fetch(`${backendUrl}/api/v1/application/status?clientId=${clientId}&email=${encodeURIComponent(email || '')}&contactId=${contactId || ''}`);
+
+                    if (response.ok) {
+                        const data = await response.json();
+
+                        if (data.redirectUrl) {
+                            // If condition met (e.g., qualified), redirect immediately
+                            window.location.href = data.redirectUrl;
+                        } else {
+                            // Otherwise, show the reviewing message
+                            showSection('reviewingSection');
+                        }
+                    } else {
+                        // If API fails or status not found, show the reviewing message as default fallback
+                        // instead of an error, as it's a better user experience
+                        showSection('reviewingSection');
+                    }
+                } catch (error) {
+                    console.error('Error checking application status:', error);
+                    showSection('reviewingSection');
+                }
+            }
+
+            // Execute check with a small artificial delay for visual feedback
+            setTimeout(checkApplicationStatus, 2000);
+        });
+    </script>
+</body>
+
+</html>
