@@ -458,6 +458,12 @@
                 </div>
 
                 <button type="submit" class="cta-button">Submit Application</button>
+
+                <p style="margin-top: 2rem; text-align: center; color: rgba(255,255,255,0.6); font-size: 0.95rem;">
+                    If you have any questions please feel free to book a call with Susanne -
+                    <a href="https://calendly.com/boards-fintechcircle/15" target="_blank"
+                        style="color: var(--sky); text-decoration: underline;">Schedule a Brief Conversation</a>
+                </p>
             </form>
         </div>
     </div>
@@ -513,6 +519,17 @@
 
     <script>
         lucide.createIcons();
+
+        // Pre-fill form from session storage if available
+        document.addEventListener('DOMContentLoaded', function () {
+            const registrationData = JSON.parse(sessionStorage.getItem('registrationData'));
+            if (registrationData) {
+                if (registrationData.firstName) document.getElementById('firstName').value = registrationData.firstName;
+                if (registrationData.lastName) document.getElementById('lastName').value = registrationData.lastName;
+                if (registrationData.email) document.getElementById('email').value = registrationData.email;
+                if (registrationData.phone) document.getElementById('phone').value = registrationData.phone;
+            }
+        });
 
         document.getElementById('applicationForm').addEventListener('submit', function (e) {
             e.preventDefault();
