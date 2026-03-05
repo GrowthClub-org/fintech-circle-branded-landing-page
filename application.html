@@ -414,49 +414,20 @@
                     <h3 class="form-section-title">Professional Screening</h3>
                     <div class="form-row">
                         <div class="form-group">
-                            <label class="form-label">Current Role</label>
-                            <select id="role" class="form-select" required>
-                                <option value="" disabled selected>Select your role...</option>
-                                <option value="Non-Executive Director">Non-Executive Director</option>
-                                <option value="Advisory Board Member">Advisory Board Member</option>
-                                <option value="Fractional Executive">Fractional Executive</option>
-                                <option value="CFO">CFO</option>
-                                <option value="CRO">CRO</option>
-                                <option value="COO">COO</option>
-                                <option value="Senior Leader">Senior Leader</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group" id="otherRoleGroup" style="display: none; margin-top: 0.5rem;">
-                            <label class="form-label">Please Specify Role</label>
-                            <input type="text" id="otherRole" class="form-input" placeholder="Your specific role">
+                            <label class="form-label">Title</label>
+                            <input type="text" id="title" class="form-input" placeholder="e.g. Finance Director"
+                                required>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Years of Experience</label>
-                            <select id="experience" class="form-select" required>
-                                <option value="" disabled selected>Select experience...</option>
-                                <option value="10–15">10–15 Years</option>
-                                <option value="15–20">15–20 Years</option>
-                                <option value="20+">20+ Years</option>
-                            </select>
+                            <label class="form-label">Company Name</label>
+                            <input type="text" id="company" class="form-input" placeholder="e.g. Acme Corp" required>
                         </div>
                     </div>
                     <div class="form-row" style="margin-top: 1.5rem;">
                         <div class="form-group">
-                            <label class="form-label">Industry</label>
-                            <select id="industry" class="form-select" required>
-                                <option value="" disabled selected>Select industry...</option>
-                                <option value="Fintech">Fintech</option>
-                                <option value="Banking">Banking</option>
-                                <option value="Payments">Payments</option>
-                                <option value="Regulated Industry">Regulated Industry</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group" id="otherIndustryGroup" style="display: none; margin-top: 0.5rem;">
-                            <label class="form-label">Please Specify Industry</label>
-                            <input type="text" id="otherIndustry" class="form-input"
-                                placeholder="Your specific industry">
+                            <label class="form-label">Years of Industry Experience</label>
+                            <input type="number" id="experience" class="form-input" placeholder="e.g. 15" min="0"
+                                required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">LinkedIn Profile URL</label>
@@ -543,36 +514,6 @@
     <script>
         lucide.createIcons();
 
-        // Handle "Other" selection for Role
-        const roleSelect = document.getElementById('role');
-        const otherRoleGroup = document.getElementById('otherRoleGroup');
-        const otherRoleInput = document.getElementById('otherRole');
-
-        roleSelect.addEventListener('change', function () {
-            if (this.value === 'Other') {
-                otherRoleGroup.style.display = 'flex';
-                otherRoleInput.required = true;
-            } else {
-                otherRoleGroup.style.display = 'none';
-                otherRoleInput.required = false;
-            }
-        });
-
-        // Handle "Other" selection for Industry
-        const industrySelect = document.getElementById('industry');
-        const otherIndustryGroup = document.getElementById('otherIndustryGroup');
-        const otherIndustryInput = document.getElementById('otherIndustry');
-
-        industrySelect.addEventListener('change', function () {
-            if (this.value === 'Other') {
-                otherIndustryGroup.style.display = 'flex';
-                otherIndustryInput.required = true;
-            } else {
-                otherIndustryGroup.style.display = 'none';
-                otherIndustryInput.required = false;
-            }
-        });
-
         document.getElementById('applicationForm').addEventListener('submit', function (e) {
             e.preventDefault();
 
@@ -592,7 +533,7 @@
             setTimeout(() => {
                 document.getElementById('processingOverlay').style.display = 'none';
 
-                const isQualified = (experience === "15–20" || experience === "20+") && investment === "Yes";
+                const isQualified = parseInt(experience) >= 15 && investment === "Yes";
 
                 if (isQualified) {
                     // Show success view
