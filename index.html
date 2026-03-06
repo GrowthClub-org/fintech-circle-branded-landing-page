@@ -1324,11 +1324,11 @@
 
         <div class="event-detail">
           <span class="event-detail-icon"><i data-lucide="calendar"></i> Date</span>
-          <span>Thursday, 5th March 2026</span>
+          <span id="eventDate">Thursday, 5th March 2026</span>
         </div>
         <div class="event-detail">
           <span class="event-detail-icon"><i data-lucide="clock"></i> Time</span>
-          <span>12:00 PM GMT</span>
+          <span id="eventTime">12:00 PM GMT</span>
         </div>
       </div>
     </div>
@@ -1743,7 +1743,7 @@
             },
             body: JSON.stringify(formData)
           });
-          
+
           // Since mode is 'no-cors', we can't read the response
           console.log('Data sent to Google Sheets successfully');
           return true;
@@ -1778,9 +1778,43 @@
           console.log('Using fallback countdown date');
         }
 
+        // Update the Date/Time display in the event card
+        updateEventDisplay(targetDate);
+
         // Start countdown
         setInterval(updateCountdown, 1000);
         updateCountdown(); // Initial call
+      }
+
+      function updateEventDisplay(timestamp) {
+        const dateObj = new Date(timestamp);
+
+        // Date formatting with ordinal suffix
+        const day = dateObj.getUTCDate();
+        const month = dateObj.toLocaleString('en-GB', { month: 'long', timeZone: 'GMT' });
+        const year = dateObj.getUTCFullYear();
+        const weekday = dateObj.toLocaleString('en-GB', { weekday: 'long', timeZone: 'GMT' });
+
+        const getOrdinal = (n) => {
+          const s = ["th", "st", "nd", "rd"];
+          const v = n % 100;
+          return n + (s[(v - 20) % 10] || s[v] || s[0]);
+        };
+
+        const formattedDate = `${weekday}, ${getOrdinal(day)} ${month} ${year}`;
+        const formattedTime = dateObj.toLocaleTimeString('en-GB', {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true,
+          timeZone: 'GMT',
+          timeZoneName: 'short'
+        }).toUpperCase();
+
+        const dateEl = document.getElementById('eventDate');
+        const timeEl = document.getElementById('eventTime');
+
+        if (dateEl) dateEl.innerText = formattedDate;
+        if (timeEl) timeEl.innerText = formattedTime;
       }
 
       function updateCountdown() {
@@ -1908,7 +1942,7 @@
             if (result.success) {
               // Send data to Google Sheets (don't wait for it to complete)
               sendToGoogleSheets(googleSheetsData);
-              
+
               // Store registration data in sessionStorage for thank-you page
               sessionStorage.setItem('registrationData', JSON.stringify(result));
 

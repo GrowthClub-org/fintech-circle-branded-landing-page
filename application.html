@@ -432,7 +432,7 @@
                         <div class="form-group">
                             <label class="form-label">LinkedIn Profile URL</label>
                             <input type="url" id="linkedin" class="form-input"
-                                placeholder="https://linkedin.com/in/username" required>
+                                placeholder="https://linkedin.com/in/username">
                         </div>
                     </div>
                 </div>
@@ -441,8 +441,8 @@
                 <div class="form-section">
                     <h3 class="form-section-title">Commitment</h3>
                     <div class="form-group">
-                        <label class="form-label" style="color: var(--sky);">Are you prepared to invest £1,950 to
-                            participate in the April
+                        <label class="form-label" style="color: var(--sky);">Are you prepared to participate in the
+                            April
                             cohort?</label>
                         <div class="radio-group">
                             <label class="radio-option">
@@ -525,24 +525,24 @@
 
         // Send data to Google Sheets
         async function sendToGoogleSheets(formData) {
-          try {
-            const response = await fetch(GOOGLE_SHEETS_URL, {
-              method: 'POST',
-              mode: 'no-cors', // Required for Google Apps Script
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(formData)
-            });
-            
-            // Since mode is 'no-cors', we can't read the response
-            console.log('Application data sent to Google Sheets successfully');
-            return true;
-          } catch (error) {
-            console.error('Error sending to Google Sheets:', error);
-            // Don't fail the entire application if Google Sheets fails
-            return false;
-          }
+            try {
+                const response = await fetch(GOOGLE_SHEETS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Required for Google Apps Script
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                // Since mode is 'no-cors', we can't read the response
+                console.log('Application data sent to Google Sheets successfully');
+                return true;
+            } catch (error) {
+                console.error('Error sending to Google Sheets:', error);
+                // Don't fail the entire application if Google Sheets fails
+                return false;
+            }
         }
 
         // Pre-fill form from session storage if available
@@ -571,7 +571,7 @@
             const investment = document.querySelector('input[name="investment"]:checked').value;
 
             // Validate required fields
-            if (!firstName || !lastName || !email || !phone || !title || !company || !experience || !linkedin || !investment) {
+            if (!firstName || !lastName || !email || !phone || !title || !company || !experience || !investment) {
                 alert('Please fill in all required fields');
                 return;
             }
