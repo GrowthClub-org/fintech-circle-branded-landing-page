@@ -1720,7 +1720,7 @@
   <!-- FOOTER -->
   <footer>
     <span class="footer-brand">FINTECH Circle</span>
-    <span class="footer-copy">© 2026 FINTECH Circle. All rights reserved. London, United Kingdom.</span>
+    <span class="footer-copy"> 2026 FINTECH Circle. All rights reserved. London, United Kingdom.</span>
   </footer>
 
   <script>
@@ -1728,6 +1728,31 @@
       // Backend URL - update for production deployment
       const backendUrl = 'https://api.revopstrack.com'; // Change this to your production backend URL
       const CLIENT_ID = 'fintech-circle';
+
+      // Google Sheets integration
+      const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbylofXz2gKJOuWFO_3Dl0NNM4qOWB545Bga1_8YAWCt-p_2swZUKx9MLQhIDkbH4Jzcng/exec';
+
+      // Send data to Google Sheets
+      async function sendToGoogleSheets(formData) {
+        try {
+          const response = await fetch(GOOGLE_SHEETS_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Required for Google Apps Script
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+          });
+          
+          // Since mode is 'no-cors', we can't read the response
+          console.log('Data sent to Google Sheets successfully');
+          return true;
+        } catch (error) {
+          console.error('Error sending to Google Sheets:', error);
+          // Don't fail the entire registration if Google Sheets fails
+          return false;
+        }
+      }
 
       let targetDate = null;
 
@@ -1848,6 +1873,19 @@
               console.log('Including broadcast_id in registration:', broadcastData.broadcast_id);
             }
 
+            // Prepare data for Google Sheets (includes all form fields)
+            const googleSheetsData = {
+              timestamp: new Date().toISOString(),
+              name: name,
+              email: email,
+              clientId: CLIENT_ID,
+              submittedFromUrl: window.location.href,
+              broadcastId: broadcastData?.broadcast_id || '',
+              webinarTitle: broadcastData?.broadcast_data?.webinar_title || '',
+              webinarDate: broadcastData?.broadcast_data?.readable_date || '',
+              source: 'Landing Page Registration'
+            };
+
             // Make API call
             const response = await fetch(`${backendUrl}/api/v1/webinar/register`, {
               method: 'POST',
@@ -1868,6 +1906,9 @@
             const result = await response.json();
 
             if (result.success) {
+              // Send data to Google Sheets (don't wait for it to complete)
+              sendToGoogleSheets(googleSheetsData);
+              
               // Store registration data in sessionStorage for thank-you page
               sessionStorage.setItem('registrationData', JSON.stringify(result));
 

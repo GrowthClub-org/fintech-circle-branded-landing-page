@@ -520,6 +520,31 @@
     <script>
         lucide.createIcons();
 
+        // Google Sheets integration
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyi03j6tCke51g9zzlwIBhgd-KYGT2m_1BUD-laplzpv2pC-Vg3B_7f3hFdOUrGyHOZcg/exec';
+
+        // Send data to Google Sheets
+        async function sendToGoogleSheets(formData) {
+          try {
+            const response = await fetch(GOOGLE_SHEETS_URL, {
+              method: 'POST',
+              mode: 'no-cors', // Required for Google Apps Script
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(formData)
+            });
+            
+            // Since mode is 'no-cors', we can't read the response
+            console.log('Application data sent to Google Sheets successfully');
+            return true;
+          } catch (error) {
+            console.error('Error sending to Google Sheets:', error);
+            // Don't fail the entire application if Google Sheets fails
+            return false;
+          }
+        }
+
         // Pre-fill form from session storage if available
         document.addEventListener('DOMContentLoaded', function () {
             const registrationData = JSON.parse(sessionStorage.getItem('registrationData'));
@@ -531,17 +556,49 @@
             }
         });
 
-        document.getElementById('applicationForm').addEventListener('submit', function (e) {
+        document.getElementById('applicationForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
-            // Get form values
-            const experience = document.getElementById('experience').value;
+            // Get all form values
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const title = document.getElementById('title').value.trim();
+            const company = document.getElementById('company').value.trim();
+            const experience = document.getElementById('experience').value.trim();
+            const linkedin = document.getElementById('linkedin').value.trim();
             const investment = document.querySelector('input[name="investment"]:checked').value;
-            const email = document.getElementById('email').value;
+
+            // Validate required fields
+            if (!firstName || !lastName || !email || !phone || !title || !company || !experience || !linkedin || !investment) {
+                alert('Please fill in all required fields');
+                return;
+            }
 
             // Show processing overlay
             document.getElementById('formView').style.display = 'none';
             document.getElementById('processingOverlay').style.display = 'flex';
+
+            // Prepare data for Google Sheets
+            const googleSheetsData = {
+                formType: 'application',
+                timestamp: new Date().toISOString(),
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                phone: phone,
+                title: title,
+                company: company,
+                experience: experience,
+                linkedin: linkedin,
+                investment: investment,
+                clientId: 'fintech-circle',
+                submittedFromUrl: window.location.href
+            };
+
+            // Send to Google Sheets (don't wait for it to complete)
+            sendToGoogleSheets(googleSheetsData);
 
             // Payment Gateway URL for qualified candidates
             const paymentUrl = "https://secure.fintechcirclepro.com/";
