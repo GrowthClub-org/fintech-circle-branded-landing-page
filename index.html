@@ -263,8 +263,6 @@
       border-top: 1px solid rgba(255, 255, 255, 0.15);
     }
 
-    .indicator {}
-
     .indicator-num {
       font-family: var(--font-heading);
       font-size: 2.2rem;
@@ -1730,7 +1728,7 @@
       const CLIENT_ID = 'fintech-circle';
 
       // Google Sheets integration
-      const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbylofXz2gKJOuWFO_3Dl0NNM4qOWB545Bga1_8YAWCt-p_2swZUKx9MLQhIDkbH4Jzcng/exec';
+      const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyGWFvnqneAL3xfjAd24tI0wulEWKvABYLoaodauqA26yS9nL57JnngA3wVsVwaAVf_/exec';
 
       // Send data to Google Sheets
       async function sendToGoogleSheets(formData) {
@@ -1909,6 +1907,7 @@
 
             // Prepare data for Google Sheets (includes all form fields)
             const googleSheetsData = {
+              formType: 'replay',
               timestamp: new Date().toISOString(),
               name: name,
               email: email,
