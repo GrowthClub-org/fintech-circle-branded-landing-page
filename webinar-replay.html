@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5MFP65RH');</script>
+    <!-- End Google Tag Manager -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webinar Replay | FINTECH Circle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Heebo:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            /* Brand Colors */
+            --onyx: #000000;
+            --cloud: #C6C8C9;
+            --sky: #22C1C9;
+            --ocean: #006BDC;
+            --dusk: #724FC2;
+            --sun: #FF9A48;
+
+            /* Semantic Variables - Dark Theme */
+            --ink: #ffffff;
+            --ivory: var(--onyx);
+            --gold: var(--sky);
+            --gold-light: var(--ocean);
+            --slate: #121212;
+            --muted: #a0a0a0;
+            --rule: rgba(198, 200, 201, 0.15);
+            --white: #ffffff;
+            --card-bg: rgba(26, 26, 26, 0.8);
+
+            /* Layout */
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-accent: 'Heebo', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 18px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #000000;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(34, 193, 201, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(114, 79, 194, 0.05) 0%, transparent 40%),
+                linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+            background-size: cover;
+            background-attachment: fixed;
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .mesh-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 4rem;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .nav-brand {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.35rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        .nav-brand span {
+            color: var(--cloud);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 140px auto 80px;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 1.25rem;
+            line-height: 1.1;
+        }
+
+        .hero-title em {
+            font-style: normal;
+            color: var(--sky);
+            text-shadow: 0 0 30px rgba(34, 193, 201, 0.3);
+        }
+
+        .hero-sub {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--muted);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* FORM CARD */
+        .signup-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 3.5rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .signup-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sky), var(--dusk));
+        }
+
+        .form-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .reg-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .form-label {
+            font-family: var(--font-accent);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--sky);
+            opacity: 0.9;
+        }
+
+        .form-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.1rem 1.25rem;
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 12px;
+            width: 100%;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--sky);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px rgba(34, 193, 201, 0.15), inset 0 0 10px rgba(34, 193, 201, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.25rem 3.5rem;
+            font-family: var(--font-accent);
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            border-radius: 99px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            border: none;
+            background: var(--sky);
+            color: var(--onyx);
+            margin-top: 1rem;
+            width: 100%;
+            box-shadow: 0 10px 20px rgba(34, 193, 201, 0.2);
+        }
+
+        .cta-button:hover {
+            background: var(--white);
+            color: var(--onyx);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(34, 193, 201, 0.3);
+        }
+
+        /* VIDEO SECTION */
+        #videoView {
+            display: none;
+        }
+
+        .video-player-container {
+            width: 100%;
+            min-height: 500px;
+            background: #111;
+            border-radius: 24px;
+            overflow: visible;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+
+        .video-player-container iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            border: none;
+        }
+
+        .video-info {
+            margin-top: 2.5rem;
+            text-align: left;
+        }
+
+        .video-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(34, 193, 201, 0.15);
+            color: var(--sky);
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .video-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .video-desc {
+            color: var(--muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* ANIMATIONS */
+        .fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(34, 193, 201, 0.1);
+            border-top-color: var(--sky);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.25rem 2rem;
+            }
+
+            .signup-card {
+                padding: 2rem;
+            }
+
+            .container {
+                margin-top: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mesh-grid"></div>
+
+    <nav>
+        <a href="index.html" class="nav-brand">FINTECH <span>Circle</span></a>
+    </nav>
+
+    <div class="container">
+        <!-- HEADER VIEW -->
+        <div class="hero-header fade-in-up">
+            <h1 class="hero-title">The Insider Roadmap to <em>UK Fintech Board Seats</em></h1>
+            <p class="hero-sub" id="heroSubText">Register below to unlock the exclusive webinar replay featuring Susanne
+                Chishti and veteran board directors.</p>
+        </div>
+
+        <!-- SIGNUP VIEW -->
+        <div id="signupView" class="fade-in-up" style="animation-delay: 0.2s;">
+            <div class="signup-card">
+                <h2 class="form-title">Unlock Webinar Replay</h2>
+                <form class="reg-form" id="webinarSignupForm">
+                    <div class="form-group">
+                        <label class="form-label" for="fullName">Full Name</label>
+                        <input type="text" id="fullName" class="form-input" placeholder="e.g. James Wilson" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Address</label>
+                        <input type="email" id="email" class="form-input" placeholder="james@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="company">Company</label>
+                        <input type="text" id="company" class="form-input" placeholder="e.g. Goldman Sachs" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="linkedin">LinkedIn Profile (Optional)</label>
+                        <input type="url" id="linkedin" class="form-input"
+                            placeholder="https://linkedin.com/in/username">
+                    </div>
+                    <button type="submit" class="cta-button">
+                        <i data-lucide="play-circle" style="width: 20px; height: 20px;"></i>
+                        Watch Replay Now
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div id="videoView" class="fade-in-up">
+            <div class="video-player-container">
+                <iframe id="replayVideo" src="" allow="autoplay"></iframe>
+            </div>
+
+            <div class="video-info">
+                <span class="video-tag">Masterclass Replay</span>
+                <h2 class="video-title">The Insider Roadmap to UK Fintech Board Seats 2026</h2>
+                <p class="video-desc">Join Susanne Chishti as she reveals the exact strategies used by top financial
+                    executives to secure lucrative board positions in the UK's thriving fintech sector. Learn how to
+                    position your expertise, navigate the recruitment landscape, and build a powerful board-level
+                    personal brand.</p>
+
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--rule);">
+                    <h3 style="color: var(--white); margin-bottom: 1.5rem;">Ready to take the next step?</h3>
+                    <a href="application.html" class="cta-button" style="width: auto; padding: 1rem 2.5rem;">
+                        Apply for the 2026 Cohort
+                        <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOADING OVERLAY -->
+    <div class="success-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <h2 class="hero-title" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Granting Access</h2>
+        <p class="hero-sub">Preparing your exclusive session...</p>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyi03j6tCke51g9zzlwIBhgd-KYGT2m_1BUD-laplzpv2pC-Vg3B_7f3hFdOUrGyHOZcg/exec';
+
+        document.getElementById('webinarSignupForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const company = document.getElementById('company').value.trim();
+            const linkedin = document.getElementById('linkedin').value.trim();
+
+            // Show loading
+            document.getElementById('loadingOverlay').style.display = 'flex';
+
+            // Prepare data
+            const formData = {
+                formType: 'replay',
+                timestamp: new Date().toISOString(),
+                name: fullName,
+                email: email,
+                company: company,
+                linkedin: linkedin,
+                webinarTitle: 'Insider Roadmap to UK Fintech Board Seats Replay',
+                submittedFromUrl: window.location.href,
+                source: 'webinar_replay_page'
+            };
+
+            // Send to Google Sheets (fire and forget for better UX, or wait if you prefer)
+            try {
+                fetch(GOOGLE_SHEETS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+            } catch (err) {
+                console.error('Submission error:', err);
+            }
+
+            // Simulate slight delay for "premium" feel
+            setTimeout(() => {
+                // Redirect to WebinarGeek Replay
+                window.location.href = "https://fintech-circle.webinargeek.com/watch/replay/5851219/a396baf5ff5aae44df051e70d491798a/";
+            }, 2000);
+        });
+    </script>
+</body>
+
+</html>

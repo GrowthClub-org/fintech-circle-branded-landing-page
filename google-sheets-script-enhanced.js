@@ -9,7 +9,9 @@ function doPost(e) {
     
     // Determine the form type and sheet name
     const formType = data.formType || 'registration';
-    const sheetName = formType === 'application' ? 'Programme Applicants' : 'Registrants';
+    let sheetName = 'Registrants';
+    if (formType === 'application') sheetName = 'Programme Applicants';
+    if (formType === 'replay') sheetName = 'Replays';
     
     // Get the active spreadsheet and sheet
     const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
