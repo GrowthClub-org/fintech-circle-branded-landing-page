@@ -604,24 +604,25 @@
         </div>
     </div>
 
-    <!-- SUCCESS VIEW (CONGRATULATIONS) -->
+    <!-- SUCCESS VIEW (NEXT STEPS) -->
     <div class="container" id="successView" style="display:none;">
         <div class="fade-up" style="text-align: center;">
-            <h1 class="hero-title">Congratulations!</h1>
-            <p class="hero-sub">Based on your professional profile, you are <span>pre-qualified</span> for the April
-                cohort of the Board Programme.</p>
+            <h1 class="hero-title">Application Received</h1>
+            <p class="hero-sub">Thank you for your interest. Your professional profile <span>aligns with our 2026 cohort
+                    requirements</span>.</p>
 
             <div class="application-card"
                 style="margin-top: 3rem; text-align: left; border-color: rgba(34, 193, 201, 0.4);">
                 <div class="glow"></div>
-                <h3 style="color: var(--sky); margin-bottom: 1rem;">Next Step: Secure Your Seat</h3>
-                <p>We are now redirecting you to our secure payment gateway to finalize your registration and guarantee
-                    your placement in the upcoming cohort.</p>
-                <p style="margin-top: 1rem; color: rgba(255,255,255,0.7); font-style: italic;">Redirecting in
-                    progress...</p>
+                <h3 style="color: var(--sky); margin-bottom: 1rem;">Profile Review in Progress</h3>
+                <p>Thank you for the detailed information. Your profile currently meets most of our core requirements
+                    for the Board Programme.</p>
+                <p style="margin-top: 1.5rem;">To maintain our high standards of peer-to-peer learning, our faculty is
+                    now conducting a <strong>final manual review</strong> of your professional experience. You will
+                    receive a follow-up via email within 24 hours.</p>
             </div>
 
-            <a id="manualPaymentBtn" href="#" class="cta-button" style="margin-top: 4rem;">Secure My Seat Now</a>
+            <a href="index.html" class="cta-button" style="margin-top: 4rem;">Return to Homepage</a>
         </div>
     </div>
 
@@ -708,9 +709,6 @@
             // Send to Google Sheets (don't wait for it to complete)
             sendToGoogleSheets(googleSheetsData);
 
-            // Payment Gateway URL for qualified candidates
-            const paymentUrl = "https://secure.fintechcirclepro.com/";
-
             // Logic processing
             setTimeout(() => {
                 document.getElementById('processingOverlay').style.display = 'none';
@@ -718,14 +716,8 @@
                 const isQualified = parseInt(experience) >= 15 && investment === "Yes";
 
                 if (isQualified) {
-                    // Show success view
+                    // Show success view (no redirection now)
                     document.getElementById('successView').style.display = 'block';
-                    document.getElementById('manualPaymentBtn').href = paymentUrl;
-
-                    // Redirect after a short delay to allow "Congratulations" to be seen
-                    setTimeout(() => {
-                        window.location.href = paymentUrl;
-                    }, 3000);
                 } else {
                     // Show reviewing view
                     document.getElementById('reviewingView').style.display = 'block';
