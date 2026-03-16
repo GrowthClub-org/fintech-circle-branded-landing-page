@@ -365,6 +365,96 @@
                 font-size: 2.2rem;
             }
         }
+
+        /* LinkedIn Helper Styles */
+        .linkedin-helpers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .helper-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 99px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(34, 193, 201, 0.3);
+            font-family: var(--font-accent);
+            background: rgba(34, 193, 201, 0.05);
+            color: var(--sky);
+        }
+
+        .helper-link:hover {
+            background: var(--sky);
+            color: var(--onyx);
+            transform: translateY(-1px);
+        }
+
+        .helper-link.small {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            opacity: 0.8;
+            border-color: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .helper-link.small:hover {
+            background: rgba(255, 255, 255, 0.1);
+            opacity: 1;
+        }
+
+        .video-help-box {
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            display: none;
+            position: relative;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+            width: 100%;
+        }
+
+        .video-help-box.active {
+            display: block;
+            animation: expandVideo 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes expandVideo {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .video-container {
+            width: 100%;
+            display: block;
+            line-height: 0;
+            /* Remove gaps */
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            /* Limit height to keep it usable */
+            display: block;
+            border-radius: 8px;
+        }
     </style>
 </head>
 
@@ -430,9 +520,27 @@
                                 required>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">LinkedIn Profile URL</label>
+                            <label class="form-label">LinkedIn Profile URL (Optional)</label>
                             <input type="url" id="linkedin" class="form-input"
                                 placeholder="https://linkedin.com/in/username">
+                            <div class="linkedin-helpers">
+                                <a href="https://linkedin.com/in/me" target="_blank" class="helper-link">
+                                    <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+                                    Find My Profile
+                                </a>
+                                <button type="button" id="showHelpVideo" class="helper-link small">
+                                    <i data-lucide="help-circle" style="width: 14px; height: 14px;"></i>
+                                    Can't find your LinkedIn?
+                                </button>
+                            </div>
+                            <div id="videoHelpContainer" class="video-help-box">
+                                <div class="video-container">
+                                    <video id="linkedinTutorial" controls muted loop playsinline>
+                                        <source src="linkedin-tutorial.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -623,6 +731,21 @@
                     document.getElementById('reviewingView').style.display = 'block';
                 }
             }, 2500); // Artificial delay for "Executive processing" feel
+        });
+
+        // LinkedIn Help Toggle
+        document.getElementById('showHelpVideo').addEventListener('click', function () {
+            const container = document.getElementById('videoHelpContainer');
+            const video = document.getElementById('linkedinTutorial');
+            const isActive = container.classList.toggle('active');
+
+            if (isActive) {
+                video.play().catch(e => console.log("Video autoplay prevented:", e));
+                lucide.createIcons();
+            } else {
+                video.pause();
+                video.currentTime = 0;
+            }
         });
     </script>
 </body>
