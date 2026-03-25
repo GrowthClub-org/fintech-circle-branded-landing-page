@@ -1326,7 +1326,7 @@
         </div>
         <div class="event-detail">
           <span class="event-detail-icon"><i data-lucide="clock"></i> Time</span>
-          <span id="eventTime">12:00 PM GMT</span>
+          <span id="eventTime">12:00 PM London Time</span>
         </div>
       </div>
     </div>
@@ -1644,7 +1644,7 @@
         <div class="programme-header">
           <div>
             <h3 style="color:var(--white); font-size:1.4rem; margin-bottom:0.5rem;">FINTECH Circle Board Programme</h3>
-            <p style="color:rgba(255,255,255,0.5); font-size:0.85rem; max-width:none;">10-hour online course · 8
+            <p style="color:rgba(255,255,255,0.5); font-size:0.85rem; max-width:none;">12-hour online course · 8
               structured modules · Taught by Chairs, Headhunters &amp; Board Experts</p>
           </div>
         </div>
@@ -1772,7 +1772,7 @@
 
         // Fallback to hardcoded date if API fails
         if (!targetDate) {
-          targetDate = new Date('2026-03-05T12:00:00Z').getTime(); // Updated to match the page content
+          targetDate = new Date('2026-03-05T12:00:00Z').getTime(); // Note: UTC time, displayed in British Time below
           console.log('Using fallback countdown date');
         }
 
@@ -1788,10 +1788,11 @@
         const dateObj = new Date(timestamp);
 
         // Date formatting with ordinal suffix
-        const day = dateObj.getUTCDate();
-        const month = dateObj.toLocaleString('en-GB', { month: 'long', timeZone: 'GMT' });
-        const year = dateObj.getUTCFullYear();
-        const weekday = dateObj.toLocaleString('en-GB', { weekday: 'long', timeZone: 'GMT' });
+        // Date formatting based on British Time
+        const day = parseInt(dateObj.toLocaleString('en-GB', { day: 'numeric', timeZone: 'Europe/London' }));
+        const month = dateObj.toLocaleString('en-GB', { month: 'long', timeZone: 'Europe/London' });
+        const year = dateObj.toLocaleString('en-GB', { year: 'numeric', timeZone: 'Europe/London' });
+        const weekday = dateObj.toLocaleString('en-GB', { weekday: 'long', timeZone: 'Europe/London' });
 
         const getOrdinal = (n) => {
           const s = ["th", "st", "nd", "rd"];
@@ -1804,7 +1805,7 @@
           hour: '2-digit',
           minute: '2-digit',
           hour12: true,
-          timeZone: 'GMT',
+          timeZone: 'Europe/London',
           timeZoneName: 'short'
         }).toUpperCase();
 
