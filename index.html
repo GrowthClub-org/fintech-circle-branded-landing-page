@@ -1959,7 +1959,7 @@
 
           } catch (error) {
             console.error('Registration error:', error);
-            alert('Registration failed. Please try again or contact support.');
+            alert('Registration failed. Please try again or contact support. Error: ${error.message}');
 
             // Reset button
             submitButton.innerHTML = originalText;
