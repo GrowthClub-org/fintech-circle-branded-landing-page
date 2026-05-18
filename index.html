@@ -1322,11 +1322,11 @@
 
         <div class="event-detail">
           <span class="event-detail-icon"><i data-lucide="calendar"></i> Date</span>
-          <span id="eventDate">Thursday, 5th March 2026</span>
+          <span id="eventDate">Friday, 19th June 2026</span>
         </div>
         <div class="event-detail">
           <span class="event-detail-icon"><i data-lucide="clock"></i> Time</span>
-          <span id="eventTime">12:00 PM London Time</span>
+          <span id="eventTime">12:00 PM BST</span>
         </div>
       </div>
     </div>
@@ -1772,7 +1772,7 @@
 
         // Fallback to hardcoded date if API fails
         if (!targetDate) {
-          targetDate = new Date('2026-03-05T12:00:00Z').getTime(); // Note: UTC time, displayed in British Time below
+          targetDate = new Date('2026-06-19T11:00:00Z').getTime(); // Note: UTC time, displayed in British Time below
           console.log('Using fallback countdown date');
         }
 
