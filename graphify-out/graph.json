@@ -1,0 +1,462 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "google-sheets-script-enhanced.js",
+      "file_type": "code",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L1",
+      "id": "google_sheets_script_enhanced_js",
+      "community": 0,
+      "norm_label": "google-sheets-script-enhanced.js"
+    },
+    {
+      "label": "doPost()",
+      "file_type": "code",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L5",
+      "id": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_dopost",
+      "community": 1,
+      "norm_label": "dopost()"
+    },
+    {
+      "label": "getRegistrationHeaders()",
+      "file_type": "code",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L77",
+      "id": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_getregistrationheaders",
+      "community": 0,
+      "norm_label": "getregistrationheaders()"
+    },
+    {
+      "label": "getApplicationHeaders()",
+      "file_type": "code",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L93",
+      "id": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_getapplicationheaders",
+      "community": 1,
+      "norm_label": "getapplicationheaders()"
+    },
+    {
+      "label": "prepareRegistrationRow()",
+      "file_type": "code",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L113",
+      "id": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_prepareregistrationrow",
+      "community": 1,
+      "norm_label": "prepareregistrationrow()"
+    },
+    {
+      "label": "prepareApplicationRow()",
+      "file_type": "code",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L129",
+      "id": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_prepareapplicationrow",
+      "community": 1,
+      "norm_label": "prepareapplicationrow()"
+    },
+    {
+      "label": "determineApplicationStatus()",
+      "file_type": "code",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L149",
+      "id": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_determineapplicationstatus",
+      "community": 1,
+      "norm_label": "determineapplicationstatus()"
+    },
+    {
+      "label": "sendApplicationNotification()",
+      "file_type": "code",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L163",
+      "id": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_sendapplicationnotification",
+      "community": 1,
+      "norm_label": "sendapplicationnotification()"
+    },
+    {
+      "label": "setupSpreadsheet()",
+      "file_type": "code",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L196",
+      "id": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_setupspreadsheet",
+      "community": 0,
+      "norm_label": "setupspreadsheet()"
+    },
+    {
+      "label": "setupSheet()",
+      "file_type": "code",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L214",
+      "id": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_setupsheet",
+      "community": 0,
+      "norm_label": "setupsheet()"
+    },
+    {
+      "label": "createSummaryReport()",
+      "file_type": "code",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L248",
+      "id": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_createsummaryreport",
+      "community": 0,
+      "norm_label": "createsummaryreport()"
+    },
+    {
+      "label": "exportForMailMerge()",
+      "file_type": "code",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L311",
+      "id": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_exportformailmerge",
+      "community": 0,
+      "norm_label": "exportformailmerge()"
+    },
+    {
+      "label": "onOpen()",
+      "file_type": "code",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L360",
+      "id": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_onopen",
+      "community": 0,
+      "norm_label": "onopen()"
+    },
+    {
+      "label": "viewLogs()",
+      "file_type": "code",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L372",
+      "id": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_viewlogs",
+      "community": 0,
+      "norm_label": "viewlogs()"
+    },
+    {
+      "label": "google-sheets-script.js",
+      "file_type": "code",
+      "source_file": "google-sheets-script.js",
+      "source_location": "L1",
+      "id": "google_sheets_script_js",
+      "community": 2,
+      "norm_label": "google-sheets-script.js"
+    },
+    {
+      "label": "doPost()",
+      "file_type": "code",
+      "source_file": "google-sheets-script.js",
+      "source_location": "L4",
+      "id": "fintech_circle_branded_landing_page_google_sheets_script_dopost",
+      "community": 2,
+      "norm_label": "dopost()"
+    },
+    {
+      "label": "setupSpreadsheet()",
+      "file_type": "code",
+      "source_file": "google-sheets-script.js",
+      "source_location": "L85",
+      "id": "fintech_circle_branded_landing_page_google_sheets_script_setupspreadsheet",
+      "community": 2,
+      "norm_label": "setupspreadsheet()"
+    },
+    {
+      "label": "createSummaryReport()",
+      "file_type": "code",
+      "source_file": "google-sheets-script.js",
+      "source_location": "L135",
+      "id": "fintech_circle_branded_landing_page_google_sheets_script_createsummaryreport",
+      "community": 2,
+      "norm_label": "createsummaryreport()"
+    },
+    {
+      "label": "onOpen()",
+      "file_type": "code",
+      "source_file": "google-sheets-script.js",
+      "source_location": "L172",
+      "id": "fintech_circle_branded_landing_page_google_sheets_script_onopen",
+      "community": 2,
+      "norm_label": "onopen()"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "google_sheets_script_enhanced_js",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_dopost",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L77",
+      "weight": 1.0,
+      "source": "google_sheets_script_enhanced_js",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_getregistrationheaders",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L93",
+      "weight": 1.0,
+      "source": "google_sheets_script_enhanced_js",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_getapplicationheaders",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L113",
+      "weight": 1.0,
+      "source": "google_sheets_script_enhanced_js",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_prepareregistrationrow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L129",
+      "weight": 1.0,
+      "source": "google_sheets_script_enhanced_js",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_prepareapplicationrow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L149",
+      "weight": 1.0,
+      "source": "google_sheets_script_enhanced_js",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_determineapplicationstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L163",
+      "weight": 1.0,
+      "source": "google_sheets_script_enhanced_js",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_sendapplicationnotification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L196",
+      "weight": 1.0,
+      "source": "google_sheets_script_enhanced_js",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_setupspreadsheet",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L214",
+      "weight": 1.0,
+      "source": "google_sheets_script_enhanced_js",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_setupsheet",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L248",
+      "weight": 1.0,
+      "source": "google_sheets_script_enhanced_js",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_createsummaryreport",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L311",
+      "weight": 1.0,
+      "source": "google_sheets_script_enhanced_js",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_exportformailmerge",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L360",
+      "weight": 1.0,
+      "source": "google_sheets_script_enhanced_js",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_onopen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L372",
+      "weight": 1.0,
+      "source": "google_sheets_script_enhanced_js",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_viewlogs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_dopost",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_getapplicationheaders",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_dopost",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_getregistrationheaders",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_dopost",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_prepareapplicationrow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_dopost",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_prepareregistrationrow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_dopost",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_sendapplicationnotification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L200",
+      "weight": 1.0,
+      "source": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_setupspreadsheet",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_getregistrationheaders",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L203",
+      "weight": 1.0,
+      "source": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_setupspreadsheet",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_getapplicationheaders",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L143",
+      "weight": 1.0,
+      "source": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_prepareapplicationrow",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_determineapplicationstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L179",
+      "weight": 1.0,
+      "source": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_sendapplicationnotification",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_determineapplicationstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script-enhanced.js",
+      "source_location": "L200",
+      "weight": 1.0,
+      "source": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_setupspreadsheet",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_enhanced_setupsheet",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "google_sheets_script_js",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_dopost",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script.js",
+      "source_location": "L85",
+      "weight": 1.0,
+      "source": "google_sheets_script_js",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_setupspreadsheet",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script.js",
+      "source_location": "L135",
+      "weight": 1.0,
+      "source": "google_sheets_script_js",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_createsummaryreport",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "google-sheets-script.js",
+      "source_location": "L172",
+      "weight": 1.0,
+      "source": "google_sheets_script_js",
+      "target": "fintech_circle_branded_landing_page_google_sheets_script_onopen",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "fd2933da718ba03215539106664c957795f8f34e"
+}
