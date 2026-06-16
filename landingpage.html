@@ -62,10 +62,7 @@
 
     body {
       background: #050b14;
-      background-image:
-        radial-gradient(circle at 10% 20%, rgba(229, 196, 131, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(27, 54, 93, 0.22) 0%, transparent 45%),
-        linear-gradient(180deg, #050b14 0%, #0d1e36 100%);
+      background-image: linear-gradient(180deg, #050b14 0%, #0d1e36 100%);
       background-size: cover;
       background-attachment: fixed;
       color: var(--ink);
@@ -83,7 +80,7 @@
       transform: translate(-50%, -50%);
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at 50% 50%, rgba(229, 196, 131, 0.06) 0%, transparent 70%);
+      background: transparent;
       pointer-events: none;
       z-index: 0;
     }
@@ -160,10 +157,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       padding-top: 80px;
-      background:
-        radial-gradient(circle at 82% 28%, rgba(229, 196, 131, 0.12) 0%, transparent 46%),
-        radial-gradient(circle at 96% 96%, rgba(27, 54, 93, 0.18) 0%, transparent 42%),
-        linear-gradient(105deg, #050b14 0%, #050b14 44%, #0c182d 70%, #0e2340 100%);
+      background: linear-gradient(105deg, #050b14 0%, #050b14 44%, #0c182d 70%, #0e2340 100%);
     }
 
     .hero-left {
@@ -1492,7 +1486,6 @@
     <div class="hero-right" id="register">
       <div class="event-card">
         <span class="event-tag">Secure Your Place - Live 2026</span>
-        <h2 class="event-title" style="font-size:1.35rem; margin-bottom:1rem;">Join the Exclusive 2026 Masterclass</h2>
         <div class="seats-urgency" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--rule); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 2rem; font-family: var(--font-accent); font-size: 0.82rem; letter-spacing: 0.05em; color: var(--white); display: flex; align-items: center; gap: 0.6rem;">
           <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #ff453a; box-shadow: 0 0 8px #ff453a; animation: pulse-dot 1.6s ease-in-out infinite;"></span>
           <span><strong style="color: var(--gold);">394/400 Seats Filled</strong> &middot; Only 6 Seats Remaining</span>
