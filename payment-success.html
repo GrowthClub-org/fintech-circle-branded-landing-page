@@ -260,25 +260,63 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
 
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .cta-btn {
+                padding: 1rem 2.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
         @media (max-width: 600px) {
             html {
                 font-size: 16px;
             }
 
             .container {
-                padding-top: 100px;
+                padding: 90px 1rem 60px;
             }
 
             .hero-title {
-                font-size: 2.2rem;
+                font-size: 2rem;
+            }
+
+            .hero-sub {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
             }
 
             .application-card {
-                padding: 2rem 1.5rem;
+                padding: 1.5rem 1.25rem;
+                border-radius: 16px;
             }
 
             .step-item {
                 gap: 1rem;
+            }
+
+            .step-icon {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                border-radius: 10px;
+            }
+
+            .step-content h3 {
+                font-size: 1.1rem;
+            }
+
+            .step-content p {
+                font-size: 0.95rem;
+            }
+
+            .cta-btn {
+                padding: 0.9rem 2rem;
+                font-size: 0.85rem;
+                margin-top: 2.5rem;
             }
         }
     </style>

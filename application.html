@@ -352,17 +352,73 @@
             }
         }
 
-        @media (max-width: 600px) {
-            .form-row {
-                grid-template-columns: 1fr;
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .container {
+                margin: 100px auto 60px;
+                padding: 0 1rem;
             }
 
             .application-card {
-                padding: 1.5rem;
+                padding: 2rem;
+            }
+
+            .hero-header {
+                margin-bottom: 2.5rem;
+            }
+
+            .cta-button {
+                padding: 1rem 2.5rem;
+                font-size: 0.95rem;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            html {
+                font-size: 16px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .application-card {
+                padding: 1.25rem;
+                border-radius: 16px;
             }
 
             .hero-title {
-                font-size: 2.2rem;
+                font-size: 2rem;
+            }
+
+            .hero-sub {
+                font-size: 1rem;
+            }
+
+            .form-section-title {
+                font-size: 1.1rem;
+            }
+
+            .radio-option {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .cta-button {
+                padding: 1rem 2rem;
+                font-size: 0.9rem;
+                letter-spacing: 0.05em;
+            }
+
+            .form-input,
+            .form-select {
+                padding: 0.9rem 1rem;
+                font-size: 0.95rem;
             }
         }
 
@@ -657,10 +713,32 @@
         document.addEventListener('DOMContentLoaded', function () {
             const registrationData = JSON.parse(sessionStorage.getItem('registrationData'));
             if (registrationData) {
-                if (registrationData.firstName) document.getElementById('firstName').value = registrationData.firstName;
-                if (registrationData.lastName) document.getElementById('lastName').value = registrationData.lastName;
-                if (registrationData.email) document.getElementById('email').value = registrationData.email;
-                if (registrationData.phone) document.getElementById('phone').value = registrationData.phone;
+                // Handle nesting under .data or .registrant if returned from registration API
+                const dataObj = registrationData.data || registrationData.registrant || registrationData;
+                
+                // Prefill email
+                const email = dataObj.email || registrationData.email;
+                if (email) document.getElementById('email').value = email;
+                
+                // Prefill phone
+                const phone = dataObj.phone || registrationData.phone;
+                if (phone) document.getElementById('phone').value = phone;
+
+                // Prefill first name & last name
+                if (dataObj.firstName) {
+                    document.getElementById('firstName').value = dataObj.firstName;
+                    if (dataObj.lastName) document.getElementById('lastName').value = dataObj.lastName;
+                } else {
+                    // Try to split full name if name is saved as a single field
+                    const fullName = dataObj.name || dataObj.fullName || registrationData.name || registrationData.fullName;
+                    if (fullName) {
+                        const parts = fullName.trim().split(/\s+/);
+                        const firstName = parts[0] || '';
+                        const lastName = parts.slice(1).join(' ') || '';
+                        document.getElementById('firstName').value = firstName;
+                        document.getElementById('lastName').value = lastName;
+                    }
+                }
             }
         });
 

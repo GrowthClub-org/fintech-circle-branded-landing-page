@@ -36,7 +36,7 @@
       --gold: var(--sky);
       --gold-light: var(--ocean);
       --slate: #121212;
-      --muted: #a0a0a0;
+      --muted: #b8b8b8;
       --rule: rgba(198, 200, 201, 0.15);
       --white: #ffffff;
       --card-bg: rgba(26, 26, 26, 0.8);
@@ -98,6 +98,8 @@
         linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
       background-size: 50px 50px;
+      -webkit-mask-image: linear-gradient(to right, #000 20%, transparent 85%);
+      mask-image: linear-gradient(to right, #000 20%, transparent 85%);
       pointer-events: none;
       z-index: 0;
     }
@@ -126,23 +128,11 @@
       text-transform: uppercase;
       color: var(--ink);
       text-decoration: none;
+      white-space: nowrap;
     }
 
     .nav-brand span {
       color: var(--cloud);
-    }
-
-    .nav-cta {
-      font-family: var(--font-accent);
-      font-weight: 700;
-      font-size: 0.9rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--white);
-      background: var(--sky);
-      padding: 0.75rem 2rem;
-      text-decoration: none;
-      transition: background 0.2s;
     }
 
     .floating-node {
@@ -170,6 +160,10 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       padding-top: 80px;
+      background:
+        radial-gradient(circle at 82% 28%, rgba(34, 193, 201, 0.13) 0%, transparent 46%),
+        radial-gradient(circle at 96% 96%, rgba(114, 79, 194, 0.10) 0%, transparent 42%),
+        linear-gradient(105deg, #000000 0%, #000000 44%, #04090f 70%, #07121d 100%);
     }
 
     .hero-left {
@@ -177,7 +171,7 @@
       flex-direction: column;
       justify-content: center;
       padding: 6rem 3rem 6rem 4rem;
-      background: #000000;
+      background: transparent;
       position: relative;
       overflow: hidden;
     }
@@ -194,6 +188,8 @@
           transparent 59px,
           rgba(34, 193, 201, 0.08) 59px,
           rgba(34, 193, 201, 0.08) 60px);
+      -webkit-mask-image: linear-gradient(to right, #000 20%, transparent 85%);
+      mask-image: linear-gradient(to right, #000 20%, transparent 85%);
       pointer-events: none;
     }
 
@@ -255,49 +251,13 @@
       box-shadow: 0 8px 25px rgba(0, 107, 220, 0.3);
     }
 
-    .hero-indicators {
-      display: flex;
-      gap: 2rem;
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    .indicator-num {
-      font-family: var(--font-heading);
-      font-size: 2.2rem;
-      color: var(--sky);
-      font-weight: 600;
-      line-height: 1;
-    }
-
-    .indicator-label {
-      font-family: var(--font-accent);
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.6);
-      margin-top: 0.3rem;
-    }
-
     .hero-right {
       display: flex;
       flex-direction: column;
       justify-content: center;
       padding: 6rem 4rem;
-      background: url('/Users/abhay/.gemini/antigravity/brain/c37a270e-4fa2-44b6-96d8-a679830dabdf/fintech_boardroom_hero_1772107923853.png') center/cover no-repeat;
+      background: transparent;
       position: relative;
-    }
-
-    .hero-right::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 1;
     }
 
     .event-card {
@@ -1072,28 +1032,73 @@
     }
 
     /* COUNTDOWN BAR */
-    .countdown-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: var(--sky);
-      color: var(--white);
-      text-align: center;
-      padding: 0.6rem;
-      font-family: var(--font-accent);
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-      transition: all 0.5s ease;
+    .nav-countdown {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: rgba(34, 193, 201, 0.1);
+      border: 1px solid rgba(34, 193, 201, 0.45);
+      border-radius: 999px;
+      padding: 0.45rem 1.1rem;
+      transition: all 0.4s ease;
     }
 
-    #countdown {
-      display: inline-block;
+    .nav-countdown::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--sky);
+      box-shadow: 0 0 8px var(--sky);
+      animation: pulse-dot 1.6s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.75); }
+    }
+
+    .nav-countdown-label {
+      font-family: var(--font-accent);
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.65);
+      white-space: nowrap;
+    }
+
+    .nav-countdown-time {
+      font-family: var(--font-accent);
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: 0.03em;
+      color: var(--sky);
       font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .nav-countdown.is-live {
+      background: rgba(255, 59, 48, 0.15);
+      border-color: rgba(255, 59, 48, 0.6);
+    }
+
+    .nav-countdown.is-live .nav-countdown-time {
+      color: #ff453a;
+    }
+
+    .nav-countdown.is-live::before {
+      background: #ff453a;
+      box-shadow: 0 0 8px #ff453a;
+    }
+
+    .form-disclaimer {
+      margin-top: 1rem;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.55);
+      text-align: center;
     }
 
     .loading-spinner {
@@ -1114,21 +1119,15 @@
       }
     }
 
-    /* Adjust Navigation to compensate for countdown bar */
-    nav {
-      top: 40px !important;
-    }
-
-    /* Adjust Hero for the shift */
+    /* Hero clears the fixed nav (countdown now lives inside the nav) */
     .hero {
-      padding-top: 120px !important;
+      padding-top: 100px !important;
     }
 
     /* ===== RESPONSIVE REFINEMENTS ===== */
     @media (max-width: 900px) {
       nav {
         padding: 1rem 1.5rem;
-        top: 40px !important;
       }
 
       .nav-brand {
@@ -1144,11 +1143,25 @@
         text-align: center;
       }
 
+      .hero-sub {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cta-primary {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
       .hero-right {
         padding: 2rem 1.5rem 4rem;
       }
 
-      .hero-title {
+      .event-card {
+        padding: 2rem;
+      }
+
+      .hero-headline {
         font-size: clamp(2.2rem, 10vw, 3.5rem);
       }
 
@@ -1157,7 +1170,7 @@
       }
 
       .section-inner {
-        padding: 0;
+        padding: 0 1.5rem;
       }
 
       .audience-grid {
@@ -1198,13 +1211,53 @@
         margin: 0 auto;
       }
 
+      .host-quote {
+        font-size: 1.3rem;
+      }
+
       .faculty-grid {
         grid-template-columns: 1fr 1fr;
+      }
+
+      .bonus-box {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem;
+      }
+
+      .programme-header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .authority-strip {
+        padding: 3rem 1.5rem;
       }
 
       .authority-numbers {
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
+      }
+
+      .authority-figure {
+        font-size: 2.5rem;
+      }
+
+      .final-cta {
+        padding: 5rem 1.5rem;
+      }
+
+      .final-cta-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        padding: 2rem 1.5rem;
       }
     }
 
@@ -1214,24 +1267,83 @@
         font-size: 16px;
       }
 
-      .hero-title {
+      .nav-countdown {
+        padding: 0.35rem 0.8rem;
+        gap: 0.4rem;
+      }
+
+      .nav-countdown-label {
+        display: none;
+      }
+
+      .nav-brand {
+        font-size: 1rem;
+      }
+
+      .nav-countdown-time {
+        font-size: 1.1rem;
+      }
+
+      .hero {
+        padding-top: 90px !important;
+      }
+
+      .hero-headline {
         font-size: 2rem;
+      }
+
+      .hero-left {
+        padding: 3rem 1rem 2rem;
+      }
+
+      .hero-right {
+        padding: 1.5rem 1rem 3rem;
+      }
+
+      .event-card {
+        padding: 1.5rem;
+      }
+
+      .event-title {
+        font-size: 1.2rem;
+      }
+
+      .cta-primary {
+        padding: 1rem 2.5rem;
+        font-size: 0.95rem;
+      }
+
+      section {
+        padding: 3rem 1rem;
+      }
+
+      .section-inner {
+        padding: 0 1rem;
       }
 
       .roadmap-wave {
         gap: 2rem;
+        --node: 48px;
       }
 
       .roadmap-wave-item {
-        gap: 1.5rem;
+        gap: 1rem;
       }
 
       .roadmap-wave-card {
-        padding: 1.5rem;
+        padding: 1.25rem;
       }
 
       .roadmap-wave-card h3 {
-        font-size: 1.25rem;
+        font-size: 1.15rem;
+      }
+
+      .roadmap-wave-card p {
+        font-size: 0.95rem;
+      }
+
+      .roadmap-wave-num {
+        font-size: 1rem;
       }
 
       .faculty-grid {
@@ -1243,15 +1355,88 @@
       }
 
       .bonus-box {
-        padding: 2rem 1.5rem;
+        padding: 1.5rem;
+        gap: 1.5rem;
       }
 
-      .final-cta h2 {
-        font-size: 1.8rem;
+      .bonus-title {
+        font-size: 1.4rem;
       }
 
       .final-cta {
         padding: 4rem 1rem;
+      }
+
+      .final-quote {
+        font-size: 1.6rem;
+      }
+
+      .authority-strip {
+        padding: 2.5rem 1rem;
+      }
+
+      .authority-numbers {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+
+      .authority-figure {
+        font-size: 2rem;
+      }
+
+      .authority-desc {
+        font-size: 0.75rem;
+      }
+
+      .audience-item {
+        padding: 1.5rem;
+      }
+
+      .insight-item {
+        padding: 1.5rem;
+      }
+
+      footer {
+        padding: 1.5rem 1rem;
+      }
+
+      .host-quote {
+        font-size: 1.15rem;
+        padding-left: 1rem;
+      }
+
+      .host-credential span {
+        font-size: 0.95rem;
+      }
+    }
+
+    /* Very small screens */
+    @media (max-width: 380px) {
+      .hero-headline {
+        font-size: 1.7rem;
+      }
+
+      .hero-eyebrow {
+        font-size: 0.8rem;
+      }
+
+      .nav-brand {
+        font-size: 1rem;
+      }
+
+      .nav-countdown-time {
+        font-size: 0.92rem;
+      }
+
+      .event-detail {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+      }
+
+      .cta-primary {
+        padding: 0.9rem 2rem;
+        font-size: 0.85rem;
       }
     }
   </style>
@@ -1262,13 +1447,13 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MFP65RH" height="0" width="0"
       style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
-  <div class="countdown-bar">
-    <div id="countdown">LOADING...</div>
-  </div>
-
   <!-- NAV -->
   <nav>
     <a href="#" class="nav-brand">FINTECH <span>Circle</span></a>
+    <div class="nav-countdown" id="navCountdown">
+      <span class="nav-countdown-label">Masterclass starts in</span>
+      <span id="countdown" class="nav-countdown-time">LOADING...</span>
+    </div>
   </nav>
 
 
@@ -1313,9 +1498,10 @@
           </div>
           <div class="form-group">
             <label class="form-label">Company Name</label>
-            <input type="text" class="form-input" placeholder="Company Ltd." required>
+            <input type="text" id="company" class="form-input" placeholder="Company Ltd." required>
           </div>
           <button type="submit" class="cta-primary form-submit cta-button" style="width:100%;">Reserve My Seat</button>
+          <p class="form-disclaimer">By reserving your seat you agree to receive emails about this masterclass from FINTECH Circle. We respect your privacy, never share your details, and you can unsubscribe at any time.</p>
         </form>
 
         <div class="event-rule" style="margin: 2rem 0 1.5rem;"></div>
@@ -1346,6 +1532,23 @@
       <div>
         <div class="host-portrait">
         </div>
+        <div class="host-credentials">
+          <div class="host-credential">
+            <div class="credential-dot"></div><span><strong>Chair</strong> - FINTECH Circle (260,000 global members)</span>
+          </div>
+          <div class="host-credential">
+            <div class="credential-dot"></div><span><strong>Non-Executive Director</strong> - Crown Agents Bank</span>
+          </div>
+          <div class="host-credential">
+            <div class="credential-dot"></div><span><strong>Advisory Board</strong> - Elevator Ventures (Raiffeisen Bank International CVC)</span>
+          </div>
+          <div class="host-credential">
+            <div class="credential-dot"></div><span><strong>Board Member since 2016</strong> - private, PE-owned and public company boards</span>
+          </div>
+          <div class="host-credential">
+            <div class="credential-dot"></div><span><strong>Author</strong> - 7 published fintech books, including the acclaimed “The FINTECH Book” Series</span>
+          </div>
+        </div>
       </div>
       <div>
         <p style="margin-bottom:1.5rem;">Susanne Chishti has spent a decade at the intersection of fintech governance,
@@ -1361,28 +1564,6 @@
           boards. She has witnessed governance create genuine enterprise value - including the £700 million exit of
           SafeCharge to Nuvei - and understands how board decisions shape company trajectories at the most consequential
           moments.</p>
-
-        <div>
-          <div class="host-credential">
-            <div class="credential-dot"></div><span><strong>Chair</strong> - FINTECH Circle (260,000 global
-              members)</span>
-          </div>
-          <div class="host-credential">
-            <div class="credential-dot"></div><span><strong>Non-Executive Director</strong> – Crown Agents Bank</span>
-          </div>
-          <div class="host-credential">
-            <div class="credential-dot"></div><span><strong>Advisory Board</strong> - Elevator Ventures (Raiffeisen Bank
-              International CVC)</span>
-          </div>
-          <div class="host-credential">
-            <div class="credential-dot"></div><span><strong>Board Member since 2016</strong> - private, PE-owned and
-              public company boards</span>
-          </div>
-          <div class="host-credential">
-            <div class="credential-dot"></div><span><strong>Author</strong> – 7 published fintech books, including the
-              acclaimed “The FINTECH Book” Series</span>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -1591,8 +1772,7 @@
 
       <div style="text-align: center; margin-top: 4rem;">
         <a href="#register" id="scrollToFormBtn" class="cta-primary"
-          style="padding: 1.2rem 3rem; font-size: 0.85rem;">REGISTER FOR EXCLUSIVE
-          MASTERCLASS</a>
+          style="padding: 1.2rem 3rem;">Reserve My Seat</a>
 
       </div>
     </div>
@@ -1644,12 +1824,12 @@
         <div class="programme-header">
           <div>
             <h3 style="color:var(--white); font-size:1.4rem; margin-bottom:0.5rem;">FINTECH Circle Board Programme</h3>
-            <p style="color:rgba(255,255,255,0.5); font-size:0.85rem; max-width:none;">12-hour online course · 8
+            <p style="color:rgba(255,255,255,0.72); font-size:0.85rem; max-width:none;">12-hour online course · 8
               structured modules · Taught by Chairs, Headhunters &amp; Board Experts</p>
           </div>
         </div>
 
-        <p style="color:rgba(255,255,255,0.5); font-size:0.85rem; margin-bottom:2rem; max-width:600px;">A closed-door
+        <p style="color:rgba(255,255,255,0.72); font-size:0.85rem; margin-bottom:2rem; max-width:600px;">A closed-door
           boardroom education delivered by practitioners. Not theory. Not generic governance training. Applied,
           specific, and taught by people actively placing and serving on UK fintech boards.</p>
 
@@ -1695,7 +1875,7 @@
           record required for senior appointments.</p>
       </div>
       <div>
-        <a href="#register" class="bonus-cta">Secure My Placement</a>
+        <a href="#register" class="bonus-cta">Reserve My Seat</a>
         <p class="bonus-note">Places for the board placement cohort are strictly limited to ensure quality of
           experience. Reservations are prioritised on a first-qualified basis.</p>
       </div>
@@ -1710,7 +1890,7 @@
       positioning deliberately. This is where that process begins.</p>
 
     <div class="final-cta-buttons">
-      <a href="#register" class="cta-primary" style="font-size:0.72rem;">Secure My Place Now</a>
+      <a href="#register" class="cta-primary">Reserve My Seat</a>
       <a href="https://fintechcircle.com/" target="_blank" class="cta-ghost">Learn more about FINTECH CIRCLE</a>
     </div>
   </div>
@@ -1829,13 +2009,14 @@
           const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
           document.getElementById('countdown').innerHTML =
-            String(days).padStart(2, '0') + ' d: ' +
-            String(hours).padStart(2, '0') + ' h: ' +
-            String(minutes).padStart(2, '0') + ' m: ' +
-            String(seconds).padStart(2, '0') + ' s';
+            String(days).padStart(2, '0') + 'd ' +
+            String(hours).padStart(2, '0') + 'h ' +
+            String(minutes).padStart(2, '0') + 'm ' +
+            String(seconds).padStart(2, '0') + 's';
         } else {
-          document.getElementById('countdown').innerHTML = 'LIVE NOW!';
-          document.querySelector('.countdown-bar').style.backgroundColor = '#ff3b30';
+          document.getElementById('countdown').innerHTML = 'LIVE NOW';
+          const navCountdown = document.getElementById('navCountdown');
+          if (navCountdown) navCountdown.classList.add('is-live');
         }
       }
 
@@ -1868,6 +2049,7 @@
           // Get form data
           const name = document.getElementById('name').value.trim();
           const email = document.getElementById('email').value.trim();
+          const company = document.getElementById('company').value.trim();
 
           if (!email) {
             alert('Please enter your email address');
@@ -1896,8 +2078,9 @@
             const registrationData = {
               name: name,
               email: email,
+              company: company,
               submittedFromUrl: window.location.href,
-              terms: true // Assuming they agree by submitting
+              terms: true // User consents via the disclaimer shown beneath the submit button
             };
 
             // Include broadcast_id if available
@@ -1912,6 +2095,7 @@
               timestamp: new Date().toISOString(),
               name: name,
               email: email,
+              company: company,
               clientId: CLIENT_ID,
               submittedFromUrl: window.location.href,
               broadcastId: broadcastData?.broadcast_id || '',
