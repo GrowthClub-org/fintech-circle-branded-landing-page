@@ -1944,36 +1944,35 @@
         }
       }
 
-      let targetDate = null;
+      let targetDate = new Date('2026-06-19T11:00:00Z').getTime(); // Initialize with fallback date immediately
 
       // Function to fetch broadcast data and set countdown date
       async function initializeCountdown() {
+        // Update display with initial fallback date immediately so there is no loading delay
+        updateEventDisplay(targetDate);
+        updateCountdown();
+
+        // Start countdown interval immediately
+        setInterval(updateCountdown, 1000);
+
         try {
+          // Asynchronously fetch upcoming broadcast date
           const response = await fetch(`${backendUrl}/api/v1/broadcast/upcoming-broadcast?clientId=${encodeURIComponent(CLIENT_ID)}`);
           if (response.ok) {
             const data = await response.json();
             if (data.broadcast_data && data.broadcast_data.date) {
               // Convert Unix timestamp to milliseconds
               targetDate = data.broadcast_data.date * 1000;
-              console.log('Broadcast date loaded:', new Date(targetDate).toISOString());
+              console.log('Broadcast date loaded from API:', new Date(targetDate).toISOString());
+
+              // Refresh display with API-provided date
+              updateEventDisplay(targetDate);
+              updateCountdown();
             }
           }
         } catch (error) {
-          console.warn('Could not fetch broadcast data, using fallback date:', error);
+          console.warn('Could not fetch broadcast data, keeping fallback date:', error);
         }
-
-        // Fallback to hardcoded date if API fails
-        if (!targetDate) {
-          targetDate = new Date('2026-06-19T11:00:00Z').getTime(); // Note: UTC time, displayed in British Time below
-          console.log('Using fallback countdown date');
-        }
-
-        // Update the Date/Time display in the event card
-        updateEventDisplay(targetDate);
-
-        // Start countdown
-        setInterval(updateCountdown, 1000);
-        updateCountdown(); // Initial call
       }
 
       function updateEventDisplay(timestamp) {
