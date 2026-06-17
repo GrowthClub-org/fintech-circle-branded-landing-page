@@ -1256,6 +1256,12 @@
 
             // Logic processing
             setTimeout(() => {
+                
+                if (pricingTier === 'Digital') {
+                    window.location.href = 'https://secure.fintechcirclepro.com/payment-page-digital';
+                    return;
+                }
+                
                 document.getElementById('processingOverlay').style.display = 'none';
 
                 const isQualified = parseInt(experience) >= 15 && (investment === "Yes" || investment === "Future");
