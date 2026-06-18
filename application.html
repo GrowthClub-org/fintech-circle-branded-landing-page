@@ -1258,7 +1258,15 @@
             setTimeout(() => {
                 
                 if (pricingTier === 'Digital') {
-                    window.location.href = 'https://secure.fintechcirclepro.com/payment-page-digital';
+
+                    if (investment === 'Yes') {
+                        window.location.href = 'https://secure.fintechcirclepro.com/payment-page-digital';
+                        return;
+                    }
+            
+                    // User selected "No, not at this stage"
+                    document.getElementById('processingOverlay').style.display = 'none';
+                    document.getElementById('reviewingView').style.display = 'block';
                     return;
                 }
                 
