@@ -1163,15 +1163,22 @@
             document.getElementById('futureMonthContainer').style.display = 'none';
             document.getElementById('futureCohortMonth').value = '';
         
-            if (tierName === 'Elite') {
-                // Show Future + No
-                optionYes.style.display = 'none';
-                optionFuture.style.display = 'flex';
-                optionNo.style.display = 'flex';
-            } else {
-                // Digital & Flagship → Show Yes + No
+            if (tierName === 'Digital') {
+                // Yes + No
                 optionYes.style.display = 'flex';
                 optionFuture.style.display = 'none';
+                optionNo.style.display = 'flex';
+        
+            } else if (tierName === 'Flagship') {
+                // Yes + Future + No
+                optionYes.style.display = 'flex';
+                optionFuture.style.display = 'flex';
+                optionNo.style.display = 'flex';
+        
+            } else if (tierName === 'Elite') {
+                // Future + No
+                optionYes.style.display = 'none';
+                optionFuture.style.display = 'flex';
                 optionNo.style.display = 'flex';
             }
         }
