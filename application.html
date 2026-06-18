@@ -763,6 +763,14 @@
                                 <span>1 Year Access & digital certificate</span>
                             </li>
                         </ul>
+
+                        <div id="digitalPaymentButton" style="display:none; margin-top:1rem;">
+                            <a href="https://secure.fintechcirclepro.com/payment-page-digital"
+                               class="cta-button"
+                               style="width:100%; padding:0.9rem 1rem; font-size:0.9rem; text-decoration:none;">
+                               Join Digital
+                            </a>
+                        </div>
                         
                         <div class="pricing-footer">
                             <div class="pricing-footer-label">Best For</div>
@@ -1184,20 +1192,29 @@
 
         function selectPricingTier(tierName) {
 
-            // Show form when a tier is selected
-            document.getElementById('applicationFormContainer').style.display = 'block';
+            const formContainer = document.getElementById('applicationFormContainer');
+            const digitalButton = document.getElementById('digitalPaymentButton');
         
-            // Update hidden input
+            // Hide button initially
+            digitalButton.style.display = 'none';
+        
+            // Digital = no form
+            if (tierName === 'Digital') {
+                formContainer.style.display = 'none';
+                digitalButton.style.display = 'block';
+            } else {
+                formContainer.style.display = 'block';
+            }
+        
             document.getElementById('selectedPricingTier').value = tierName;
         
-            // Remove 'selected' class from all cards
             document.querySelectorAll('.pricing-card').forEach(card => {
                 card.classList.remove('selected');
             });
         
-            // Add 'selected' class to the clicked card
-            const lowerTier = tierName.toLowerCase();
-            const selectedCard = document.querySelector(`.pricing-card[data-tier="${lowerTier}"]`);
+            const selectedCard = document.querySelector(
+                `.pricing-card[data-tier="${tierName.toLowerCase()}"]`
+            );
         
             if (selectedCard) {
                 selectedCard.classList.add('selected');
@@ -1205,11 +1222,13 @@
         
             updateCommitmentOptions(tierName);
         
-            // Scroll to form
-            document.getElementById('applicationFormContainer').scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            // Only scroll for tiers with forms
+            if (tierName !== 'Digital') {
+                formContainer.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         }
 
         document.getElementById('applicationForm').addEventListener('submit', async function (e) {
