@@ -880,7 +880,7 @@
             </div>
         </div>
 
-        <div class="container form-stage">
+        <div class="container form-stage" id="applicationFormContainer" style="display:none;">
             <div class="application-card">
                 <form class="reg-form" id="applicationForm">
                     <!-- Hidden input to store selection value -->
@@ -1107,7 +1107,6 @@
                     }
                 });
             });
-            selectPricingTier('Flagship');
         });
 
         // Function to dynamically populate future months of current year
@@ -1184,21 +1183,33 @@
         }
 
         function selectPricingTier(tierName) {
+
+            // Show form when a tier is selected
+            document.getElementById('applicationFormContainer').style.display = 'block';
+        
             // Update hidden input
             document.getElementById('selectedPricingTier').value = tierName;
-            
+        
             // Remove 'selected' class from all cards
             document.querySelectorAll('.pricing-card').forEach(card => {
                 card.classList.remove('selected');
             });
-            
+        
             // Add 'selected' class to the clicked card
             const lowerTier = tierName.toLowerCase();
             const selectedCard = document.querySelector(`.pricing-card[data-tier="${lowerTier}"]`);
+        
             if (selectedCard) {
                 selectedCard.classList.add('selected');
             }
+        
             updateCommitmentOptions(tierName);
+        
+            // Scroll to form
+            document.getElementById('applicationFormContainer').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
 
         document.getElementById('applicationForm').addEventListener('submit', async function (e) {
