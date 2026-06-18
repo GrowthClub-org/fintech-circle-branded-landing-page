@@ -1118,40 +1118,66 @@
         });
 
         // Function to dynamically populate future months of current year
-        function populateFutureMonths() {
+        function populateFutureMonths(tierName) {
             const selectEl = document.getElementById('futureCohortMonth');
             if (!selectEl) return;
-            
-            // Clear current options (except placeholder)
-            selectEl.innerHTML = '<option value="" disabled selected>Select Month...</option>';
-            
-            const monthNames = [
-                "January", "February", "March", "April", "May", "June",
-                "July", "August", "September", "October", "November", "December"
-            ];
-            
-            const now = new Date();
-            const currentYear = now.getFullYear();
-            const currentMonth = now.getMonth(); // 0-11
-            
-            // Loop from the next month (currentMonth + 1) to December (11)
-            let hasFutureMonths = false;
-            for (let i = currentMonth + 2; i < 12; i++) {
+        
+            selectEl.innerHTML =
+                '<option value="" disabled selected>Select Month...</option>';
+        
+            const addMonth = (month, year) => {
                 const opt = document.createElement('option');
-                opt.value = `${monthNames[i]} ${currentYear}`;
-                opt.textContent = `${monthNames[i]} ${currentYear}`;
+                opt.value = `${month} ${year}`;
+                opt.textContent = `${month} ${year}`;
                 selectEl.appendChild(opt);
-                hasFutureMonths = true;
+            };
+        
+            const months = [
+                "January", "February", "March", "April",
+                "May", "June", "July", "August",
+                "September", "October", "November", "December"
+            ];
+        
+            // FLAGSHIP
+            if (tierName === 'Flagship') {
+        
+                for (let year = 2026; year <= 2028; year++) {
+                    for (let month of months) {
+                        addMonth(month, year);
+                    }
+                }
+        
             }
-            
-            // Fallback: If no future months remain in the current year, populate next year's months
-            if (!hasFutureMonths) {
-                const nextYear = currentYear + 1;
-                for (let i = 0; i < 12; i++) {
-                    const opt = document.createElement('option');
-                    opt.value = `${monthNames[i]} ${nextYear}`;
-                    opt.textContent = `${monthNames[i]} ${nextYear}`;
-                    selectEl.appendChild(opt);
+        
+            // ELITE
+            else if (tierName === 'Elite') {
+        
+                // Sept 2026 - Nov 2026
+                addMonth("September", 2026);
+                addMonth("October", 2026);
+                addMonth("November", 2026);
+        
+                // Jan 2027 - Apr 2027
+                addMonth("January", 2027);
+                addMonth("February", 2027);
+                addMonth("March", 2027);
+                addMonth("April", 2027);
+        
+                // May 2027 - Jul 2027
+                addMonth("May", 2027);
+                addMonth("June", 2027);
+                addMonth("July", 2027);
+        
+            }
+        
+            // DIGITAL (if ever needed)
+            else {
+        
+                const now = new Date();
+                const currentYear = now.getFullYear();
+        
+                for (let i = 0; i < months.length; i++) {
+                    addMonth(months[i], currentYear);
                 }
             }
         }
@@ -1188,6 +1214,7 @@
                 optionFuture.style.display = 'flex';
                 optionNo.style.display = 'flex';
             }
+            populateFutureMonths(tierName);
         }
 
         function selectPricingTier(tierName) {
