@@ -320,7 +320,8 @@
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
-            padding: 2.5rem 1.5rem 0; /* padding bottom is handled by footer */
+            padding: 2.5rem 1.5rem 0;
+            /* padding bottom is handled by footer */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -335,11 +336,13 @@
         }
 
         .pricing-card[data-tier="flagship"] {
-            border-color: rgba(114, 79, 194, 0.35); /* Dusk border */
+            border-color: rgba(114, 79, 194, 0.35);
+            /* Dusk border */
         }
 
         .pricing-card[data-tier="elite"] {
-            border-color: rgba(255, 154, 72, 0.35); /* Sun border */
+            border-color: rgba(255, 154, 72, 0.35);
+            /* Sun border */
         }
 
         .pricing-card:hover {
@@ -480,7 +483,8 @@
             background: rgba(114, 79, 194, 0.2);
             border-top: 1px solid rgba(114, 79, 194, 0.15);
             padding: 1.25rem 1.2rem;
-            margin: auto -1.5rem 0; /* bleed out to edges */
+            margin: auto -1.5rem 0;
+            /* bleed out to edges */
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -591,6 +595,7 @@
                 opacity: 0;
                 transform: translateY(-10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -715,16 +720,19 @@
         <div class="container-wide">
             <div class="hero-header">
                 <h1 class="hero-title">Programme Application</h1>
-                <p class="hero-sub">Complete your professional screening for the 2026 FINTECH Circle Board Programme.</p>
+                <p class="hero-sub">Complete your professional screening for the 2026 FINTECH Circle Board Programme.
+                </p>
             </div>
 
             <!-- PRICING TIERS SELECTION (OUTSIDE THE FORM CARD) -->
             <div class="form-section" style="border-bottom: none; margin-bottom: 0;">
-                <h3 class="form-section-title" style="text-align: center; margin-bottom: 0.5rem; border-bottom: none;">Select Your Board Pathway</h3>
-                <p class="form-label" style="text-align: center; margin-bottom: 2rem; text-transform: none; font-size: 0.95rem; color: rgba(255, 255, 255, 0.7); line-height: 1.5; font-weight: normal; max-width: 600px; margin-left: auto; margin-right: auto;">
+                <h3 class="form-section-title" style="text-align: center; margin-bottom: 0.5rem; border-bottom: none;">
+                    Select Your Board Pathway</h3>
+                <p class="form-label"
+                    style="text-align: center; margin-bottom: 2rem; text-transform: none; font-size: 0.95rem; color: rgba(255, 255, 255, 0.7); line-height: 1.5; font-weight: normal; max-width: 600px; margin-left: auto; margin-right: auto;">
                     Choose the pricing tier and pathway that aligns with your experience and career aspirations.
                 </p>
-                
+
                 <div class="pricing-grid">
                     <!-- DIGITAL CARD -->
                     <div class="pricing-card" data-tier="digital" onclick="selectPricingTier('Digital')">
@@ -735,12 +743,20 @@
                             <div class="pricing-icon-wrapper">
                                 <i data-lucide="laptop" style="width: 26px; height: 26px;"></i>
                             </div>
-                            <h4 style="font-family: var(--font-heading); font-weight: 700; font-size: 1.35rem; letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.15rem;">DIGITAL</h4>
-                            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 1.75rem; color: var(--white); margin-bottom: 0.25rem;">£999</div>
-                            <div style="width: 40px; height: 2px; background: var(--dusk); margin: 0.5rem auto; opacity: 0.8;"></div>
-                            <div style="font-family: var(--font-accent); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 1.25rem;">Learn</div>
+                            <h4
+                                style="font-family: var(--font-heading); font-weight: 700; font-size: 1.35rem; letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.15rem;">
+                                DIGITAL</h4>
+                            <div
+                                style="font-family: var(--font-heading); font-weight: 800; font-size: 1.75rem; color: var(--white); margin-bottom: 0.25rem;">
+                                £999</div>
+                            <div
+                                style="width: 40px; height: 2px; background: var(--dusk); margin: 0.5rem auto; opacity: 0.8;">
+                            </div>
+                            <div
+                                style="font-family: var(--font-accent); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 1.25rem;">
+                                Learn</div>
                         </div>
-                        
+
                         <ul class="pricing-features">
                             <li>
                                 <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
@@ -765,13 +781,12 @@
                         </ul>
 
                         <div id="digitalPaymentButton" style="display:none; margin-top:2rem; margin-bottom:2rem;">
-                            <a href="https://secure.fintechcirclepro.com/payment-page-digital"
-                               class="cta-button"
-                               style="width:100%; padding:0.9rem 1rem; font-size:0.9rem; text-decoration:none;">
-                               Join Digital
+                            <a href="https://secure.fintechcirclepro.com/payment-page-digital" class="cta-button"
+                                style="width:100%; padding:0.9rem 1rem; font-size:0.9rem; text-decoration:none;">
+                                Join Digital
                             </a>
                         </div>
-                        
+
                         <div class="pricing-footer">
                             <div class="pricing-footer-label">Best For</div>
                             <div class="pricing-footer-title">Board-curious professionals</div>
@@ -788,12 +803,20 @@
                             <div class="pricing-icon-wrapper">
                                 <i data-lucide="flag" style="width: 26px; height: 26px;"></i>
                             </div>
-                            <h4 style="font-family: var(--font-heading); font-weight: 700; font-size: 1.35rem; letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.15rem;">FLAGSHIP</h4>
-                            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 1.75rem; color: var(--white); margin-bottom: 0.25rem;">£2,950</div>
-                            <div style="width: 40px; height: 2px; background: var(--dusk); margin: 0.5rem auto; opacity: 0.8;"></div>
-                            <div style="font-family: var(--font-accent); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 1.25rem;">Learn + Practice</div>
+                            <h4
+                                style="font-family: var(--font-heading); font-weight: 700; font-size: 1.35rem; letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.15rem;">
+                                FLAGSHIP</h4>
+                            <div
+                                style="font-family: var(--font-heading); font-weight: 800; font-size: 1.75rem; color: var(--white); margin-bottom: 0.25rem;">
+                                £2,950</div>
+                            <div
+                                style="width: 40px; height: 2px; background: var(--dusk); margin: 0.5rem auto; opacity: 0.8;">
+                            </div>
+                            <div
+                                style="font-family: var(--font-accent); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 1.25rem;">
+                                Learn + Practice</div>
                         </div>
-                        
+
                         <ul class="pricing-features">
                             <li class="everything-highlight">
                                 <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
@@ -820,11 +843,12 @@
                                 <span>Routes to NED appointments</span>
                             </li>
                         </ul>
-                        
+
                         <div class="pricing-footer">
                             <div class="pricing-footer-label">Best For</div>
                             <div class="pricing-footer-title">Senior Executives</div>
-                            <div class="pricing-footer-desc">Ready to pursue their first or next fintech board seat.</div>
+                            <div class="pricing-footer-desc">Ready to pursue their first or next fintech board seat.
+                            </div>
                         </div>
                     </div>
 
@@ -837,12 +861,20 @@
                             <div class="pricing-icon-wrapper" style="background: var(--sun);">
                                 <i data-lucide="crown" style="width: 26px; height: 26px; color: var(--onyx);"></i>
                             </div>
-                            <h4 style="font-family: var(--font-heading); font-weight: 700; font-size: 1.35rem; letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.15rem;">ELITE</h4>
-                            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 1.75rem; color: var(--white); margin-bottom: 0.25rem;">£7,200</div>
-                            <div style="width: 40px; height: 2px; background: var(--sun); margin: 0.5rem auto; opacity: 0.8;"></div>
-                            <div style="font-family: var(--font-accent); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 1.25rem;">Learn + Practice + Placement</div>
+                            <h4
+                                style="font-family: var(--font-heading); font-weight: 700; font-size: 1.35rem; letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.15rem;">
+                                ELITE</h4>
+                            <div
+                                style="font-family: var(--font-heading); font-weight: 800; font-size: 1.75rem; color: var(--white); margin-bottom: 0.25rem;">
+                                £7,200</div>
+                            <div
+                                style="width: 40px; height: 2px; background: var(--sun); margin: 0.5rem auto; opacity: 0.8;">
+                            </div>
+                            <div
+                                style="font-family: var(--font-accent); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 1.25rem;">
+                                Learn + Practice + Placement</div>
                         </div>
-                        
+
                         <ul class="pricing-features">
                             <li class="everything-highlight">
                                 <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
@@ -877,11 +909,12 @@
                                 <span>Extended community & directory access</span>
                             </li>
                         </ul>
-                        
+
                         <div class="pricing-footer">
                             <div class="pricing-footer-label">Best For</div>
                             <div class="pricing-footer-title">C-suite / MD-level</div>
-                            <div class="pricing-footer-desc">Leaders seeking maximum placement support and strategic access.</div>
+                            <div class="pricing-footer-desc">Leaders seeking maximum placement support and strategic
+                                access.</div>
                         </div>
                     </div>
                 </div>
@@ -893,120 +926,127 @@
                 <form class="reg-form" id="applicationForm">
                     <!-- Hidden input to store selection value -->
                     <input type="hidden" id="selectedPricingTier" name="pricingTier" required>
-                <!-- Basic Information -->
-                <div class="form-section">
-                    <h3 class="form-section-title">Basic Information</h3>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">First Name</label>
-                            <input type="text" id="firstName" class="form-input" placeholder="e.g. Jane" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Last Name</label>
-                            <input type="text" id="lastName" class="form-input" placeholder="e.g. Smith" required>
-                        </div>
-                    </div>
-                    <div class="form-row" style="margin-top: 1.5rem;">
-                        <div class="form-group">
-                            <label class="form-label">Email Address</label>
-                            <input type="email" id="email" class="form-input" placeholder="jane@company.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Phone Number</label>
-                            <input type="tel" id="phone" class="form-input" placeholder="+44 7000 000000" required>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Professional Screening -->
-                <div class="form-section">
-                    <h3 class="form-section-title">Professional Screening</h3>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Title</label>
-                            <input type="text" id="title" class="form-input" placeholder="e.g. Finance Director"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Company Name</label>
-                            <input type="text" id="company" class="form-input" placeholder="e.g. Acme Corp" required>
-                        </div>
-                    </div>
-                    <div class="form-row" style="margin-top: 1.5rem;">
-                        <div class="form-group">
-                            <label class="form-label">Years of Industry Experience</label>
-                            <input type="number" id="experience" class="form-input" placeholder="e.g. 15" min="0"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">LinkedIn Profile URL (Optional)</label>
-                            <input type="url" id="linkedin" class="form-input"
-                                placeholder="https://linkedin.com/in/username">
-                            <div class="linkedin-helpers">
-                                <a href="https://linkedin.com/in/me" target="_blank" class="helper-link">
-                                    <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
-                                    Find My Profile
-                                </a>
-                                <button type="button" id="showHelpVideo" class="helper-link small">
-                                    <i data-lucide="help-circle" style="width: 14px; height: 14px;"></i>
-                                    Can't find your LinkedIn?
-                                </button>
+                    <!-- Basic Information -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">Basic Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">First Name</label>
+                                <input type="text" id="firstName" class="form-input" placeholder="e.g. Jane" required>
                             </div>
-                            <div id="videoHelpContainer" class="video-help-box">
-                                <div class="video-container">
-                                    <video id="linkedinTutorial" controls muted loop playsinline>
-                                        <source src="linkedin-tutorial.mp4" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
+                            <div class="form-group">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" id="lastName" class="form-input" placeholder="e.g. Smith" required>
+                            </div>
+                        </div>
+                        <div class="form-row" style="margin-top: 1.5rem;">
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" id="email" class="form-input" placeholder="jane@company.com"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" id="phone" class="form-input" placeholder="+44 7000 000000" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Professional Screening -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">Professional Screening</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Title</label>
+                                <input type="text" id="title" class="form-input" placeholder="e.g. Finance Director"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Company Name</label>
+                                <input type="text" id="company" class="form-input" placeholder="e.g. Acme Corp"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-row" style="margin-top: 1.5rem;">
+                            <div class="form-group">
+                                <label class="form-label">Years of Industry Experience</label>
+                                <input type="number" id="experience" class="form-input" placeholder="e.g. 15" min="0"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">LinkedIn Profile URL (Optional)</label>
+                                <input type="url" id="linkedin" class="form-input"
+                                    placeholder="https://linkedin.com/in/username">
+                                <div class="linkedin-helpers">
+                                    <a href="https://linkedin.com/in/me" target="_blank" class="helper-link">
+                                        <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+                                        Find My Profile
+                                    </a>
+                                    <button type="button" id="showHelpVideo" class="helper-link small">
+                                        <i data-lucide="help-circle" style="width: 14px; height: 14px;"></i>
+                                        Can't find your LinkedIn?
+                                    </button>
+                                </div>
+                                <div id="videoHelpContainer" class="video-help-box">
+                                    <div class="video-container">
+                                        <video id="linkedinTutorial" controls muted loop playsinline>
+                                            <source src="linkedin-tutorial.mp4" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
 
 
-                <!-- Financial Commitment -->
-                <div class="form-section">
-                    <h3 class="form-section-title">Commitment</h3>
-                    <div class="form-group">
-                        <label class="form-label" style="color: var(--sky);">Are you prepared to participate in the cohort?</label>
-                        <div class="radio-group">
-                            <label class="radio-option" id="optionYes">
-                                <input type="radio" name="investment" value="Yes" required>
-                                <span>Yes, I would like to join the next cohort.</span>
-                            </label>
-                            <label class="radio-option" id="optionFuture">
-                                <input type="radio" name="investment" value="Future">
-                                <span>Yes, but I would like to join a future cohort.</span>
-                            </label>
-                            
-                            <!-- Future Start Month Selection Container (Hidden by default) -->
-                            <div class="form-group" id="futureMonthContainer" style="display: none; margin-left: 2.2rem; margin-top: -0.5rem; margin-bottom: 0.5rem; padding: 1rem; border: 1px dashed rgba(255, 154, 72, 0.2); border-radius: 8px; animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
-                                <label class="form-label" style="font-size: 0.8rem; color: var(--sun); margin-bottom: 0.4rem;">Select Preferred Month</label>
-                                <select id="futureCohortMonth" class="form-select" style="max-width: 280px; padding: 0.8rem 1rem;">
-                                    <option value="" disabled selected>Select Month...</option>
-                                </select>
+                    <!-- Financial Commitment -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">Application</h3>
+                        <div class="form-group">
+                            <label class="form-label" style="color: var(--sky);">Would you like to join the FINTECH
+                                Circle Board Programme?</label>
+                            <div class="radio-group">
+                                <label class="radio-option" id="optionYes">
+                                    <input type="radio" name="investment" value="Yes" required>
+                                    <span>Yes, I would like to join the next cohort.</span>
+                                </label>
+                                <label class="radio-option" id="optionFuture">
+                                    <input type="radio" name="investment" value="Future">
+                                    <span>Yes, but I would like to join a future cohort.</span>
+                                </label>
+
+                                <!-- Future Start Month Selection Container (Hidden by default) -->
+                                <div class="form-group" id="futureMonthContainer"
+                                    style="display: none; margin-left: 2.2rem; margin-top: -0.5rem; margin-bottom: 0.5rem; padding: 1rem; border: 1px dashed rgba(255, 154, 72, 0.2); border-radius: 8px; animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
+                                    <label class="form-label"
+                                        style="font-size: 0.8rem; color: var(--sun); margin-bottom: 0.4rem;">Select
+                                        Preferred Month</label>
+                                    <select id="futureCohortMonth" class="form-select"
+                                        style="max-width: 280px; padding: 0.8rem 1rem;">
+                                        <option value="" disabled selected>Select Month...</option>
+                                    </select>
+                                </div>
+                                <label class="radio-option" id="optionNo">
+                                    <input type="radio" name="investment" value="No">
+                                    <span>No, not at this stage.</span>
+                                </label>
                             </div>
-                            <label class="radio-option" id="optionNo">
-                                <input type="radio" name="investment" value="No">
-                                <span>No, not at this stage.</span>
-                            </label>
                         </div>
                     </div>
-                </div>
 
-                <button type="submit" class="cta-button">Submit Application</button>
+                    <button type="submit" class="cta-button">Submit Application</button>
 
-                <p style="margin-top: 2rem; text-align: center; color: rgba(255,255,255,0.6); font-size: 0.95rem;">
-                    If you have any questions please feel free to book a call with Susanne -
-                    <a href="https://calendly.com/boards-fintechcircle/15" target="_blank"
-                        style="color: var(--sky); text-decoration: underline;">Schedule a Brief Conversation</a>
-                </p>
-            </form>
+                    <p style="margin-top: 2rem; text-align: center; color: rgba(255,255,255,0.6); font-size: 0.95rem;">
+                        If you have any questions please feel free to book a call with Susanne -
+                        <a href="https://calendly.com/boards-fintechcircle/15" target="_blank"
+                            style="color: var(--sky); text-decoration: underline;">Schedule a Brief Conversation</a>
+                    </p>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
     <!-- PROCESSING OVERLAY -->
     <div class="overlay" id="processingOverlay">
@@ -1095,7 +1135,7 @@
                 if (registrationData.email) document.getElementById('email').value = registrationData.email;
                 if (registrationData.phone) document.getElementById('phone').value = registrationData.phone;
             }
-            
+
             // Populate dynamic future months in selection
             populateFutureMonths();
 
@@ -1104,7 +1144,7 @@
                 radio.addEventListener('change', function () {
                     const futureMonthContainer = document.getElementById('futureMonthContainer');
                     const futureCohortMonth = document.getElementById('futureCohortMonth');
-                    
+
                     if (this.value === 'Future') {
                         futureMonthContainer.style.display = 'block';
                         futureCohortMonth.setAttribute('required', 'required');
@@ -1121,61 +1161,61 @@
         function populateFutureMonths(tierName) {
             const selectEl = document.getElementById('futureCohortMonth');
             if (!selectEl) return;
-        
+
             selectEl.innerHTML =
                 '<option value="" disabled selected>Select Month...</option>';
-        
+
             const addMonth = (month, year) => {
                 const opt = document.createElement('option');
                 opt.value = `${month} ${year}`;
                 opt.textContent = `${month} ${year}`;
                 selectEl.appendChild(opt);
             };
-        
+
             const months = [
                 "January", "February", "March", "April",
                 "May", "June", "July", "August",
                 "September", "October", "November", "December"
             ];
-        
+
             // FLAGSHIP
             if (tierName === 'Flagship') {
-        
+
                 for (let year = 2026; year <= 2028; year++) {
                     for (let month of months) {
                         addMonth(month, year);
                     }
                 }
-        
+
             }
-        
+
             // ELITE
             else if (tierName === 'Elite') {
-        
+
                 // Sept 2026 - Nov 2026
                 addMonth("September", 2026);
                 addMonth("October", 2026);
                 addMonth("November", 2026);
-        
+
                 // Jan 2027 - Apr 2027
                 addMonth("January", 2027);
                 addMonth("February", 2027);
                 addMonth("March", 2027);
                 addMonth("April", 2027);
-        
+
                 // May 2027 - Jul 2027
                 addMonth("May", 2027);
                 addMonth("June", 2027);
                 addMonth("July", 2027);
-        
+
             }
-        
+
             // DIGITAL (if ever needed)
             else {
-        
+
                 const now = new Date();
                 const currentYear = now.getFullYear();
-        
+
                 for (let i = 0; i < months.length; i++) {
                     addMonth(months[i], currentYear);
                 }
@@ -1186,28 +1226,28 @@
             const optionYes = document.getElementById('optionYes');
             const optionFuture = document.getElementById('optionFuture');
             const optionNo = document.getElementById('optionNo');
-        
+
             // Clear any selected radio
             document.querySelectorAll('input[name="investment"]').forEach(radio => {
                 radio.checked = false;
             });
-        
+
             // Hide future month selector
             document.getElementById('futureMonthContainer').style.display = 'none';
             document.getElementById('futureCohortMonth').value = '';
-        
+
             if (tierName === 'Digital') {
                 // Yes + No
                 optionYes.style.display = 'flex';
                 optionFuture.style.display = 'none';
                 optionNo.style.display = 'flex';
-        
+
             } else if (tierName === 'Flagship') {
                 // Yes + Future + No
                 optionYes.style.display = 'flex';
                 optionFuture.style.display = 'flex';
                 optionNo.style.display = 'flex';
-        
+
             } else if (tierName === 'Elite') {
                 // Future + No
                 optionYes.style.display = 'none';
@@ -1221,10 +1261,10 @@
 
             const formContainer = document.getElementById('applicationFormContainer');
             const digitalButton = document.getElementById('digitalPaymentButton');
-        
+
             // Hide button initially
             digitalButton.style.display = 'none';
-        
+
             // Digital = no form
             if (tierName === 'Digital') {
                 formContainer.style.display = 'none';
@@ -1232,23 +1272,23 @@
             } else {
                 formContainer.style.display = 'block';
             }
-        
+
             document.getElementById('selectedPricingTier').value = tierName;
-        
+
             document.querySelectorAll('.pricing-card').forEach(card => {
                 card.classList.remove('selected');
             });
-        
+
             const selectedCard = document.querySelector(
                 `.pricing-card[data-tier="${tierName.toLowerCase()}"]`
             );
-        
+
             if (selectedCard) {
                 selectedCard.classList.add('selected');
             }
-        
+
             updateCommitmentOptions(tierName);
-        
+
             // Only scroll for tiers with forms
             if (tierName !== 'Digital') {
                 formContainer.scrollIntoView({
@@ -1320,20 +1360,20 @@
 
             // Logic processing
             setTimeout(() => {
-                
+
                 if (pricingTier === 'Digital') {
 
                     if (investment === 'Yes') {
                         window.location.href = 'https://secure.fintechcirclepro.com/payment-page-digital';
                         return;
                     }
-            
+
                     // User selected "No, not at this stage"
                     document.getElementById('processingOverlay').style.display = 'none';
                     document.getElementById('reviewingView').style.display = 'block';
                     return;
                 }
-                
+
                 document.getElementById('processingOverlay').style.display = 'none';
 
                 const isQualified = parseInt(experience) >= 15 && (investment === "Yes" || investment === "Future");
