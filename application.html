@@ -789,7 +789,7 @@
                             </li>
                         </ul>
 
-                        <div id="digitalPaymentButton" style="display:none; margin-top:2rem; margin-bottom:2rem;">
+                        <div id="digitalPaymentButton" style="margin-top:2rem; margin-bottom:2rem;">
                             <a href="https://secure.fintechcirclepro.com/payment-page-digital" class="cta-button"
                                 style="width:100%; padding:0.9rem 1rem; font-size:0.9rem; text-decoration:none;">
                                 Join Digital
@@ -1268,13 +1268,9 @@
             const formContainer = document.getElementById('applicationFormContainer');
             const digitalButton = document.getElementById('digitalPaymentButton');
 
-            // Hide button initially
-            digitalButton.style.display = 'none';
-
             // Digital = no form
             if (tierName === 'Digital') {
                 formContainer.style.display = 'none';
-                digitalButton.style.display = 'block';
             } else {
                 formContainer.style.display = 'block';
             }
