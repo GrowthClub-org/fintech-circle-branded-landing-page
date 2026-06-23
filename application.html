@@ -356,8 +356,8 @@
         }
 
         .pricing-card[data-tier="digital"]:hover {
-            border-color: rgba(34, 193, 201, 0.4);
-            box-shadow: 0 10px 30px rgba(34, 193, 201, 0.1);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.1);
         }
 
         .pricing-card[data-tier="flagship"]:hover {
@@ -372,9 +372,9 @@
 
         /* Selection States */
         .pricing-card.selected[data-tier="digital"] {
-            border-color: var(--sky);
-            background: rgba(34, 193, 201, 0.06);
-            box-shadow: 0 0 25px rgba(34, 193, 201, 0.25);
+            border-color: #10B981;
+            background: rgba(16, 185, 129, 0.06);
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
         }
 
         .pricing-card.selected[data-tier="flagship"] {
@@ -410,7 +410,7 @@
         }
 
         .pricing-card.selected[data-tier="digital"] .select-indicator {
-            background: var(--sky);
+            background: #10B981;
         }
 
         .pricing-card.selected[data-tier="flagship"] .select-indicator {
@@ -473,6 +473,10 @@
             color: var(--dusk);
             flex-shrink: 0;
             margin-top: 0.15rem;
+        }
+
+        .pricing-card[data-tier="digital"] .pricing-features li i {
+            color: #10B981;
         }
 
         .pricing-features li.everything-highlight {
@@ -745,7 +749,7 @@
                             <i data-lucide="check"></i>
                         </div>
                         <div style="text-align: center;">
-                            <div class="pricing-icon-wrapper">
+                            <div class="pricing-icon-wrapper" style="background: #10B981;">
                                 <i data-lucide="laptop" style="width: 26px; height: 26px;"></i>
                             </div>
                             <h4
@@ -811,9 +815,8 @@
                             <h4
                                 style="font-family: var(--font-heading); font-weight: 700; font-size: 1.35rem; letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.15rem;">
                                 FLAGSHIP</h4>
-                            <div
-                                style="font-family: var(--font-heading); font-weight: 800; font-size: 1.75rem; color: var(--white); margin-bottom: 0.25rem;">
-                                £2,950</div>
+                            <div class="cta-button" style="margin: 0.5rem auto 1rem; padding: 0.6rem 1.5rem; font-size: 0.9rem;">
+                                Apply Now</div>
                             <div
                                 style="width: 40px; height: 2px; background: var(--dusk); margin: 0.5rem auto; opacity: 0.8;">
                             </div>
@@ -823,8 +826,8 @@
                         </div>
 
                         <ul class="pricing-features">
-                            <li class="everything-highlight">
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
+                            <li class="everything-highlight" style="color: #10B981;">
+                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px; color: #10B981;"></i>
                                 <span>Everything from Digital</span>
                             </li>
                             <li>
@@ -869,9 +872,8 @@
                             <h4
                                 style="font-family: var(--font-heading); font-weight: 700; font-size: 1.35rem; letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.15rem;">
                                 ELITE</h4>
-                            <div
-                                style="font-family: var(--font-heading); font-weight: 800; font-size: 1.75rem; color: var(--white); margin-bottom: 0.25rem;">
-                                £7,200</div>
+                            <div class="cta-button" style="margin: 0.5rem auto 1rem; padding: 0.6rem 1.5rem; font-size: 0.9rem; background: var(--sun);">
+                                Apply Now</div>
                             <div
                                 style="width: 40px; height: 2px; background: var(--sun); margin: 0.5rem auto; opacity: 0.8;">
                             </div>
@@ -881,8 +883,8 @@
                         </div>
 
                         <ul class="pricing-features">
-                            <li class="everything-highlight">
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
+                            <li class="everything-highlight" style="color: var(--dusk);">
+                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px; color: var(--dusk);"></i>
                                 <span>Everything in Flagship</span>
                             </li>
                             <li>
