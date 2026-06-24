@@ -1885,15 +1885,15 @@
 
           try {
             // First, fetch broadcast data to get the broadcast_id
-            // let broadcastData = null;
-            // try {
-            //   const broadcastResponse = await fetch(`${backendUrl}/api/v1/broadcast/upcoming-broadcast?clientId=${encodeURIComponent(CLIENT_ID)}`);
-            //   if (broadcastResponse.ok) {
-            //     broadcastData = await broadcastResponse.json();
-            //   }
-            // } catch (broadcastError) {
-            //   console.warn('Could not fetch broadcast data:', broadcastError);
-            // }
+            let broadcastData = null;
+            try {
+              const broadcastResponse = await fetch(`${backendUrl}/api/v1/broadcast/upcoming-broadcast?clientId=${encodeURIComponent(CLIENT_ID)}`);
+              if (broadcastResponse.ok) {
+                broadcastData = await broadcastResponse.json();
+              }
+            } catch (broadcastError) {
+              console.warn('Could not fetch broadcast data:', broadcastError);
+            }
 
             // Prepare registration data
             const registrationData = {
@@ -1903,11 +1903,11 @@
               terms: true // Assuming they agree by submitting
             };
 
-            // Include broadcast_id if available
-            // if (broadcastData && broadcastData.broadcast_id) {
-            //   registrationData.broadcastId = broadcastData.broadcast_id;
-            //   console.log('Including broadcast_id in registration:', broadcastData.broadcast_id);
-            // }
+            Include broadcast_id if available
+            if (broadcastData && broadcastData.broadcast_id) {
+              registrationData.broadcastId = broadcastData.broadcast_id;
+              console.log('Including broadcast_id in registration:', broadcastData.broadcast_id);
+            }
 
             // Prepare data for Google Sheets (includes all form fields)
             const googleSheetsData = {
@@ -1924,41 +1924,42 @@
               source: 'Landing Page Registration'
             };
 
-            // Make API call
-            // const response = await fetch(`${backendUrl}/api/v1/webinar/register`, {
-            //   method: 'POST',
-            //   headers: {
-            //     'Content-Type': 'application/json',
-            //     'Accept': 'application/json'
-            //   },
-            //   body: JSON.stringify({
-            //     ...registrationData,
-            //     clientId: CLIENT_ID
-            //   })
-            // });
-            const response = await fetch(
-              `https://app.webinargeek.com/api/v2/broadcasts/${BROADCAST_ID}/subscriptions`,
-              {
-                method: 'POST',
-                headers: {
-                  'Api-Token': `${WEBINARGEEK_API_KEY}`,
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  email: email,
-                  first_name: name
-                })
-              }
-            );
+            Make API call
+            const response = await fetch(`${backendUrl}/api/v1/webinar/register`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({
+                ...registrationData,
+                clientId: CLIENT_ID
+              })
+            });
+            // const response = await fetch(
+            //   `https://app.webinargeek.com/api/v2/broadcasts/${BROADCAST_ID}/subscriptions`,
+            //   {
+            //     method: 'POST',
+            //     headers: {
+            //       'Api-Token': `${WEBINARGEEK_API_KEY}`,
+            //       'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify({
+            //       email: email,
+            //       first_name: name
+            //     })
+            //   }
+            // );
 
-            const result = await response.json();
+            // const result = await response.json();
 
             if (!response.ok) {
               throw new Error(`Registration failed: ${response.status}`);
             }
 
-            //if (result.success) {
-            if (response.ok) {
+            const result = await response.json();
+            if (result.success) {
+            //if (response.ok) {
               // Send data to Google Sheets (don't wait for it to complete)
               sendToGoogleSheets(googleSheetsData);
 
