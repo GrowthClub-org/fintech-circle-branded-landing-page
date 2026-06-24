@@ -1957,10 +1957,8 @@
               throw new Error(`Registration failed: ${response.status}`);
             }
 
-            const result = await response.json();
-
             //if (result.success) {
-            if (result.ok) {
+            if (response.ok) {
               // Send data to Google Sheets (don't wait for it to complete)
               sendToGoogleSheets(googleSheetsData);
 
