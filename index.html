@@ -1903,7 +1903,7 @@
               terms: true // Assuming they agree by submitting
             };
 
-            Include broadcast_id if available
+           // Include broadcast_id if available
             if (broadcastData && broadcastData.broadcast_id) {
               registrationData.broadcastId = broadcastData.broadcast_id;
               console.log('Including broadcast_id in registration:', broadcastData.broadcast_id);
@@ -1924,7 +1924,7 @@
               source: 'Landing Page Registration'
             };
 
-            Make API call
+            //Make API call
             const response = await fetch(`${backendUrl}/api/v1/webinar/register`, {
               method: 'POST',
               headers: {
