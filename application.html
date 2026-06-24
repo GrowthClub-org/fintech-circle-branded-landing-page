@@ -127,18 +127,6 @@
             z-index: 1;
         }
 
-        .container-wide {
-            max-width: 1200px;
-            margin: 120px auto 0;
-            padding: 0 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .container.form-stage {
-            margin-top: 40px;
-        }
-
         .hero-header {
             text-align: center;
             margin-bottom: 4rem;
@@ -310,236 +298,6 @@
             color: var(--white);
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        /* PRICING SELECTOR STYLES */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.25rem;
-            margin-top: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .pricing-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 2.5rem 1.5rem 0;
-            /* padding bottom is handled by footer */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
-            position: relative;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            overflow: hidden;
-        }
-
-        .pricing-card[data-tier="digital"] {
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .pricing-card[data-tier="flagship"] {
-            border-color: rgba(114, 79, 194, 0.35);
-            /* Dusk border */
-        }
-
-        .pricing-card[data-tier="elite"] {
-            border-color: rgba(255, 154, 72, 0.35);
-            /* Sun border */
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .pricing-card[data-tier="digital"]:hover {
-            border-color: rgba(16, 185, 129, 0.4);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.1);
-        }
-
-        .pricing-card[data-tier="flagship"]:hover {
-            border-color: rgba(114, 79, 194, 0.6);
-            box-shadow: 0 10px 30px rgba(114, 79, 194, 0.15);
-        }
-
-        .pricing-card[data-tier="elite"]:hover {
-            border-color: rgba(255, 154, 72, 0.6);
-            box-shadow: 0 10px 30px rgba(255, 154, 72, 0.15);
-        }
-
-        /* Selection States */
-        .pricing-card.selected[data-tier="digital"] {
-            border-color: #10B981;
-            background: rgba(16, 185, 129, 0.06);
-            box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
-        }
-
-        .pricing-card.selected[data-tier="flagship"] {
-            border-color: var(--dusk);
-            background: rgba(114, 79, 194, 0.08);
-            box-shadow: 0 0 25px rgba(114, 79, 194, 0.3);
-        }
-
-        .pricing-card.selected[data-tier="elite"] {
-            border-color: var(--sun);
-            background: rgba(255, 154, 72, 0.08);
-            box-shadow: 0 0 25px rgba(255, 154, 72, 0.3);
-        }
-
-        .select-indicator {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            width: 22px;
-            height: 22px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        .pricing-card.selected .select-indicator {
-            border-color: transparent;
-            color: var(--onyx);
-        }
-
-        .pricing-card.selected[data-tier="digital"] .select-indicator {
-            background: #10B981;
-        }
-
-        .pricing-card.selected[data-tier="flagship"] .select-indicator {
-            background: var(--dusk);
-            color: var(--white);
-        }
-
-        .pricing-card.selected[data-tier="elite"] .select-indicator {
-            background: var(--sun);
-        }
-
-        .select-indicator i {
-            width: 14px;
-            height: 14px;
-            opacity: 0;
-            transform: scale(0.6);
-            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            stroke-width: 3px;
-        }
-
-        .pricing-card.selected .select-indicator i {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .pricing-icon-wrapper {
-            width: 60px;
-            height: 60px;
-            background: var(--dusk);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.2rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            color: var(--white);
-        }
-
-        .pricing-features {
-            list-style: none;
-            padding: 0;
-            margin: 1.5rem 0 2rem;
-            text-align: left;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .pricing-features li {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.6rem;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.4;
-        }
-
-        .pricing-features li i {
-            color: var(--dusk);
-            flex-shrink: 0;
-            margin-top: 0.15rem;
-        }
-
-        .pricing-card[data-tier="digital"] .pricing-features li i {
-            color: #10B981;
-        }
-
-        .pricing-features li.everything-highlight {
-            font-weight: 600;
-            color: var(--white);
-        }
-
-        .pricing-features li.everything-highlight i {
-            color: var(--sun);
-        }
-
-        .pricing-footer {
-            background: rgba(114, 79, 194, 0.2);
-            border-top: 1px solid rgba(114, 79, 194, 0.15);
-            padding: 1.25rem 1.2rem;
-            margin: auto -1.5rem 0;
-            /* bleed out to edges */
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 110px;
-        }
-
-        .pricing-card[data-tier="elite"] .pricing-footer {
-            background: rgba(255, 154, 72, 0.15);
-            border-top: 1px solid rgba(255, 154, 72, 0.15);
-        }
-
-        .pricing-footer-label {
-            font-family: var(--font-accent);
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--sun);
-            letter-spacing: 0.08em;
-            margin-bottom: 0.2rem;
-        }
-
-        .pricing-card[data-tier="elite"] .pricing-footer-label {
-            color: var(--dusk);
-        }
-
-        .pricing-footer-title {
-            font-family: var(--font-heading);
-            font-weight: 700;
-            font-size: 1rem;
-            color: var(--white);
-            line-height: 1.2;
-        }
-
-        .pricing-footer-desc {
-            font-size: 0.78rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: 0.3rem;
-            line-height: 1.35;
-        }
-
-        @media (max-width: 768px) {
-            .pricing-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
         }
 
         /* PROCESSING OVERLAY */
@@ -726,213 +484,15 @@
 
     <!-- FORM VIEW -->
     <div id="formView">
-        <div class="container-wide">
+        <div class="container">
             <div class="hero-header">
                 <h1 class="hero-title">Programme Application</h1>
                 <p class="hero-sub">Complete your professional screening for the 2026 FINTECH Circle Board Programme.
                 </p>
             </div>
 
-            <!-- PRICING TIERS SELECTION (OUTSIDE THE FORM CARD) -->
-            <div class="form-section" style="border-bottom: none; margin-bottom: 0;">
-                <h3 class="form-section-title" style="text-align: center; margin-bottom: 0.5rem; border-bottom: none;">
-                    Select Your Board Pathway</h3>
-                <p class="form-label"
-                    style="text-align: center; margin-bottom: 2rem; text-transform: none; font-size: 0.95rem; color: rgba(255, 255, 255, 0.7); line-height: 1.5; font-weight: normal; max-width: 600px; margin-left: auto; margin-right: auto;">
-                    Choose the pricing tier and pathway that aligns with your experience and career aspirations.
-                </p>
-
-                <div class="pricing-grid">
-                    <!-- DIGITAL CARD -->
-                    <div class="pricing-card" data-tier="digital" onclick="selectPricingTier('Digital')">
-                        <div class="select-indicator">
-                            <i data-lucide="check"></i>
-                        </div>
-                        <div style="text-align: center;">
-                            <div class="pricing-icon-wrapper" style="background: #10B981;">
-                                <i data-lucide="laptop" style="width: 26px; height: 26px;"></i>
-                            </div>
-                            <h4
-                                style="font-family: var(--font-heading); font-weight: 700; font-size: 1.35rem; letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.15rem;">
-                                DIGITAL</h4>
-                            <div
-                                style="font-family: var(--font-heading); font-weight: 800; font-size: 1.75rem; color: var(--white); margin-bottom: 0.25rem;">
-                                £999</div>
-                            <div
-                                style="width: 40px; height: 2px; background: var(--dusk); margin: 0.5rem auto; opacity: 0.8;">
-                            </div>
-                            <div
-                                style="font-family: var(--font-accent); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 1.25rem;">
-                                Learn</div>
-                        </div>
-
-                        <ul class="pricing-features">
-                            <li>
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
-                                <span>12hrs- On demand content</span>
-                            </li>
-                            <li>
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
-                                <span>Self-paced learning</span>
-                            </li>
-                            <li>
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
-                                <span>Fintech Governance Fundamentals</span>
-                            </li>
-                            <li>
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
-                                <span>Board search & market insights</span>
-                            </li>
-                            <li>
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
-                                <span>1 Year Access & digital certificate</span>
-                            </li>
-                        </ul>
-
-                        <div id="digitalPaymentButton" style="margin-top:2rem; margin-bottom:2rem;">
-                            <a href="https://secure.fintechcirclepro.com/payment-page-digital" class="cta-button"
-                                style="width:100%; padding:0.9rem 1rem; font-size:0.9rem; text-decoration:none;">
-                                Join Digital
-                            </a>
-                        </div>
-
-                        <div class="pricing-footer">
-                            <div class="pricing-footer-label">Best For</div>
-                            <div class="pricing-footer-title">Board-curious professionals</div>
-                            <div class="pricing-footer-desc">Exploring a fintech board career for the first time.</div>
-                        </div>
-                    </div>
-
-                    <!-- FLAGSHIP CARD -->
-                    <div class="pricing-card" data-tier="flagship" onclick="selectPricingTier('Flagship')">
-                        <div class="select-indicator">
-                            <i data-lucide="check"></i>
-                        </div>
-                        <div style="text-align: center;">
-                            <div class="pricing-icon-wrapper">
-                                <i data-lucide="flag" style="width: 26px; height: 26px;"></i>
-                            </div>
-                            <h4
-                                style="font-family: var(--font-heading); font-weight: 700; font-size: 1.35rem; letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.15rem;">
-                                FLAGSHIP</h4>
-                            <div class="cta-button" style="margin: 0.5rem auto 1rem; padding: 0.6rem 1.5rem; font-size: 0.9rem;">
-                                Apply Now</div>
-                            <div
-                                style="width: 40px; height: 2px; background: var(--dusk); margin: 0.5rem auto; opacity: 0.8;">
-                            </div>
-                            <div
-                                style="font-family: var(--font-accent); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 1.25rem;">
-                                Learn + Practice</div>
-                        </div>
-
-                        <ul class="pricing-features">
-                            <li class="everything-highlight" style="color: #10B981;">
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px; color: #10B981;"></i>
-                                <span>Everything from Digital</span>
-                            </li>
-                            <li>
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
-                                <span>Monthly live webinars & Pop-Up Boards</span>
-                            </li>
-                            <li>
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
-                                <span>In-person London events</span>
-                            </li>
-                            <li>
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
-                                <span>Headhunter webinars</span>
-                            </li>
-                            <li>
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
-                                <span>NED CV clinic</span>
-                            </li>
-                            <li>
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
-                                <span>Routes to NED appointments</span>
-                            </li>
-                        </ul>
-
-                        <div class="pricing-footer">
-                            <div class="pricing-footer-label">Best For</div>
-                            <div class="pricing-footer-title">Senior Executives</div>
-                            <div class="pricing-footer-desc">Ready to pursue their first or next fintech board seat.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ELITE CARD -->
-                    <div class="pricing-card" data-tier="elite" onclick="selectPricingTier('Elite')">
-                        <div class="select-indicator">
-                            <i data-lucide="check"></i>
-                        </div>
-                        <div style="text-align: center;">
-                            <div class="pricing-icon-wrapper" style="background: var(--sun);">
-                                <i data-lucide="crown" style="width: 26px; height: 26px; color: var(--onyx);"></i>
-                            </div>
-                            <h4
-                                style="font-family: var(--font-heading); font-weight: 700; font-size: 1.35rem; letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.15rem;">
-                                ELITE</h4>
-                            <div class="cta-button" style="margin: 0.5rem auto 1rem; padding: 0.6rem 1.5rem; font-size: 0.9rem; background: var(--sun);">
-                                Apply Now</div>
-                            <div
-                                style="width: 40px; height: 2px; background: var(--sun); margin: 0.5rem auto; opacity: 0.8;">
-                            </div>
-                            <div
-                                style="font-family: var(--font-accent); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 1.25rem;">
-                                Learn + Practice + Placement</div>
-                        </div>
-
-                        <ul class="pricing-features">
-                            <li class="everything-highlight" style="color: var(--dusk);">
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px; color: var(--dusk);"></i>
-                                <span>Everything in Flagship</span>
-                            </li>
-                            <li>
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
-                                <span>Private board career review</span>
-                            </li>
-                            <li>
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
-                                <span>Guaranteed personal introductions</span>
-                            </li>
-                            <li>
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
-                                <span>Private board coaching</span>
-                            </li>
-                            <li>
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
-                                <span>Investor network access</span>
-                            </li>
-                            <li>
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
-                                <span>VIP Annual Board Summit dinner</span>
-                            </li>
-                            <li>
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
-                                <span>AI for Boards & regulatory deepdives</span>
-                            </li>
-                            <li>
-                                <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
-                                <span>Extended community & directory access</span>
-                            </li>
-                        </ul>
-
-                        <div class="pricing-footer">
-                            <div class="pricing-footer-label">Best For</div>
-                            <div class="pricing-footer-title">C-suite / MD-level</div>
-                            <div class="pricing-footer-desc">Leaders seeking maximum placement support and strategic
-                                access.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container form-stage" id="applicationFormContainer" style="display:none;">
             <div class="application-card">
                 <form class="reg-form" id="applicationForm">
-                    <!-- Hidden input to store selection value -->
-                    <input type="hidden" id="selectedPricingTier" name="pricingTier" required>
                     <!-- Basic Information -->
                     <div class="form-section">
                         <h3 class="form-section-title">Basic Information</h3>
@@ -1164,8 +724,8 @@
             });
         });
 
-        // Function to dynamically populate future months of current year
-        function populateFutureMonths(tierName) {
+        // Function to dynamically populate future cohort months
+        function populateFutureMonths() {
             const selectEl = document.getElementById('futureCohortMonth');
             if (!selectEl) return;
 
@@ -1180,122 +740,20 @@
             };
 
             const months = [
-                "July", "August",
-                "September", "October", "November", "December"
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
             ];
 
-            // FLAGSHIP
-            if (tierName === 'Flagship') {
+            // List the remaining months of this year through the next two years
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            const currentMonth = now.getMonth(); // 0-indexed
 
-                for (let year = 2026; year <= 2028; year++) {
-                    for (let month of months) {
-                        addMonth(month, year);
-                    }
-                }
-
-            }
-
-            // ELITE
-            else if (tierName === 'Elite') {
-
-                // Sept 2026 - Nov 2026
-                addMonth("September", 2026);
-                addMonth("October", 2026);
-                addMonth("November", 2026);
-
-                // Jan 2027 - Apr 2027
-                addMonth("January", 2027);
-                addMonth("February", 2027);
-                addMonth("March", 2027);
-                addMonth("April", 2027);
-
-                // May 2027 - Jul 2027
-                addMonth("May", 2027);
-                addMonth("June", 2027);
-                addMonth("July", 2027);
-
-            }
-
-            // DIGITAL (if ever needed)
-            else {
-
-                const now = new Date();
-                const currentYear = now.getFullYear();
-
-                for (let i = 0; i < months.length; i++) {
-                    addMonth(months[i], currentYear);
-                }
-            }
-        }
-
-        function updateCommitmentOptions(tierName) {
-            const optionYes = document.getElementById('optionYes');
-            const optionFuture = document.getElementById('optionFuture');
-            const optionNo = document.getElementById('optionNo');
-
-            // Clear any selected radio
-            document.querySelectorAll('input[name="investment"]').forEach(radio => {
-                radio.checked = false;
-            });
-
-            // Hide future month selector
-            document.getElementById('futureMonthContainer').style.display = 'none';
-            document.getElementById('futureCohortMonth').value = '';
-
-            if (tierName === 'Digital') {
-                // Yes + No
-                optionYes.style.display = 'flex';
-                optionFuture.style.display = 'none';
-                optionNo.style.display = 'flex';
-
-            } else if (tierName === 'Flagship') {
-                // Yes + Future + No
-                optionYes.style.display = 'flex';
-                optionFuture.style.display = 'flex';
-                optionNo.style.display = 'flex';
-
-            } else if (tierName === 'Elite') {
-                // Future + No
-                optionYes.style.display = 'none';
-                optionFuture.style.display = 'flex';
-                optionNo.style.display = 'flex';
-            }
-            populateFutureMonths(tierName);
-        }
-
-        function selectPricingTier(tierName) {
-
-            const formContainer = document.getElementById('applicationFormContainer');
-            const digitalButton = document.getElementById('digitalPaymentButton');
-
-            // Digital = no form
-            if (tierName === 'Digital') {
-                formContainer.style.display = 'none';
-            } else {
-                formContainer.style.display = 'block';
-            }
-
-            document.getElementById('selectedPricingTier').value = tierName;
-
-            document.querySelectorAll('.pricing-card').forEach(card => {
-                card.classList.remove('selected');
-            });
-
-            const selectedCard = document.querySelector(
-                `.pricing-card[data-tier="${tierName.toLowerCase()}"]`
-            );
-
-            if (selectedCard) {
-                selectedCard.classList.add('selected');
-            }
-
-            updateCommitmentOptions(tierName);
-
-            // Only scroll for tiers with forms
-            if (tierName !== 'Digital') {
-                formContainer.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+            for (let year = currentYear; year <= currentYear + 2; year++) {
+                months.forEach((month, index) => {
+                    // Skip months that have already passed in the current year
+                    if (year === currentYear && index < currentMonth) return;
+                    addMonth(month, year);
                 });
             }
         }
@@ -1313,7 +771,6 @@
             const experience = document.getElementById('experience').value.trim();
             const linkedin = document.getElementById('linkedin').value.trim();
             const investment = document.querySelector('input[name="investment"]:checked').value;
-            const pricingTier = document.getElementById('selectedPricingTier').value;
             const futureCohortMonth = document.getElementById('futureCohortMonth').value;
 
             // Validate required fields
@@ -1324,13 +781,6 @@
 
             if (investment === 'Future' && !futureCohortMonth) {
                 alert('Please select your preferred start month for the future cohort.');
-                return;
-            }
-
-            if (!pricingTier) {
-                alert('Please select one of the pricing tiers / board pathways to proceed.');
-                // Scroll to the pricing section
-                document.querySelector('.pricing-grid').scrollIntoView({ behavior: 'smooth' });
                 return;
             }
 
@@ -1352,7 +802,6 @@
                 linkedin: linkedin,
                 investment: investment,
                 futureCohortMonth: futureCohortMonth,
-                pricingTier: pricingTier,
                 clientId: 'fintech-circle',
                 submittedFromUrl: window.location.href
             };
@@ -1362,19 +811,6 @@
 
             // Logic processing
             setTimeout(() => {
-
-                if (pricingTier === 'Digital') {
-
-                    if (investment === 'Yes') {
-                        window.location.href = 'https://secure.fintechcirclepro.com/payment-page-digital';
-                        return;
-                    }
-
-                    // User selected "No, not at this stage"
-                    document.getElementById('processingOverlay').style.display = 'none';
-                    document.getElementById('reviewingView').style.display = 'block';
-                    return;
-                }
 
                 document.getElementById('processingOverlay').style.display = 'none';
 
