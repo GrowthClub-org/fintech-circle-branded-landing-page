@@ -501,8 +501,12 @@
             <div class="step-card">
                 <div class="glow"></div>
                 <span class="step-badge">Step 1</span>
-                <h3>Look Out for an Email Soon</h3>
-                <p>We're sending you a confirmation email with all the details you need to join the Masterclass, including the webinar link. Check your inbox (and spam folder) shortly.</p>
+                <h3>Secure Your Direct Masterclass Entry</h3>
+                <p>Save this link to your calendar. This is where you will join Susanne Chishti live.</p>
+                <a href="#" id="watchLink" class="cta-btn btn-sky">
+                    <i data-lucide="external-link"></i>
+                    Access Webinar Seat
+                </a>
             </div>
 
             <!-- STEP 2 -->
@@ -570,6 +574,20 @@
 
     <script>
         lucide.createIcons();
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const registrationData = JSON.parse(sessionStorage.getItem('registrationData'));
+            const watchLink = document.getElementById('watchLink');
+
+            if (registrationData && registrationData.watchLink) {
+                watchLink.href = registrationData.watchLink;
+            } else {
+                const broadcastData = JSON.parse(sessionStorage.getItem('broadcastData'));
+                if (broadcastData && broadcastData.broadcast_data && broadcastData.broadcast_data.public_replay_link) {
+                    watchLink.href = broadcastData.broadcast_data.public_replay_link;
+                }
+            }
+        });
     </script>
 </body>
 
