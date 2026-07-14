@@ -1759,7 +1759,7 @@
       // Function to fetch broadcast data and set countdown date
       async function initializeCountdown() {
         try {
-          const response = await fetch(`${backendUrl}/api/v1/broadcast/upcoming-broadcast?clientId=${encodeURIComponent(CLIENT_ID)}`);
+          const response = await fetch(`${backendUrl}/api/v1/broadcast/${BROADCAST_ID}?clientId=${encodeURIComponent(CLIENT_ID)}`);
           if (response.ok) {
             const data = await response.json();
             if (data.broadcast_data && data.broadcast_data.date) {
@@ -1887,7 +1887,7 @@
             // First, fetch broadcast data to get the broadcast_id
             let broadcastData = null;
             try {
-              const broadcastResponse = await fetch(`${backendUrl}/api/v1/broadcast/upcoming-broadcast?clientId=${encodeURIComponent(CLIENT_ID)}`);
+              const broadcastResponse = await fetch(`${backendUrl}/api/v1/broadcast/${BROADCAST_ID}?clientId=${encodeURIComponent(CLIENT_ID)}`);
               if (broadcastResponse.ok) {
                 broadcastData = await broadcastResponse.json();
               }
@@ -1904,7 +1904,7 @@
               company: company,
               clientId: CLIENT_ID,
               submittedFromUrl: window.location.href,
-              broadcastId: broadcastData?.broadcast_id || '',
+              broadcastId: broadcastData?.broadcast_id || BROADCAST_ID,
               webinarTitle: broadcastData?.broadcast_data?.webinar_title || '',
               webinarDate: broadcastData?.broadcast_data?.readable_date || '',
               source: 'Landing Page Registration'
@@ -1919,12 +1919,9 @@
                 name: name,
                 email: email,
                 submittedFromUrl: window.location.href,
-                terms: true
+                terms: true,
+                broadcastId: BROADCAST_ID
               };
-
-              if (broadcastData && broadcastData.broadcast_id) {
-                registrationData.broadcastId = broadcastData.broadcast_id;
-              }
 
               const response = await fetch(`${backendUrl}/api/v1/webinar/register`, {
                 method: 'POST',
