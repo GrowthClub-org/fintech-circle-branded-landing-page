@@ -1727,7 +1727,7 @@
       const backendUrl = 'https://broadcast.growthclub.org'; // Change this to your production backend URL
       const CLIENT_ID = 'fintech-circle';
       const WEBINARGEEK_API_KEY = 'ITt41dwY1E23jgCQVj1MvE97jNnpn2qyvqtbtOFiWtzJgaih6vcjzSPYHN8xtOtI0a-fWcz34_rKOLsIUeZWOQ';
-      const BROADCAST_ID = '6483482';
+      const BROADCAST_ID = '6583177';
 
       // Google Sheets integration
       const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzuNmjYclGXcJ1skJibDfgwNEw8LBo7qWGqv0WcpJvv1S2GK0KpDVRo7ZAjAHQhxTNG2w/exec';
@@ -1759,7 +1759,7 @@
       // Function to fetch broadcast data and set countdown date
       async function initializeCountdown() {
         try {
-          const response = await fetch(`${backendUrl}/api/v1/upcoming-broadcast?clientId=${encodeURIComponent(CLIENT_ID)}`);
+          const response = await fetch(`${backendUrl}/api/v1/broadcast/${BROADCAST_ID}?clientId=${encodeURIComponent(CLIENT_ID)}`);
           if (response.ok) {
             const data = await response.json();
             if (data.broadcast_data && data.broadcast_data.date) {
