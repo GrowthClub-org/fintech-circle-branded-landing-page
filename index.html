@@ -1868,6 +1868,7 @@
           // Get form data
           const name = document.getElementById('name').value.trim();
           const email = document.getElementById('email').value.trim();
+          const company = document.getElementById('company').value.trim();
 
           if (!email) {
             alert('Please enter your email address');
@@ -1912,6 +1913,7 @@
               timestamp: new Date().toISOString(),
               name: name,
               email: email,
+              company: company,
               clientId: CLIENT_ID,
               submittedFromUrl: window.location.href,
               broadcastId: broadcastData?.broadcast_id || '',
