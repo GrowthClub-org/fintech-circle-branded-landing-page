@@ -1729,6 +1729,7 @@
 
       // Google Sheets integration
       const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyutuFPR6ms0K3OTbMebBeQrvTRX8xk2l6pr4n3bf_PKrwGTbLw009iXsGAEzo5ekQgNQ/exec';
+      const N8N_WEBHOOK_URL = 'https://n8n.growthclub.org/webhook/4035665d-84b6-4a22-a9e0-1a4723bc9978';
 
       // Send data to Google Sheets
       async function sendToGoogleSheets(formData) {
@@ -1748,6 +1749,28 @@
         } catch (error) {
           console.error('Error sending to Google Sheets:', error);
           // Don't fail the entire registration if Google Sheets fails
+          return false;
+        }
+      }
+
+      async function sendToN8n(formData) {
+        try {
+          const response = await fetch(N8N_WEBHOOK_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          });
+      
+          if (!response.ok) {
+            throw new Error(`n8n request failed: ${response.status}`);
+          }
+      
+          console.log('Data sent to n8n successfully');
+          return true;
+        } catch (error) {
+          console.error('Error sending to n8n:', error);
           return false;
         }
       }
@@ -1944,6 +1967,7 @@
             if (result.success) {
               // Send data to Google Sheets (don't wait for it to complete)
               sendToGoogleSheets(googleSheetsData);
+              sendToN8n(googleSheetsData);
 
               // Store registration data in sessionStorage for thank-you page
               sessionStorage.setItem('registrationData', JSON.stringify(result));
