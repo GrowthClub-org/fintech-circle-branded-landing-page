@@ -609,6 +609,56 @@
       box-shadow: 0 0 0 4px rgba(34, 193, 201, 0.15);
     }
 
+    .form-optional {
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(160, 160, 160, 0.7);
+    }
+
+    /* Phone number + country dialling code */
+    .phone-field {
+      display: grid;
+      grid-template-columns: minmax(9.5rem, max-content) 1fr;
+      gap: 0.75rem;
+    }
+
+    .form-select {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1rem 2.25rem 1rem 1rem;
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      color: var(--white);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='%23a0a0a0' d='M6 8 0 0h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.85rem center;
+      background-size: 10px 7px;
+    }
+
+    .form-select:focus {
+      outline: none;
+      border-color: var(--sky);
+      background-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 0 4px rgba(34, 193, 201, 0.15);
+    }
+
+    /* Native dropdown list renders light-on-light without this */
+    .form-select option {
+      background-color: var(--slate);
+      color: var(--white);
+    }
+
+    @media (max-width: 480px) {
+      .phone-field {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .form-submit {
       margin-top: 1rem;
       border: none;
@@ -1315,6 +1365,83 @@
             <label class="form-label">Company Name</label>
             <input type="text" id="company" class="form-input" placeholder="Company Ltd." required>
           </div>
+          <div class="form-group">
+            <label class="form-label" for="phone">Phone Number <span class="form-optional">(Optional)</span></label>
+            <div class="phone-field">
+              <select id="countryCode" class="form-select" aria-label="Country dialling code">
+              <option value="+44" selected>+44 United Kingdom</option>
+              <option value="+1">+1 United States</option>
+              <option value="+1">+1 Canada</option>
+              <option value="+353">+353 Ireland</option>
+              <option value="+49">+49 Germany</option>
+              <option value="+33">+33 France</option>
+              <option value="+34">+34 Spain</option>
+              <option value="+39">+39 Italy</option>
+              <option value="+31">+31 Netherlands</option>
+              <option value="+32">+32 Belgium</option>
+              <option value="+352">+352 Luxembourg</option>
+              <option value="+41">+41 Switzerland</option>
+              <option value="+43">+43 Austria</option>
+              <option value="+46">+46 Sweden</option>
+              <option value="+47">+47 Norway</option>
+              <option value="+45">+45 Denmark</option>
+              <option value="+358">+358 Finland</option>
+              <option value="+354">+354 Iceland</option>
+              <option value="+48">+48 Poland</option>
+              <option value="+420">+420 Czech Republic</option>
+              <option value="+351">+351 Portugal</option>
+              <option value="+30">+30 Greece</option>
+              <option value="+40">+40 Romania</option>
+              <option value="+36">+36 Hungary</option>
+              <option value="+372">+372 Estonia</option>
+              <option value="+371">+371 Latvia</option>
+              <option value="+370">+370 Lithuania</option>
+              <option value="+356">+356 Malta</option>
+              <option value="+357">+357 Cyprus</option>
+              <option value="+971">+971 United Arab Emirates</option>
+              <option value="+966">+966 Saudi Arabia</option>
+              <option value="+974">+974 Qatar</option>
+              <option value="+973">+973 Bahrain</option>
+              <option value="+965">+965 Kuwait</option>
+              <option value="+968">+968 Oman</option>
+              <option value="+972">+972 Israel</option>
+              <option value="+90">+90 Turkey</option>
+              <option value="+27">+27 South Africa</option>
+              <option value="+234">+234 Nigeria</option>
+              <option value="+254">+254 Kenya</option>
+              <option value="+233">+233 Ghana</option>
+              <option value="+20">+20 Egypt</option>
+              <option value="+212">+212 Morocco</option>
+              <option value="+91">+91 India</option>
+              <option value="+92">+92 Pakistan</option>
+              <option value="+880">+880 Bangladesh</option>
+              <option value="+94">+94 Sri Lanka</option>
+              <option value="+86">+86 China</option>
+              <option value="+852">+852 Hong Kong</option>
+              <option value="+886">+886 Taiwan</option>
+              <option value="+81">+81 Japan</option>
+              <option value="+82">+82 South Korea</option>
+              <option value="+65">+65 Singapore</option>
+              <option value="+60">+60 Malaysia</option>
+              <option value="+62">+62 Indonesia</option>
+              <option value="+66">+66 Thailand</option>
+              <option value="+84">+84 Vietnam</option>
+              <option value="+63">+63 Philippines</option>
+              <option value="+61">+61 Australia</option>
+              <option value="+64">+64 New Zealand</option>
+              <option value="+55">+55 Brazil</option>
+              <option value="+52">+52 Mexico</option>
+              <option value="+54">+54 Argentina</option>
+              <option value="+56">+56 Chile</option>
+              <option value="+57">+57 Colombia</option>
+              <option value="+51">+51 Peru</option>
+              <option value="+7">+7 Russia</option>
+              <option value="+380">+380 Ukraine</option>
+              </select>
+              <input type="tel" id="phone" class="form-input" placeholder="7700 900000" inputmode="tel"
+                autocomplete="tel-national">
+            </div>
+          </div>
           <button type="submit" class="cta-primary form-submit cta-button" style="width:100%;">Reserve My Seat</button>
         </form>
 
@@ -1728,7 +1855,7 @@
       const CLIENT_ID = 'fintech-circle';
 
       // Google Sheets integration
-      const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyutuFPR6ms0K3OTbMebBeQrvTRX8xk2l6pr4n3bf_PKrwGTbLw009iXsGAEzo5ekQgNQ/exec';
+      const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx7ByoZjkHSt4DUaB_ijZ_9S283nfvsbK0j-fLEckXDPFf9ZVL-38X8deSuv1TW7IkZZQ/exec';
       const N8N_WEBHOOK_URL = 'https://n8n.growthclub.org/webhook/4035665d-84b6-4a22-a9e0-1a4723bc9978';
 
       // Send data to Google Sheets
@@ -1892,6 +2019,27 @@
           const name = document.getElementById('name').value.trim();
           const email = document.getElementById('email').value.trim();
           const company = document.getElementById('company').value.trim();
+          const countryCode = document.getElementById('countryCode').value;
+          const phoneInput = document.getElementById('phone').value.trim();
+
+          // Phone is optional: only validate and transmit it when something was entered.
+          // Stored in E.164 (e.g. +447700900123) so downstream systems get one canonical format.
+          let phone = '';
+          if (phoneInput) {
+            let phoneDigits;
+            if (phoneInput.charAt(0) === '+') {
+              // Already international - trust what was typed and ignore the selector
+              phoneDigits = phoneInput.replace(/\D/g, '');
+            } else {
+              // National format - drop any trunk prefix (UK 07700 -> 7700) and prepend the selected code
+              phoneDigits = countryCode.replace(/\D/g, '') + phoneInput.replace(/\D/g, '').replace(/^0+/, '');
+            }
+            if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+              alert('Please enter a valid phone number, or leave the field blank.');
+              return;
+            }
+            phone = '+' + phoneDigits;
+          }
 
           if (!email) {
             alert('Please enter your email address');
@@ -1937,6 +2085,7 @@
               name: name,
               email: email,
               company: company,
+              phone: phone,
               clientId: CLIENT_ID,
               submittedFromUrl: window.location.href,
               broadcastId: broadcastData?.broadcast_id || '',
@@ -1969,8 +2118,11 @@
               sendToGoogleSheets(googleSheetsData);
               sendToN8n(googleSheetsData);
 
-              // Store registration data in sessionStorage for thank-you page
-              sessionStorage.setItem('registrationData', JSON.stringify(result));
+              // Store registration data in sessionStorage for thank-you page.
+              // Merge the phone in (when given) so application.html can pre-fill it.
+              sessionStorage.setItem('registrationData', JSON.stringify(
+                phone ? { ...result, phone: phone } : result
+              ));
 
               // Store broadcast data if we fetched it
               if (broadcastData) {
