@@ -744,6 +744,17 @@
       color: var(--muted);
     }
 
+    /* Off-screen, not display:none - GHL's form tracking only reads fields
+       that are actually rendered, so type="hidden" inputs are skipped. */
+    .offscreen-fields {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
     .form-hint.is-error {
       color: #ff8a8a;
     }
@@ -1492,13 +1503,19 @@
             <input type="hidden" id="countryCode" value="+44">
 
             <!-- Filled in once the WebinarGeek response returns, then submitted
-                 for GoHighLevel's external form tracking to capture. -->
-            <input type="hidden" name="first_name" id="ghlFirstName">
-            <input type="hidden" name="last_name" id="ghlLastName">
-            <input type="hidden" name="phone" id="ghlPhone">
-            <input type="hidden" name="readable_webinar_date" id="ghlWebinarDate">
-            <input type="hidden" name="readable_webinar_time" id="ghlWebinarTime">
-            <input type="hidden" name="watch_link_webinargeek" id="ghlWatchLink">
+                 for GoHighLevel's external form tracking to capture. Rendered
+                 off-screen rather than type="hidden", which the tracker skips. -->
+            <div class="offscreen-fields" aria-hidden="true">
+              <input type="text" name="first_name" id="ghlFirstName" tabindex="-1" readonly autocomplete="off">
+              <input type="text" name="last_name" id="ghlLastName" tabindex="-1" readonly autocomplete="off">
+              <input type="text" name="phone" id="ghlPhone" tabindex="-1" readonly autocomplete="off">
+              <input type="text" name="readable_webinar_date" id="ghlWebinarDate" tabindex="-1" readonly
+                autocomplete="off">
+              <input type="text" name="readable_webinar_time" id="ghlWebinarTime" tabindex="-1" readonly
+                autocomplete="off">
+              <input type="text" name="watch_link_webinargeek" id="ghlWatchLink" tabindex="-1" readonly
+                autocomplete="off">
+            </div>
           </div>
           <button type="button" class="cta-primary form-submit cta-button" style="width:100%;">Reserve My Seat</button>
         </form>
@@ -2598,6 +2615,13 @@
               document.getElementById('ghlWebinarDate').value = formatWebinarDate(webinarUnix);
               document.getElementById('ghlWebinarTime').value = formatWebinarTime(webinarUnix);
               document.getElementById('ghlWatchLink').value = watchLink;
+
+              // Visible in devtools, to confirm what the tracker had to read
+              const capturedFields = {};
+              new FormData(registrationForm).forEach(function (value, key) {
+                capturedFields[key] = value;
+              });
+              console.log('GHL tracking - fields present at submit:', capturedFields);
 
               if (typeof registrationForm.requestSubmit === 'function') {
                 registrationForm.requestSubmit();
