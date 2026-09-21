@@ -2467,9 +2467,13 @@
 
               // Store registration data in sessionStorage for thank-you page.
               // Merge the phone in (when given) so application.html can pre-fill it.
-              sessionStorage.setItem('registrationData', JSON.stringify(
-                phone ? { ...result, phone: phone } : result
-              ));
+              sessionStorage.setItem('registrationData', JSON.stringify({
+                ...result,
+                name: name,
+                email: email,
+                company: company,
+                ...(phone ? { phone: phone } : {})
+              }));
 
               // Store broadcast data if we fetched it
               if (broadcastData) {

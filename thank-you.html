@@ -510,14 +510,14 @@
             </div>
 
             <!-- STEP 2 -->
-            <div class="step-card">
+            <div class="step-card" id="whatsappStep">
                 <span class="step-badge">Step 2</span>
-                <h3>Join the Board Briefing Community</h3>
-                <p>Join our exclusive WhatsApp briefing group for pre-reading materials, networking with peers, and live
-                    Board Briefing updates.</p>
-                <a href="https://chat.whatsapp.com/KYGNzJFVSEI0inOqgj4TSF" target="_blank" class="cta-btn btn-sky">
+                <h3>Message Us on WhatsApp</h3>
+                <p>Send us a message on WhatsApp and we will reply with your join link, pre-reading materials and
+                    your Board Briefing reminders.</p>
+                <a href="#" id="whatsappLink" target="_blank" rel="noopener" class="cta-btn btn-sky">
                     <i data-lucide="message-circle"></i>
-                    Join Community Group
+                    Message Us on WhatsApp
                 </a>
             </div>
 
@@ -577,9 +577,38 @@
     <script>
         lucide.createIcons();
 
+        /* ---------- WhatsApp click-to-chat ----------
+           FINTECH Circle's WhatsApp Business number in international format,
+           digits only - no +, spaces or dashes. For example: 447700900123
+           While this is empty the Step 2 card stays hidden, so a half-configured
+           deploy never shows a dead button. */
+        const WHATSAPP_NUMBER = '';
+
+        /* The inbound message reaches GHL from the sender's own phone number.
+           Since the phone field on the registration form is optional, that number
+           may not be on their contact record - including the registrant's email
+           gives the workflow something to match on. Set false for a plain message. */
+        const INCLUDE_EMAIL_REFERENCE = true;
+
+        function buildWhatsAppHref(reg) {
+            const opening = 'Hi Susanne, I\u2019ve registered for the Board Briefing.';
+            const ask = ' Please send me my join link and resources.';
+            const ref = (INCLUDE_EMAIL_REFERENCE && reg && reg.email) ? ' (' + reg.email + ')' : '';
+            return 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(opening + ref + ask);
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             const registrationData = JSON.parse(sessionStorage.getItem('registrationData'));
             const watchLink = document.getElementById('watchLink');
+
+            const whatsappStep = document.getElementById('whatsappStep');
+            const whatsappLink = document.getElementById('whatsappLink');
+            if (WHATSAPP_NUMBER) {
+                whatsappLink.href = buildWhatsAppHref(registrationData);
+            } else if (whatsappStep) {
+                whatsappStep.style.display = 'none';
+                console.warn('WHATSAPP_NUMBER is not set - the WhatsApp step is hidden.');
+            }
 
             if (registrationData && registrationData.watchLink) {
                 watchLink.href = registrationData.watchLink;
