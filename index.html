@@ -2627,13 +2627,6 @@
               document.getElementById('ghlWebinarTime').value = formatWebinarTime(webinarUnix);
               document.getElementById('ghlWatchLink').value = watchLink;
 
-              // Visible in devtools, to confirm what the tracker had to read
-              const capturedFields = {};
-              new FormData(registrationForm).forEach(function (value, key) {
-                capturedFields[key] = value;
-              });
-              console.log('GHL tracking - fields present at submit:', capturedFields);
-
               if (typeof registrationForm.requestSubmit === 'function') {
                 registrationForm.requestSubmit();
               } else {
