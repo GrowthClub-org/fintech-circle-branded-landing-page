@@ -1905,6 +1905,13 @@
       const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx7ByoZjkHSt4DUaB_ijZ_9S283nfvsbK0j-fLEckXDPFf9ZVL-38X8deSuv1TW7IkZZQ/exec';
       const N8N_WEBHOOK_URL = 'https://n8n.growthclub.org/webhook/4035665d-84b6-4a22-a9e0-1a4723bc9978';
 
+      /* GoHighLevel Inbound Webhook URL. Create a GHL workflow with the
+         "Inbound Webhook" trigger, copy its URL here, then map the JSON keys
+         below onto the contact fields in that workflow's Create/Update Contact
+         step. While this is empty the GHL sync is skipped and logged, so
+         registrations are never blocked by it. */
+      const GHL_WEBHOOK_URL = '';
+
       // Send data to Google Sheets
       async function sendToGoogleSheets(formData) {
         try {
@@ -1923,6 +1930,73 @@
         } catch (error) {
           console.error('Error sending to Google Sheets:', error);
           // Don't fail the entire registration if Google Sheets fails
+          return false;
+        }
+      }
+
+      /* ---------- GoHighLevel sync ----------
+         The confirmation template uses contact.first_name,
+         contact.readable_webinar_date, contact.readable_webinar_time and
+         contact.watch_link_webinargeek, so those are built here.
+
+         The broadcast API returns only a raw "2026-09-25 10:00:00" string and a
+         Unix timestamp, so the display strings are derived from the timestamp in
+         Europe/London - which also keeps BST and GMT correct across the year. */
+      function ordinalSuffix(n) {
+        const s = ['th', 'st', 'nd', 'rd'];
+        const v = n % 100;
+        return s[(v - 20) % 10] || s[v] || s[0];
+      }
+
+      function formatWebinarDate(unixSeconds) {
+        if (!unixSeconds) return '';
+        const d = new Date(unixSeconds * 1000);
+        const tz = 'Europe/London';
+        const weekday = new Intl.DateTimeFormat('en-GB', { weekday: 'long', timeZone: tz }).format(d);
+        const day = Number(new Intl.DateTimeFormat('en-GB', { day: 'numeric', timeZone: tz }).format(d));
+        const month = new Intl.DateTimeFormat('en-GB', { month: 'long', timeZone: tz }).format(d);
+        const year = new Intl.DateTimeFormat('en-GB', { year: 'numeric', timeZone: tz }).format(d);
+        return weekday + ', ' + day + ordinalSuffix(day) + ' ' + month + ' ' + year;
+      }
+
+      function formatWebinarTime(unixSeconds) {
+        if (!unixSeconds) return '';
+        const d = new Date(unixSeconds * 1000);
+        const tz = 'Europe/London';
+        const clock = new Intl.DateTimeFormat('en-GB', {
+          hour: 'numeric', minute: '2-digit', hour12: true, timeZone: tz
+        }).format(d).toUpperCase();
+        const parts = new Intl.DateTimeFormat('en-GB', { timeZoneName: 'short', timeZone: tz }).formatToParts(d);
+        const zone = (parts.find(part => part.type === 'timeZoneName') || {}).value || '';
+        return (clock + ' ' + zone).replace(/\s+/g, ' ').trim();
+      }
+
+      // The form takes one Full Name field, but GHL expects first and last
+      function splitName(fullName) {
+        const parts = String(fullName || '').trim().split(/\s+/).filter(Boolean);
+        return { first: parts[0] || '', last: parts.slice(1).join(' ') };
+      }
+
+      async function sendToGHL(payload) {
+        if (!GHL_WEBHOOK_URL) {
+          console.warn('GHL_WEBHOOK_URL is not set - skipping GHL sync.');
+          return false;
+        }
+        try {
+          const response = await fetch(GHL_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            throw new Error(`GHL request failed: ${response.status}`);
+          }
+
+          console.log('Data sent to GHL successfully');
+          return true;
+        } catch (error) {
+          console.error('Error sending to GHL:', error);
           return false;
         }
       }
@@ -2464,6 +2538,27 @@
               // Send data to Google Sheets (don't wait for it to complete)
               sendToGoogleSheets(googleSheetsData);
               sendToN8n(googleSheetsData);
+
+              // GHL: flat keys matching the confirmation template's merge fields
+              const registrantName = splitName(name);
+              const webinarUnix = broadcastData?.broadcast_data?.date || null;
+              sendToGHL({
+                first_name: registrantName.first,
+                last_name: registrantName.last,
+                full_name: name,
+                email: email,
+                phone: phone,
+                company: company,
+                readable_webinar_date: formatWebinarDate(webinarUnix),
+                readable_webinar_time: formatWebinarTime(webinarUnix),
+                watch_link_webinargeek: result.watchLink || '',
+                webinar_timestamp: webinarUnix || '',
+                broadcast_id: broadcastData?.broadcast_id || '',
+                client_id: CLIENT_ID,
+                source: 'Landing Page Registration',
+                submitted_from_url: window.location.href,
+                registered_at: new Date().toISOString()
+              });
 
               // Store registration data in sessionStorage for thank-you page.
               // Merge the phone in (when given) so application.html can pre-fill it.
