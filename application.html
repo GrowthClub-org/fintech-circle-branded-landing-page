@@ -577,25 +577,8 @@
                             <div class="radio-group">
                                 <label class="radio-option" id="optionYes">
                                     <input type="radio" name="investment" value="Yes" required>
-                                    <span>Yes, I would like to join the next cohort.</span>
+                                    <span>Yes, I would like to join the FINTECH Circle Board Programme</span>
                                 </label>
-                                <label class="radio-option" id="optionFuture">
-                                    <input type="radio" name="investment" value="Future">
-                                    <span>Yes, but I would like to join a future cohort.</span>
-                                </label>
-
-                                <!-- Future Start Month Selection Container (Hidden by default) -->
-                                <div class="form-group" id="futureMonthContainer"
-                                    style="display: none; margin-left: 2.2rem; margin-top: -0.5rem; margin-bottom: 0.5rem; padding: 1rem; border: 1px dashed rgba(255, 154, 72, 0.2); border-radius: 8px; animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
-                                    <label class="form-label"
-                                        style="font-size: 0.8rem; color: var(--sun); margin-bottom: 0.4rem;">Select
-                                        Preferred Month</label>
-                                    <select id="futureCohortMonth" class="form-select"
-                                        style="max-width: 280px; padding: 0.8rem 1rem;">
-                                        <option value="" disabled selected>Select Month...</option>
-                                    </select>
-                                </div>
-
                             </div>
                         </div>
                     </div>
@@ -700,60 +683,7 @@
                 if (registrationData.phone) document.getElementById('phone').value = registrationData.phone;
             }
 
-            // Populate dynamic future months in selection
-            populateFutureMonths();
-
-            // Add change listener to radio options to show/hide Month select box
-            document.querySelectorAll('input[name="investment"]').forEach(radio => {
-                radio.addEventListener('change', function () {
-                    const futureMonthContainer = document.getElementById('futureMonthContainer');
-                    const futureCohortMonth = document.getElementById('futureCohortMonth');
-
-                    if (this.value === 'Future') {
-                        futureMonthContainer.style.display = 'block';
-                        futureCohortMonth.setAttribute('required', 'required');
-                    } else {
-                        futureMonthContainer.style.display = 'none';
-                        futureCohortMonth.removeAttribute('required');
-                        futureCohortMonth.value = ''; // Reset value
-                    }
-                });
-            });
         });
-
-        // Function to dynamically populate future cohort months
-        function populateFutureMonths() {
-            const selectEl = document.getElementById('futureCohortMonth');
-            if (!selectEl) return;
-
-            selectEl.innerHTML =
-                '<option value="" disabled selected>Select Month...</option>';
-
-            const addMonth = (month, year) => {
-                const opt = document.createElement('option');
-                opt.value = `${month} ${year}`;
-                opt.textContent = `${month} ${year}`;
-                selectEl.appendChild(opt);
-            };
-
-            const months = [
-                "January", "February", "March", "April", "May", "June",
-                "July", "August", "September", "October", "November", "December"
-            ];
-
-            // List the remaining months of this year through the next two years
-            const now = new Date();
-            const currentYear = now.getFullYear();
-            const currentMonth = now.getMonth(); // 0-indexed
-
-            for (let year = currentYear; year <= currentYear + 2; year++) {
-                months.forEach((month, index) => {
-                    // Skip months that have already passed in the current year
-                    if (year === currentYear && index < currentMonth) return;
-                    addMonth(month, year);
-                });
-            }
-        }
 
         document.getElementById('applicationForm').addEventListener('submit', async function (e) {
             e.preventDefault();
@@ -768,16 +698,10 @@
             const experience = document.getElementById('experience').value.trim();
             const linkedin = document.getElementById('linkedin').value.trim();
             const investment = document.querySelector('input[name="investment"]:checked').value;
-            const futureCohortMonth = document.getElementById('futureCohortMonth').value;
 
             // Validate required fields
             if (!firstName || !lastName || !email || !phone || !title || !company || !experience || !investment) {
                 alert('Please fill in all required fields');
-                return;
-            }
-
-            if (investment === 'Future' && !futureCohortMonth) {
-                alert('Please select your preferred start month for the future cohort.');
                 return;
             }
 
@@ -798,7 +722,7 @@
                 experience: experience,
                 linkedin: linkedin,
                 investment: investment,
-                futureCohortMonth: futureCohortMonth,
+                futureCohortMonth: '',
                 clientId: 'fintech-circle',
                 submittedFromUrl: window.location.href
             };
@@ -811,7 +735,7 @@
 
                 document.getElementById('processingOverlay').style.display = 'none';
 
-                const isQualified = parseInt(experience) >= 15 && (investment === "Yes" || investment === "Future");
+                const isQualified = parseInt(experience) >= 15 && investment === "Yes";
 
                 if (isQualified) {
                     // Show success view (no redirection now)
