@@ -2347,6 +2347,12 @@
       });
 
       search.addEventListener('keydown', function (e) {
+        /* Stop these reaching the form's Enter-to-register listener below -
+           preventDefault stops the browser acting, not the event bubbling. */
+        if (['ArrowDown', 'ArrowUp', 'Enter', 'Escape'].indexOf(e.key) !== -1) {
+          e.stopPropagation();
+        }
+
         if (e.key === 'ArrowDown') {
           e.preventDefault();
           if (shown.length) {
@@ -2360,7 +2366,7 @@
             highlight();
           }
         } else if (e.key === 'Enter') {
-          // Never let Enter inside the search box submit the registration form
+          // Enter picks the highlighted country; it must never register
           e.preventDefault();
           if (shown.length && activeIndex >= 0) {
             selectCountry(shown[activeIndex]);
@@ -2487,10 +2493,15 @@
         /* A form whose button is type="button" loses Enter-to-submit, so put
            it back explicitly. */
         registrationForm.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' && e.target.tagName === 'INPUT' && e.target.type !== 'hidden') {
-            e.preventDefault();
-            handleRegistration(e);
-          }
+          if (e.key !== 'Enter') return;
+          if (e.target.tagName !== 'INPUT' || e.target.type === 'hidden') return;
+
+          // Enter inside the country picker selects a country, it does not register
+          const picker = document.getElementById('countryCombo');
+          if (picker && picker.contains(e.target)) return;
+
+          e.preventDefault();
+          handleRegistration(e);
         });
 
         async function handleRegistration(e) {

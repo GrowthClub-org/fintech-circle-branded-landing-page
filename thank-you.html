@@ -584,16 +584,17 @@
            deploy never shows a dead button. */
         const WHATSAPP_NUMBER = '447366234449';
 
-        /* The inbound message reaches GHL from the sender's own phone number.
-           Since the phone field on the registration form is optional, that number
-           may not be on their contact record - including the registrant's email
-           gives the workflow something to match on. Set false for a plain message. */
+        /* Registration now sends the phone number straight to GHL, so an inbound
+           WhatsApp from that number matches the contact on its own and the message
+           can stay clean. The phone field is optional though, so when it was left
+           blank the email is appended as the only thing left to match on. */
         const INCLUDE_EMAIL_REFERENCE = true;
 
         function buildWhatsAppHref(reg) {
             const opening = 'Hi Susanne, I\u2019ve registered for the Board Briefing.';
             const ask = ' Please send me my join link and resources.';
-            const ref = (INCLUDE_EMAIL_REFERENCE && reg && reg.email) ? ' (' + reg.email + ')' : '';
+            const needsReference = INCLUDE_EMAIL_REFERENCE && reg && reg.email && !reg.phone;
+            const ref = needsReference ? ' (' + reg.email + ')' : '';
             return 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(opening + ref + ask);
         }
 
