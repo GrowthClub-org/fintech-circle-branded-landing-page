@@ -1459,15 +1459,15 @@
         <form class="reg-form" id="registrationForm">
           <div class="form-group">
             <label class="form-label">Full Name</label>
-            <input type="text" id="name" class="form-input" placeholder="Your Full Name" required>
+            <input type="text" id="name" name="full_name" class="form-input" placeholder="Your Full Name" required>
           </div>
           <div class="form-group">
             <label class="form-label">Email Address</label>
-            <input type="email" id="email" class="form-input" placeholder="name@company.com" required>
+            <input type="email" id="email" name="email" class="form-input" placeholder="name@company.com" required>
           </div>
           <div class="form-group">
             <label class="form-label">Company Name</label>
-            <input type="text" id="company" class="form-input" placeholder="Company Ltd." required>
+            <input type="text" id="company" name="company" class="form-input" placeholder="Company Ltd." required>
           </div>
           <div class="form-group">
             <label class="form-label" for="phone">Phone Number <span class="form-optional">(Optional)</span></label>
@@ -1490,8 +1490,17 @@
             </div>
             <p class="form-hint" id="phoneHint" hidden></p>
             <input type="hidden" id="countryCode" value="+44">
+
+            <!-- Filled in once the WebinarGeek response returns, then submitted
+                 for GoHighLevel's external form tracking to capture. -->
+            <input type="hidden" name="first_name" id="ghlFirstName">
+            <input type="hidden" name="last_name" id="ghlLastName">
+            <input type="hidden" name="phone" id="ghlPhone">
+            <input type="hidden" name="readable_webinar_date" id="ghlWebinarDate">
+            <input type="hidden" name="readable_webinar_time" id="ghlWebinarTime">
+            <input type="hidden" name="watch_link_webinargeek" id="ghlWatchLink">
           </div>
-          <button type="submit" class="cta-primary form-submit cta-button" style="width:100%;">Reserve My Seat</button>
+          <button type="button" class="cta-primary form-submit cta-button" style="width:100%;">Reserve My Seat</button>
         </form>
 
         <div class="event-rule" style="margin: 2rem 0 1.5rem;"></div>
@@ -1978,10 +1987,8 @@
       }
 
       async function sendToGHL(payload) {
-        if (!GHL_WEBHOOK_URL) {
-          console.warn('GHL_WEBHOOK_URL is not set - skipping GHL sync.');
-          return false;
-        }
+        // Unset by design while external form tracking handles the sync
+        if (!GHL_WEBHOOK_URL) return false;
         try {
           const response = await fetch(GHL_WEBHOOK_URL, {
             method: 'POST',
@@ -2446,8 +2453,37 @@
 
       const registrationForm = document.getElementById('registrationForm');
       if (registrationForm) {
-        registrationForm.addEventListener('submit', async function (e) {
+        /* The only submit event this page raises is the one requestSubmit()
+           fires further down, after the hidden fields hold the watch link. It
+           exists so GHL's tracking script reads one complete form rather than
+           an empty submission followed by a full one - two captures would fire
+           the workflow, and the WhatsApp confirmation, twice. */
+        registrationForm.addEventListener('submit', function (e) {
           e.preventDefault();
+        });
+
+        const submitTrigger = document.querySelector('.cta-button');
+        if (submitTrigger) {
+          submitTrigger.addEventListener('click', handleRegistration);
+        }
+
+        /* A form whose button is type="button" loses Enter-to-submit, so put
+           it back explicitly. */
+        registrationForm.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' && e.target.tagName === 'INPUT' && e.target.type !== 'hidden') {
+            e.preventDefault();
+            handleRegistration(e);
+          }
+        });
+
+        async function handleRegistration(e) {
+          if (e) e.preventDefault();
+
+          // Native validation no longer runs on its own now the button is type="button"
+          if (!registrationForm.checkValidity()) {
+            registrationForm.reportValidity();
+            return;
+          }
 
           // Get form data value
           const name = document.getElementById('name').value.trim();
@@ -2539,9 +2575,37 @@
               sendToGoogleSheets(googleSheetsData);
               sendToN8n(googleSheetsData);
 
-              // GHL: flat keys matching the confirmation template's merge fields
+              /* ---------- GoHighLevel external form tracking ----------
+                 The watch link only exists once WebinarGeek has responded, so
+                 the hidden fields are filled here and the form is then
+                 submitted again for the tracking script to pick up.
+
+                 requestSubmit() is used rather than dispatchEvent so the submit
+                 event is generated by the browser and carries isTrusted: true -
+                 a tracker that ignores synthetic events still sees this one. */
               const registrantName = splitName(name);
               const webinarUnix = broadcastData?.broadcast_data?.date || null;
+
+              // Mirror the fallback thank-you.html uses, so the confirmation
+              // message never goes out with an empty join link
+              const watchLink = result.watchLink
+                || broadcastData?.broadcast_data?.public_replay_link
+                || '';
+
+              document.getElementById('ghlFirstName').value = registrantName.first;
+              document.getElementById('ghlLastName').value = registrantName.last;
+              document.getElementById('ghlPhone').value = phone;
+              document.getElementById('ghlWebinarDate').value = formatWebinarDate(webinarUnix);
+              document.getElementById('ghlWebinarTime').value = formatWebinarTime(webinarUnix);
+              document.getElementById('ghlWatchLink').value = watchLink;
+
+              if (typeof registrationForm.requestSubmit === 'function') {
+                registrationForm.requestSubmit();
+              } else {
+                registrationForm.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+              }
+
+              // Kept as a fallback: does nothing unless GHL_WEBHOOK_URL is set
               sendToGHL({
                 first_name: registrantName.first,
                 last_name: registrantName.last,
@@ -2551,7 +2615,7 @@
                 company: company,
                 readable_webinar_date: formatWebinarDate(webinarUnix),
                 readable_webinar_time: formatWebinarTime(webinarUnix),
-                watch_link_webinargeek: result.watchLink || '',
+                watch_link_webinargeek: watchLink,
                 webinar_timestamp: webinarUnix || '',
                 broadcast_id: broadcastData?.broadcast_id || '',
                 client_id: CLIENT_ID,
@@ -2575,8 +2639,12 @@
                 sessionStorage.setItem('broadcastData', JSON.stringify(broadcastData));
               }
 
-              // Redirect to thank-you page
-              window.location.href = 'thank-you.html';
+              /* Navigating immediately would cancel the tracking script's
+                 outbound request, which fails intermittently rather than
+                 obviously. Give it a moment first. */
+              setTimeout(function () {
+                window.location.href = 'thank-you.html';
+              }, 600);
             } else {
               throw new Error(result.message || 'Registration failed');
             }
@@ -2589,12 +2657,15 @@
             submitButton.innerHTML = originalText;
             submitButton.disabled = false;
           }
-        });
+        }
       }
     });
 
     lucide.createIcons();
   </script>
+  <!-- GoHighLevel external form tracking -->
+  <script src="https://link.msgsndr.com/js/external-tracking.js"
+    data-tracking-id="tk_2e56d38ddaaa481ca49bd2dbae70ab7a"></script>
 </body>
 
 </html>
