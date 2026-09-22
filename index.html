@@ -1515,6 +1515,8 @@
                 autocomplete="off">
               <input type="text" name="watch_link_webinargeek" id="ghlWatchLink" tabindex="-1" readonly
                 autocomplete="off">
+              <input type="text" name="webinar_broadcast_date" id="ghlBroadcastDate" tabindex="-1" readonly
+                autocomplete="off">
             </div>
           </div>
           <button type="button" class="cta-primary form-submit cta-button" style="width:100%;">Reserve My Seat</button>
@@ -1995,6 +1997,25 @@
         const parts = new Intl.DateTimeFormat('en-GB', { timeZoneName: 'short', timeZone: tz }).formatToParts(d);
         const zone = (parts.find(part => part.type === 'timeZoneName') || {}).value || '';
         return (clock + ' ' + zone).replace(/\s+/g, ' ').trim();
+      }
+
+      /* Machine-readable 'YYYY-MM-DD HH:mm:ss' for GHL's webinar_broadcast_date.
+         Built in the same timezone as the display fields, so the stored value
+         matches the time the registrant was shown. hourCycle h23 keeps midnight
+         as 00:00:00 rather than 24:00:00. */
+      function formatWebinarBroadcastDate(unixSeconds) {
+        if (!unixSeconds) return '';
+        const d = new Date(unixSeconds * 1000);
+        const parts = new Intl.DateTimeFormat('en-GB', {
+          year: 'numeric', month: '2-digit', day: '2-digit',
+          hour: '2-digit', minute: '2-digit', second: '2-digit',
+          hourCycle: 'h23', timeZone: 'Europe/London'
+        }).formatToParts(d).reduce(function (acc, part) {
+          acc[part.type] = part.value;
+          return acc;
+        }, {});
+        return parts.year + '-' + parts.month + '-' + parts.day + ' ' +
+          parts.hour + ':' + parts.minute + ':' + parts.second;
       }
 
       // The form takes one Full Name field, but GHL expects first and last
@@ -2625,7 +2646,8 @@
               document.getElementById('ghlPhone').value = phone;
               document.getElementById('ghlWebinarDate').value = formatWebinarDate(webinarUnix);
               document.getElementById('ghlWebinarTime').value = formatWebinarTime(webinarUnix);
-              document.getElementById('ghlWatchLink').value = watchLink;
+              document.getElementById('ghlWatchLink').value   = watchLink;
+              document.getElementById('ghlBroadcastDate').value = formatWebinarBroadcastDate(webinarUnix);
 
               if (typeof registrationForm.requestSubmit === 'function') {
                 registrationForm.requestSubmit();
@@ -2643,6 +2665,7 @@
                 company: company,
                 readable_webinar_date: formatWebinarDate(webinarUnix),
                 readable_webinar_time: formatWebinarTime(webinarUnix),
+                webinar_broadcast_date: formatWebinarBroadcastDate(webinarUnix),
                 watch_link_webinargeek: watchLink,
                 webinar_timestamp: webinarUnix || '',
                 broadcast_id: broadcastData?.broadcast_id || '',
