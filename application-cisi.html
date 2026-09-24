@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5MFP65RH');</script>
+    <!-- End Google Tag Manager -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CISI x FINTECH Circle Board Readiness Programme Application | FINTECH Circle</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Heebo:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            /* Brand Colors */
+            --onyx: #000000;
+            --cloud: #C6C8C9;
+            --sky: #22C1C9;
+            --ocean: #006BDC;
+            --dusk: #724FC2;
+            --sun: #FF9A48;
+
+            /* Semantic Variables - Dark Theme */
+            --ink: #ffffff;
+            --ivory: var(--onyx);
+            --gold: var(--sky);
+            --gold-light: var(--ocean);
+            --slate: #121212;
+            --muted: #a0a0a0;
+            --rule: rgba(198, 200, 201, 0.15);
+            --white: #ffffff;
+            --card-bg: rgba(26, 26, 26, 0.8);
+
+            /* Layout */
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-accent: 'Heebo', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 18px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #000000;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(34, 193, 201, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(114, 79, 194, 0.05) 0%, transparent 40%),
+                linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+            background-size: cover;
+            background-attachment: fixed;
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .mesh-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem 4rem;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .nav-brand {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.35rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        .nav-brand span {
+            color: var(--cloud);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 120px auto 80px;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: var(--sky);
+            margin-bottom: 1.25rem;
+            text-shadow: 0 0 30px rgba(34, 193, 201, 0.3);
+        }
+
+        .hero-sub {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--white);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 500;
+        }
+
+        /* FORM STYLES */
+        .application-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .reg-form {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .form-section-title {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            color: var(--sun);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 154, 72, 0.2);
+            padding-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-label {
+            font-family: var(--font-accent);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--muted);
+        }
+
+        .form-input,
+        .form-select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.1rem 1.25rem;
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all 0.2s;
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2rem;
+        }
+
+        .form-select option {
+            background-color: #121212;
+            color: var(--white);
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--sky);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 15px rgba(34, 193, 201, 0.2);
+        }
+
+        /* Off-screen, not display:none - GHL's tracker only reads rendered fields */
+        .offscreen-fields {
+            position: absolute;
+            left: -9999px;
+            top: 0;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            color: var(--white);
+            font-size: 1rem;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .radio-option:hover {
+            border-color: rgba(34, 193, 201, 0.4);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .radio-option input[type="radio"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .radio-option input[type="radio"]:checked {
+            border-color: var(--sky);
+            background: var(--sky);
+            box-shadow: inset 0 0 0 4px var(--card-bg);
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.25rem 3.5rem;
+            font-family: var(--font-accent);
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            border-radius: 99px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            background: var(--sky);
+            color: var(--onyx);
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            background: var(--ocean);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* PROCESSING OVERLAY */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .loading-spinner-large {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(34, 193, 201, 0.1);
+            border-left: 4px solid var(--sky);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 2rem;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* REVIEWING VIEW */
+        #reviewingView {
+            display: none;
+        }
+
+        .fade-up {
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .application-card {
+                padding: 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* LinkedIn Helper Styles */
+        .linkedin-helpers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .helper-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 99px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(34, 193, 201, 0.3);
+            font-family: var(--font-accent);
+            background: rgba(34, 193, 201, 0.05);
+            color: var(--sky);
+        }
+
+        .helper-link:hover {
+            background: var(--sky);
+            color: var(--onyx);
+            transform: translateY(-1px);
+        }
+
+        .helper-link.small {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            opacity: 0.8;
+            border-color: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .helper-link.small:hover {
+            background: rgba(255, 255, 255, 0.1);
+            opacity: 1;
+        }
+
+        .video-help-box {
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            display: none;
+            position: relative;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+            width: 100%;
+        }
+
+        .video-help-box.active {
+            display: block;
+            animation: expandVideo 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes expandVideo {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .video-container {
+            width: 100%;
+            display: block;
+            line-height: 0;
+            /* Remove gaps */
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            /* Limit height to keep it usable */
+            display: block;
+            border-radius: 8px;
+        }
+    </style>
+  <link rel="stylesheet" href="phone-field.css">
+  <script src="phone-field.js"></script>
+</head>
+
+<body>
+    <div class="mesh-grid"></div>
+
+    <nav>
+        <a href="index.html" class="nav-brand">FINTECH <span>Circle</span></a>
+    </nav>
+
+    <!-- FORM VIEW -->
+    <div id="formView">
+        <div class="container">
+            <div class="hero-header">
+                <h1 class="hero-title">Board Readiness Programme Application</h1>
+                <p class="hero-sub">Complete your professional screening for the CISI x FINTECH Circle Board Readiness Programme.
+                </p>
+            </div>
+
+            <div class="application-card">
+                <form class="reg-form" id="applicationCisiForm">
+                    <!-- Basic Information -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">Basic Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">First Name</label>
+                                <input type="text" id="firstName" name="first_name" class="form-input" placeholder="e.g. Jane" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" id="lastName" name="last_name" class="form-input" placeholder="e.g. Smith" required>
+                            </div>
+                        </div>
+                        <div class="form-row" style="margin-top: 1.5rem;">
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="jane@company.com"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="phone">Phone Number</label>
+                                <div class="phone-field is-stacked">
+                                    <div class="country-combo" id="countryCombo">
+                                        <button type="button" class="country-trigger" id="countryTrigger"
+                                            aria-haspopup="listbox" aria-expanded="false"
+                                            aria-label="Country dialling code, United Kingdom +44 selected">
+                                            <span class="country-trigger-text" id="countryTriggerText">+44 United
+                                                Kingdom</span>
+                                            <span class="country-caret" aria-hidden="true"></span>
+                                        </button>
+                                        <div class="country-panel" id="countryPanel" hidden>
+                                            <input type="text" class="country-search" id="countrySearch"
+                                                placeholder="Search country or code" autocomplete="off" role="combobox"
+                                                aria-controls="countryList" aria-expanded="true"
+                                                aria-autocomplete="list" aria-label="Search for a country">
+                                            <ul class="country-list" id="countryList" role="listbox"
+                                                aria-label="Country dialling code"></ul>
+                                        </div>
+                                    </div>
+                                    <input type="tel" id="phone" class="form-input" placeholder="7400 123456"
+                                        inputmode="tel" autocomplete="tel-national" aria-describedby="phoneHint"
+                                        required>
+                                </div>
+                                <p class="form-hint" id="phoneHint" hidden></p>
+                                <input type="hidden" id="countryCode" value="+44">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Professional Screening -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">Professional Screening</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Title</label>
+                                <input type="text" id="title" name="applicant_title" class="form-input" placeholder="e.g. Finance Director"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Company Name</label>
+                                <input type="text" id="company" name="company" class="form-input" placeholder="e.g. Acme Corp"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-row" style="margin-top: 1.5rem;">
+                            <div class="form-group">
+                                <label class="form-label">Years of Industry Experience</label>
+                                <input type="number" id="experience" name="applicant_years_of_experience" class="form-input" placeholder="e.g. 15" min="0"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">LinkedIn Profile URL (Optional)</label>
+                                <input type="url" id="linkedin" name="linkedin_profile" class="form-input"
+                                    placeholder="https://linkedin.com/in/username">
+                                <div class="linkedin-helpers">
+                                    <a href="https://linkedin.com/in/me" target="_blank" class="helper-link">
+                                        <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+                                        Find My Profile
+                                    </a>
+                                    <button type="button" id="showHelpVideo" class="helper-link small">
+                                        <i data-lucide="help-circle" style="width: 14px; height: 14px;"></i>
+                                        Can't find your LinkedIn?
+                                    </button>
+                                </div>
+                                <div id="videoHelpContainer" class="video-help-box">
+                                    <div class="video-container">
+                                        <video id="linkedinTutorial" controls muted loop playsinline>
+                                            <source src="linkedin-tutorial.mp4" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Financial Commitment -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">Application</h3>
+                        <div class="form-group">
+                            <label class="form-label" style="color: var(--sky);">Would you like to join the CISI x
+                                FINTECH Circle Board Readiness Programme?</label>
+                            <div class="radio-group">
+                                <label class="radio-option" id="optionYes">
+                                    <input type="radio" name="applicant_investment_ready" value="Yes" required>
+                                    <span>Yes, I would like to join the CISI x FINTECH Circle Board Readiness
+                                        Programme</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filled just before the tracked submit, for GoHighLevel's external
+                         form tracking. Rendered off-screen rather than type="hidden",
+                         which the tracker skips. -->
+                    <div class="offscreen-fields" aria-hidden="true">
+                        <input type="text" name="applicant_application_status" id="ghlAppStatus" tabindex="-1"
+                            readonly autocomplete="off">
+                        <input type="text" name="processing_date" id="ghlProcessingDate" tabindex="-1" readonly
+                            autocomplete="off">
+                        <input type="text" name="submitted_from_url" id="ghlSubmittedFrom" tabindex="-1" readonly
+                            autocomplete="off">
+                        <input type="text" name="phone" id="ghlPhone" tabindex="-1" readonly autocomplete="off">
+                        <input type="text" name="application_source" id="ghlAppSource" tabindex="-1" readonly
+                            autocomplete="off" value="CISI">
+                    </div>
+
+                    <button type="button" class="cta-button">Submit Application</button>
+
+                    <p style="margin-top: 2rem; text-align: center; color: rgba(255,255,255,0.6); font-size: 0.95rem;">
+                        If you have any questions, please
+                        <a href="https://calendly.com/boards-fintechcircle/15" target="_blank"
+                            style="color: var(--sky); text-decoration: underline;">book a call</a>
+                        with Susanne Chishti, Chair
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROCESSING OVERLAY -->
+    <div class="overlay" id="processingOverlay">
+        <div class="fade-up">
+            <div class="loading-spinner-large"></div>
+            <h2 class="hero-title" style="font-size: 2rem;">Analyzing Profile</h2>
+            <p class="hero-sub" style="font-size: 1rem; opacity: 0.7;">Cross-referencing your experience with cohort
+                requirements...</p>
+        </div>
+    </div>
+
+    <!-- REVIEWING VIEW -->
+    <div class="container" id="reviewingView">
+        <div class="fade-up" style="text-align: center;">
+            <h1 class="hero-title">Application Received</h1>
+            <p class="hero-sub">Thank you for your interest in the 2026 cohort. We are currently <span>reviewing your
+                    professional profile</span>.</p>
+
+            <div class="application-card" style="margin-top: 3rem; text-align: left;">
+                <p>To maintain the highest standards of peer-to-peer learning, our faculty reviews every application
+                    manually. Our team will verify your experience and alignment with current board vacancies.</p>
+                <p style="margin-top: 1.5rem;">You will receive an update via email regarding your qualification status
+                    within 24–48 hours.</p>
+            </div>
+
+            <a href="index.html" class="cta-button" style="margin-top: 4rem;">Return to Homepage</a>
+        </div>
+    </div>
+
+    <!-- SUCCESS VIEW (NEXT STEPS) -->
+    <div class="container" id="successView" style="display:none;">
+        <div class="fade-up" style="text-align: center;">
+            <h1 class="hero-title">Application Received</h1>
+            <p class="hero-sub">Thank you for your interest. Your professional profile <span>aligns with our 2026 cohort
+                    requirements</span>.</p>
+
+            <div class="application-card"
+                style="margin-top: 3rem; text-align: left; border-color: rgba(34, 193, 201, 0.4);">
+                <div class="glow"></div>
+                <h3 style="color: var(--sky); margin-bottom: 1rem;">Profile Review in Progress</h3>
+                <p>Thank you for the detailed information. Your profile currently meets most of our core requirements
+                    for the Board Readiness Programme.</p>
+                <p style="margin-top: 1.5rem;">To maintain our high standards of peer-to-peer learning, our faculty is
+                    now conducting a <strong>final manual review</strong> of your professional experience. You will
+                    receive a follow-up via email within 24 hours.</p>
+            </div>
+
+            <a href="index.html" class="cta-button" style="margin-top: 4rem;">Return to Homepage</a>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Google Sheets integration
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx7ByoZjkHSt4DUaB_ijZ_9S283nfvsbK0j-fLEckXDPFf9ZVL-38X8deSuv1TW7IkZZQ/exec';
+
+        // Send data to Google Sheets
+        async function sendToGoogleSheets(formData) {
+            try {
+                const response = await fetch(GOOGLE_SHEETS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Required for Google Apps Script
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                // Since mode is 'no-cors', we can't read the response
+                console.log('Application data sent to Google Sheets successfully');
+                return true;
+            } catch (error) {
+                console.error('Error sending to Google Sheets:', error);
+                // Don't fail the entire application if Google Sheets fails
+                return false;
+            }
+        }
+
+        // Pre-fill form from session storage if available
+        document.addEventListener('DOMContentLoaded', function () {
+            const registrationData = JSON.parse(sessionStorage.getItem('registrationData'));
+            if (registrationData) {
+                if (registrationData.firstName) document.getElementById('firstName').value = registrationData.firstName;
+                if (registrationData.lastName) document.getElementById('lastName').value = registrationData.lastName;
+                if (registrationData.email) document.getElementById('email').value = registrationData.email;
+                if (registrationData.phone) {
+                    // Stored as +447400123456; the visible box holds the national part only
+                    const stored = String(registrationData.phone);
+                    const code = document.getElementById('countryCode').value.replace(/\D/g, '');
+                    const digits = stored.replace(/\D/g, '');
+                    document.getElementById('phone').value =
+                        (stored.charAt(0) === '+' && digits.indexOf(code) === 0)
+                            ? digits.slice(code.length)
+                            : stored;
+                }
+            }
+
+        });
+
+        /* 'YYYY-MM-DD HH:mm:ss' in Europe/London, matching webinar_broadcast_date on
+           the landing page. hourCycle h23 keeps midnight at 00:00:00, not 24:00:00. */
+        function formatProcessingDate(d) {
+            const parts = new Intl.DateTimeFormat('en-GB', {
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit', second: '2-digit',
+                hourCycle: 'h23', timeZone: 'Europe/London'
+            }).formatToParts(d).reduce(function (acc, part) {
+                acc[part.type] = part.value;
+                return acc;
+            }, {});
+            return parts.year + '-' + parts.month + '-' + parts.day + ' ' +
+                parts.hour + ':' + parts.minute + ':' + parts.second;
+        }
+
+        /* Mirrors determineApplicationStatus() in the Apps Script, so GHL can branch
+           on the same verdict the spreadsheet records. */
+        function determineApplicationStatus(experience, investment) {
+            const years = parseInt(experience) || 0;
+            if (years >= 15 && investment === 'Yes') return 'Pre-Qualified';
+            if (years >= 10) return 'Under Review';
+            return 'Not Qualified';
+        }
+
+        // Searchable country dialling code + E.164 validation (phone-field.js)
+        const phoneFieldControl = PhoneField.init({ required: true });
+
+        const applicationForm = document.getElementById('applicationCisiForm');
+
+        /* The only submit event this page raises is the one requestSubmit() fires
+           below, once the off-screen fields are filled. It exists so GHL's tracking
+           script reads one complete form - with type="submit" the tracker would also
+           capture the user's own click, with those fields still empty, and the
+           workflow would run twice. */
+        applicationForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+        });
+
+        /* Scoped to the form: .cta-button is also used by the Return to Homepage
+           links, and a document-wide query would depend on DOM order. */
+        const applySubmitTrigger = applicationForm.querySelector('.cta-button');
+        if (applySubmitTrigger) {
+            applySubmitTrigger.addEventListener('click', handleApplication);
+        }
+
+        // A form whose button is type="button" loses Enter-to-submit
+        applicationForm.addEventListener('keydown', function (e) {
+            if (e.key !== 'Enter') return;
+            if (e.target.tagName !== 'INPUT' || e.target.type === 'hidden') return;
+            e.preventDefault();
+            handleApplication(e);
+        });
+
+        async function handleApplication(e) {
+            if (e) e.preventDefault();
+
+            // Native validation no longer runs by itself now the button is type="button"
+            if (!applicationForm.checkValidity()) {
+                applicationForm.reportValidity();
+                return;
+            }
+
+            // Get all form values
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            // E.164 from the picker, e.g. +447400123456
+            const phoneResult = phoneFieldControl.showFeedback();
+            if (!phoneResult.ok) {
+                phoneFieldControl.focus();
+                return;
+            }
+            const phone = phoneResult.value;
+            const title = document.getElementById('title').value.trim();
+            const company = document.getElementById('company').value.trim();
+            const experience = document.getElementById('experience').value.trim();
+            const linkedin = document.getElementById('linkedin').value.trim();
+            const investment = document.querySelector('input[name="applicant_investment_ready"]:checked').value;
+
+            // Validate required fields
+            if (!firstName || !lastName || !email || !phone || !title || !company || !experience || !investment) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            /* ---------- GoHighLevel external form tracking ----------
+               This must happen BEFORE the form is hidden: the tracker only reads
+               rendered fields, and a display:none form is invisible to it. */
+            document.getElementById('ghlAppStatus').value = determineApplicationStatus(experience, investment);
+            document.getElementById('ghlProcessingDate').value = formatProcessingDate(new Date());
+            document.getElementById('ghlSubmittedFrom').value = window.location.href;
+            document.getElementById('ghlPhone').value = phone;
+
+            if (typeof applicationForm.requestSubmit === 'function') {
+                applicationForm.requestSubmit();
+            } else {
+                applicationForm.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+            }
+
+            // Show processing overlay
+            document.getElementById('formView').style.display = 'none';
+            document.getElementById('processingOverlay').style.display = 'flex';
+
+            // Prepare data for Google Sheets
+            const googleSheetsData = {
+                formType: 'application-cisi',
+                timestamp: new Date().toISOString(),
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                phone: phone,
+                title: title,
+                company: company,
+                experience: experience,
+                linkedin: linkedin,
+                investment: investment,
+                futureCohortMonth: '',
+                clientId: 'fintech-circle',
+                submittedFromUrl: window.location.href
+            };
+
+            // Send to Google Sheets (don't wait for it to complete)
+            sendToGoogleSheets(googleSheetsData);
+
+            // Logic processing
+            setTimeout(() => {
+
+                document.getElementById('processingOverlay').style.display = 'none';
+
+                const isQualified = parseInt(experience) >= 15 && investment === "Yes";
+
+                if (isQualified) {
+                    // Show success view (no redirection now)
+                    document.getElementById('successView').style.display = 'block';
+                } else {
+                    // Show reviewing view
+                    document.getElementById('reviewingView').style.display = 'block';
+                }
+            }, 2500); // Artificial delay for "Executive processing" feel
+        }
+
+        // LinkedIn Help Toggle
+        document.getElementById('showHelpVideo').addEventListener('click', function () {
+            const container = document.getElementById('videoHelpContainer');
+            const video = document.getElementById('linkedinTutorial');
+            const isActive = container.classList.toggle('active');
+
+            if (isActive) {
+                video.play().catch(e => console.log("Video autoplay prevented:", e));
+                lucide.createIcons();
+            } else {
+                video.pause();
+                video.currentTime = 0;
+            }
+        });
+    </script>
+  <!-- GoHighLevel external form tracking -->
+  <script src="https://link.msgsndr.com/js/external-tracking.js"
+    data-tracking-id="tk_2e56d38ddaaa481ca49bd2dbae70ab7a"></script>
+</body>
+
+</html>
