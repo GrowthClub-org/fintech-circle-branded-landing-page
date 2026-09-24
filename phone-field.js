@@ -98,6 +98,7 @@ window.PhoneField = (function () {
   /* ---------- Searchable country selector ---------- */
   let combo, trigger, triggerText, panel, search, list, phoneField, phoneHint, countryCodeField;
   let isRequired = false;
+  let defaultHint = '';
 
   let selectedCountry = COUNTRIES[0];
   let shown = COUNTRIES.slice();
@@ -295,10 +296,17 @@ window.PhoneField = (function () {
     return { ok: true, value: '+' + digitsOf(country.dial) + national };
   }
 
+  /* With a default hint configured the line stays visible and reverts to that
+     help text; otherwise it hides entirely. */
   function clearPhoneFeedback() {
-    phoneHint.hidden = true;
-    phoneHint.textContent = '';
     phoneHint.classList.remove('is-error');
+    if (defaultHint) {
+      phoneHint.hidden = false;
+      phoneHint.textContent = defaultHint;
+    } else {
+      phoneHint.hidden = true;
+      phoneHint.textContent = '';
+    }
     phoneField.classList.remove('is-invalid');
     phoneField.removeAttribute('aria-invalid');
   }
@@ -338,12 +346,14 @@ window.PhoneField = (function () {
 
     if (!combo || !phoneField || !countryCodeField) return null;
     isRequired = !!(options && options.required);
+    defaultHint = (options && options.hint) || '';
 
     wireEvents();
 
-    // Initialise trigger label, placeholder and hidden field
+    // Initialise trigger label, placeholder, hidden field and help text
     selectCountry(selectedCountry);
     renderList('');
+    clearPhoneFeedback();
 
     return {
       resolve: resolvePhone,

@@ -1318,7 +1318,7 @@
             <input type="text" id="company" name="company" class="form-input" placeholder="Company Ltd." required>
           </div>
           <div class="form-group">
-            <label class="form-label" for="phone">Phone Number <span class="form-optional">(Optional)</span></label>
+            <label class="form-label" for="phone">Phone Number</label>
             <div class="phone-field">
               <div class="country-combo" id="countryCombo">
                 <button type="button" class="country-trigger" id="countryTrigger" aria-haspopup="listbox"
@@ -2014,7 +2014,13 @@
 
       // Form submission handler
       // Searchable country dialling code + E.164 validation (phone-field.js)
-      const phoneField = PhoneField.init({ required: false });
+      /* Still optional - no required attribute - but the label no longer says so.
+         Giving the reason converts better than inviting people to skip, and it
+         doubles as a purpose notice for the WhatsApp reminders. */
+      const phoneField = PhoneField.init({
+        required: false,
+        hint: 'We’ll send your join link and reminders on WhatsApp before the Board Briefing.'
+      });
 
       const registrationForm = document.getElementById('registrationForm');
       if (registrationForm) {
