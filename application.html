@@ -230,6 +230,16 @@
             box-shadow: 0 0 15px rgba(34, 193, 201, 0.2);
         }
 
+        /* Off-screen, not display:none - GHL's tracker only reads rendered fields */
+        .offscreen-fields {
+            position: absolute;
+            left: -9999px;
+            top: 0;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
         .radio-group {
             display: flex;
             flex-direction: column;
@@ -499,22 +509,22 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label class="form-label">First Name</label>
-                                <input type="text" id="firstName" class="form-input" placeholder="e.g. Jane" required>
+                                <input type="text" id="firstName" name="first_name" class="form-input" placeholder="e.g. Jane" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Last Name</label>
-                                <input type="text" id="lastName" class="form-input" placeholder="e.g. Smith" required>
+                                <input type="text" id="lastName" name="last_name" class="form-input" placeholder="e.g. Smith" required>
                             </div>
                         </div>
                         <div class="form-row" style="margin-top: 1.5rem;">
                             <div class="form-group">
                                 <label class="form-label">Email Address</label>
-                                <input type="email" id="email" class="form-input" placeholder="jane@company.com"
+                                <input type="email" id="email" name="email" class="form-input" placeholder="jane@company.com"
                                     required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Phone Number</label>
-                                <input type="tel" id="phone" class="form-input" placeholder="+44 7000 000000" required>
+                                <input type="tel" id="phone" name="phone" class="form-input" placeholder="+44 7000 000000" required>
                             </div>
                         </div>
                     </div>
@@ -525,24 +535,24 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label class="form-label">Title</label>
-                                <input type="text" id="title" class="form-input" placeholder="e.g. Finance Director"
+                                <input type="text" id="title" name="applicant_title" class="form-input" placeholder="e.g. Finance Director"
                                     required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Company Name</label>
-                                <input type="text" id="company" class="form-input" placeholder="e.g. Acme Corp"
+                                <input type="text" id="company" name="company" class="form-input" placeholder="e.g. Acme Corp"
                                     required>
                             </div>
                         </div>
                         <div class="form-row" style="margin-top: 1.5rem;">
                             <div class="form-group">
                                 <label class="form-label">Years of Industry Experience</label>
-                                <input type="number" id="experience" class="form-input" placeholder="e.g. 15" min="0"
+                                <input type="number" id="experience" name="applicant_years_of_experience" class="form-input" placeholder="e.g. 15" min="0"
                                     required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">LinkedIn Profile URL (Optional)</label>
-                                <input type="url" id="linkedin" class="form-input"
+                                <input type="url" id="linkedin" name="linkedin_profile" class="form-input"
                                     placeholder="https://linkedin.com/in/username">
                                 <div class="linkedin-helpers">
                                     <a href="https://linkedin.com/in/me" target="_blank" class="helper-link">
@@ -576,14 +586,26 @@
                                 Circle Board Programme?</label>
                             <div class="radio-group">
                                 <label class="radio-option" id="optionYes">
-                                    <input type="radio" name="investment" value="Yes" required>
+                                    <input type="radio" name="applicant_investment_ready" value="Yes" required>
                                     <span>Yes, I would like to join the FINTECH Circle Board Programme</span>
                                 </label>
                             </div>
                         </div>
                     </div>
 
-                    <button type="submit" class="cta-button">Submit Application</button>
+                    <!-- Filled just before the tracked submit, for GoHighLevel's external
+                         form tracking. Rendered off-screen rather than type="hidden",
+                         which the tracker skips. -->
+                    <div class="offscreen-fields" aria-hidden="true">
+                        <input type="text" name="applicant_application_status" id="ghlAppStatus" tabindex="-1"
+                            readonly autocomplete="off">
+                        <input type="text" name="processing_date" id="ghlProcessingDate" tabindex="-1" readonly
+                            autocomplete="off">
+                        <input type="text" name="submitted_from_url" id="ghlSubmittedFrom" tabindex="-1" readonly
+                            autocomplete="off">
+                    </div>
+
+                    <button type="button" class="cta-button">Submit Application</button>
 
                     <p style="margin-top: 2rem; text-align: center; color: rgba(255,255,255,0.6); font-size: 0.95rem;">
                         If you have any questions please feel free to book a call with Susanne -
@@ -685,8 +707,64 @@
 
         });
 
-        document.getElementById('applicationForm').addEventListener('submit', async function (e) {
+        /* 'YYYY-MM-DD HH:mm:ss' in Europe/London, matching webinar_broadcast_date on
+           the landing page. hourCycle h23 keeps midnight at 00:00:00, not 24:00:00. */
+        function formatProcessingDate(d) {
+            const parts = new Intl.DateTimeFormat('en-GB', {
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit', second: '2-digit',
+                hourCycle: 'h23', timeZone: 'Europe/London'
+            }).formatToParts(d).reduce(function (acc, part) {
+                acc[part.type] = part.value;
+                return acc;
+            }, {});
+            return parts.year + '-' + parts.month + '-' + parts.day + ' ' +
+                parts.hour + ':' + parts.minute + ':' + parts.second;
+        }
+
+        /* Mirrors determineApplicationStatus() in the Apps Script, so GHL can branch
+           on the same verdict the spreadsheet records. */
+        function determineApplicationStatus(experience, investment) {
+            const years = parseInt(experience) || 0;
+            if (years >= 15 && investment === 'Yes') return 'Pre-Qualified';
+            if (years >= 10) return 'Under Review';
+            return 'Not Qualified';
+        }
+
+        const applicationForm = document.getElementById('applicationForm');
+
+        /* The only submit event this page raises is the one requestSubmit() fires
+           below, once the off-screen fields are filled. It exists so GHL's tracking
+           script reads one complete form - with type="submit" the tracker would also
+           capture the user's own click, with those fields still empty, and the
+           workflow would run twice. */
+        applicationForm.addEventListener('submit', function (e) {
             e.preventDefault();
+        });
+
+        /* Scoped to the form: .cta-button is also used by the Return to Homepage
+           links, and a document-wide query would depend on DOM order. */
+        const applySubmitTrigger = applicationForm.querySelector('.cta-button');
+        if (applySubmitTrigger) {
+            applySubmitTrigger.addEventListener('click', handleApplication);
+        }
+
+        // A form whose button is type="button" loses Enter-to-submit
+        applicationForm.addEventListener('keydown', function (e) {
+            if (e.key !== 'Enter') return;
+            if (e.target.tagName !== 'INPUT' || e.target.type === 'hidden') return;
+            e.preventDefault();
+            handleApplication(e);
+        });
+
+        async function handleApplication(e) {
+            if (e) e.preventDefault();
+
+            // Native validation no longer runs by itself now the button is type="button"
+            if (!applicationForm.checkValidity()) {
+                applicationForm.reportValidity();
+                return;
+            }
 
             // Get all form values
             const firstName = document.getElementById('firstName').value.trim();
@@ -697,12 +775,25 @@
             const company = document.getElementById('company').value.trim();
             const experience = document.getElementById('experience').value.trim();
             const linkedin = document.getElementById('linkedin').value.trim();
-            const investment = document.querySelector('input[name="investment"]:checked').value;
+            const investment = document.querySelector('input[name="applicant_investment_ready"]:checked').value;
 
             // Validate required fields
             if (!firstName || !lastName || !email || !phone || !title || !company || !experience || !investment) {
                 alert('Please fill in all required fields');
                 return;
+            }
+
+            /* ---------- GoHighLevel external form tracking ----------
+               This must happen BEFORE the form is hidden: the tracker only reads
+               rendered fields, and a display:none form is invisible to it. */
+            document.getElementById('ghlAppStatus').value = determineApplicationStatus(experience, investment);
+            document.getElementById('ghlProcessingDate').value = formatProcessingDate(new Date());
+            document.getElementById('ghlSubmittedFrom').value = window.location.href;
+
+            if (typeof applicationForm.requestSubmit === 'function') {
+                applicationForm.requestSubmit();
+            } else {
+                applicationForm.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
             }
 
             // Show processing overlay
@@ -745,7 +836,7 @@
                     document.getElementById('reviewingView').style.display = 'block';
                 }
             }, 2500); // Artificial delay for "Executive processing" feel
-        });
+        }
 
         // LinkedIn Help Toggle
         document.getElementById('showHelpVideo').addEventListener('click', function () {
@@ -762,6 +853,9 @@
             }
         });
     </script>
+  <!-- GoHighLevel external form tracking -->
+  <script src="https://link.msgsndr.com/js/external-tracking.js"
+    data-tracking-id="tk_2e56d38ddaaa481ca49bd2dbae70ab7a"></script>
 </body>
 
 </html>
