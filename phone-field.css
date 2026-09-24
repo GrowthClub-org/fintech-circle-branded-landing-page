@@ -1,0 +1,174 @@
+/* Shared phone field: searchable country dialling code + E.164 validation.
+   Used by index.html, application.html and application-future.html.
+   Pairs with phone-field.js - keep the two together. */
+
+.form-optional {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: rgba(160, 160, 160, 0.7);
+}
+
+/* Phone number + searchable country dialling code */
+.phone-field {
+  display: grid;
+  grid-template-columns: minmax(15.5rem, max-content) 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+/* For narrow containers such as a two-column form row, where side-by-side would
+   squeeze the number box to nothing. Picker on top, number underneath. */
+.phone-field.is-stacked {
+  grid-template-columns: 1fr;
+}
+
+.country-combo {
+  position: relative;
+}
+
+.country-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0.9rem;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--white);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.country-trigger:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.country-trigger:focus-visible,
+.country-combo.is-open .country-trigger {
+  outline: none;
+  border-color: var(--sky);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 4px rgba(34, 193, 201, 0.15);
+}
+
+.country-trigger-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.country-caret {
+  flex: none;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--muted);
+}
+
+.country-panel {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 4px);
+  left: 0;
+  width: max(100%, 19rem);
+  background: #101010;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+}
+
+.country-search {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.85rem 0.9rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--white);
+}
+
+.country-search:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.country-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 15rem;
+  overflow-y: auto;
+}
+
+.country-list li {
+  padding: 0.7rem 0.9rem;
+  font-size: 1rem;
+  color: var(--white);
+  cursor: pointer;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.country-list li .dial {
+  color: var(--sky);
+  flex: none;
+  min-width: 3.6rem;
+}
+
+.country-list li.is-active,
+.country-list li:hover {
+  background: rgba(34, 193, 201, 0.18);
+}
+
+.country-list li[aria-selected="true"] {
+  font-weight: 700;
+}
+
+.country-empty {
+  padding: 0.9rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.form-hint {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+/* Off-screen, not display:none - GHL's form tracking only reads fields
+   that are actually rendered, so type="hidden" inputs are skipped. */
+.offscreen-fields {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form-hint.is-error {
+  color: #ff8a8a;
+}
+
+.form-input.is-invalid {
+  border-color: #ff8a8a;
+  box-shadow: 0 0 0 4px rgba(255, 138, 138, 0.12);
+}
+
+@media (max-width: 480px) {
+  .phone-field {
+    grid-template-columns: 1fr;
+  }
+
+  .country-panel {
+    width: 100%;
+  }
+}

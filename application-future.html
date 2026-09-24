@@ -484,6 +484,8 @@
             border-radius: 8px;
         }
     </style>
+  <link rel="stylesheet" href="phone-field.css">
+  <script src="phone-field.js"></script>
 </head>
 
 <body>
@@ -503,7 +505,7 @@
             </div>
 
             <div class="application-card">
-                <form class="reg-form" id="applicationForm">
+                <form class="reg-form" id="applicationFutureForm">
                     <!-- Basic Information -->
                     <div class="form-section">
                         <h3 class="form-section-title">Basic Information</h3>
@@ -524,8 +526,31 @@
                                     required>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Phone Number</label>
-                                <input type="tel" id="phone" name="phone" class="form-input" placeholder="+44 7000 000000" required>
+                                <label class="form-label" for="phone">Phone Number</label>
+                                <div class="phone-field is-stacked">
+                                    <div class="country-combo" id="countryCombo">
+                                        <button type="button" class="country-trigger" id="countryTrigger"
+                                            aria-haspopup="listbox" aria-expanded="false"
+                                            aria-label="Country dialling code, United Kingdom +44 selected">
+                                            <span class="country-trigger-text" id="countryTriggerText">+44 United
+                                                Kingdom</span>
+                                            <span class="country-caret" aria-hidden="true"></span>
+                                        </button>
+                                        <div class="country-panel" id="countryPanel" hidden>
+                                            <input type="text" class="country-search" id="countrySearch"
+                                                placeholder="Search country or code" autocomplete="off" role="combobox"
+                                                aria-controls="countryList" aria-expanded="true"
+                                                aria-autocomplete="list" aria-label="Search for a country">
+                                            <ul class="country-list" id="countryList" role="listbox"
+                                                aria-label="Country dialling code"></ul>
+                                        </div>
+                                    </div>
+                                    <input type="tel" id="phone" class="form-input" placeholder="7400 123456"
+                                        inputmode="tel" autocomplete="tel-national" aria-describedby="phoneHint"
+                                        required>
+                                </div>
+                                <p class="form-hint" id="phoneHint" hidden></p>
+                                <input type="hidden" id="countryCode" value="+44">
                             </div>
                         </div>
                     </div>
@@ -613,6 +638,7 @@
                             autocomplete="off">
                         <input type="text" name="submitted_from_url" id="ghlSubmittedFrom" tabindex="-1" readonly
                             autocomplete="off">
+                        <input type="text" name="phone" id="ghlPhone" tabindex="-1" readonly autocomplete="off">
                     </div>
 
                     <button type="button" class="cta-button">Submit Application</button>
@@ -693,7 +719,16 @@
                 if (registrationData.firstName) document.getElementById('firstName').value = registrationData.firstName;
                 if (registrationData.lastName) document.getElementById('lastName').value = registrationData.lastName;
                 if (registrationData.email) document.getElementById('email').value = registrationData.email;
-                if (registrationData.phone) document.getElementById('phone').value = registrationData.phone;
+                if (registrationData.phone) {
+                    // Stored as +447400123456; the visible box holds the national part only
+                    const stored = String(registrationData.phone);
+                    const code = document.getElementById('countryCode').value.replace(/\D/g, '');
+                    const digits = stored.replace(/\D/g, '');
+                    document.getElementById('phone').value =
+                        (stored.charAt(0) === '+' && digits.indexOf(code) === 0)
+                            ? digits.slice(code.length)
+                            : stored;
+                }
             }
 
             populateFutureMonths();
@@ -750,7 +785,10 @@
             return 'Not Qualified';
         }
 
-        const applicationForm = document.getElementById('applicationForm');
+        // Searchable country dialling code + E.164 validation (phone-field.js)
+        const phoneFieldControl = PhoneField.init({ required: true });
+
+        const applicationForm = document.getElementById('applicationFutureForm');
 
         /* The only submit event this page raises is the one requestSubmit() fires
            below, once the off-screen fields are filled. It exists so GHL's tracking
@@ -789,7 +827,13 @@
             const firstName = document.getElementById('firstName').value.trim();
             const lastName = document.getElementById('lastName').value.trim();
             const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
+            // E.164 from the picker, e.g. +447400123456
+            const phoneResult = phoneFieldControl.showFeedback();
+            if (!phoneResult.ok) {
+                phoneFieldControl.focus();
+                return;
+            }
+            const phone = phoneResult.value;
             const title = document.getElementById('title').value.trim();
             const company = document.getElementById('company').value.trim();
             const experience = document.getElementById('experience').value.trim();
@@ -814,6 +858,7 @@
             document.getElementById('ghlAppStatus').value = determineApplicationStatus(experience, investment);
             document.getElementById('ghlProcessingDate').value = formatProcessingDate(new Date());
             document.getElementById('ghlSubmittedFrom').value = window.location.href;
+            document.getElementById('ghlPhone').value = phone;
 
             if (typeof applicationForm.requestSubmit === 'function') {
                 applicationForm.requestSubmit();
