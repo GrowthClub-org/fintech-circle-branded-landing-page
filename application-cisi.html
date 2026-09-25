@@ -702,7 +702,11 @@
         lucide.createIcons();
 
         // Google Sheets integration
-        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx7ByoZjkHSt4DUaB_ijZ_9S283nfvsbK0j-fLEckXDPFf9ZVL-38X8deSuv1TW7IkZZQ/exec';
+        /* CISI applications post to their OWN Apps Script, bound to the CISI
+           spreadsheet - see google-sheets-script-cisi.js. This must never point at
+           the main endpoint: that script has no application-cisi branch, so a CISI
+           submission would be filed as a registration row in the wrong book. */
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycby3thjECwjq_1_qwKFG3srNgeaSb0WZ0fKc0XpAIYsYzNtgdV0PyLvsQ1MZOAiG0LV7/exec';
 
         // Send data to Google Sheets
         async function sendToGoogleSheets(formData) {
