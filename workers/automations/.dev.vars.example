@@ -1,0 +1,9 @@
+# Copy to .dev.vars for `npm run dev`. Never commit .dev.vars.
+GHL_PRIVATE_TOKEN=pit-REPLACE_ME
+WEBINARGEEK_WEBHOOK_SECRET=REPLACE_ME
+# Shared with the summit site (Lovable secret of the same name).
+SUMMIT_FORM_SECRET=REPLACE_ME
+
+# For deploying and reading logs only. Load it into the shell for wrangler;
+# never upload it as a Worker secret.
+CLOUDFLARE_API_TOKEN=REPLACE_ME

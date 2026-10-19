@@ -1,0 +1,24 @@
+{
+  // One Worker hosts every automation; each gets its own route in src/index.js.
+  "name": "growthclub-automations",
+  "main": "src/index.js",
+  "account_id": "c5410597cd6c806573552d0a83bef461",
+  "compatibility_date": "2026-09-01",
+  "observability": { "enabled": true },
+
+  // Not secret, so they live here. Secrets are set with `wrangler secret put`
+  // (see README.md): GHL_PRIVATE_TOKEN, WEBINARGEEK_WEBHOOK_SECRET.
+  "vars": {
+    "GHL_LOCATION_ID": "v9PRZECQMMf3nH4iagQQ",
+    // Timezone the readable_webinar_* fields are written in. Must match index.html.
+    "WEBINAR_TIMEZONE": "Europe/London",
+    // Website form notifications. NOTIFY_TO must be a verified Email Routing
+    // destination; NOTIFY_FROM must be on a domain with Email Routing enabled.
+    "NOTIFY_FROM": "forms@fintechcirclepro.com",
+    "NOTIFY_TO": "boards@fintechcircle.com"
+  },
+
+  "send_email": [
+    { "name": "NOTIFY_EMAIL", "destination_address": "boards@fintechcircle.com" }
+  ]
+}
