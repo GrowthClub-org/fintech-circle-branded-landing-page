@@ -14,7 +14,7 @@
     })(window, document, 'script', 'dataLayer', 'GTM-5MFP65RH');</script>
   <!-- End Google Tag Manager -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Insider Roadmap to UK Fintech Board Seats 2026 | FINTECH Circle</title>
+  <title>The Insider Roadmap to UK Fintech Board Seats 2027 | FINTECH Circle</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Heebo:wght@300;400;500;700&display=swap"
@@ -1284,11 +1284,11 @@
       <div class="floating-node" style="top: 45%; left: 85%;"></div>
       <div class="floating-node" style="top: 80%; left: 20%;"></div>
       <div class="fade-up">
-        <p class="hero-eyebrow">Exclusive Board Briefing -&nbsp;2026</p>
+        <p class="hero-eyebrow">Exclusive Board Briefing -&nbsp;2027</p>
       </div>
       <div class="fade-up">
         <h1 class="hero-headline">The <span style="color:var(--dusk)">Insider Roadmap</span> to Access Top UK Fintech
-          Board Seats in 2026</h1>
+          Board Seats in 2027</h1>
       </div>
       <div class="fade-up">
         <p class="hero-sub">Governance standards are rising. Regulatory exposure is intensifying. AI accountability is
@@ -1300,8 +1300,8 @@
 
     <div class="hero-right" id="register">
       <div class="event-card">
-        <span class="event-tag">Secure Your Place - Live 2026</span>
-        <h2 class="event-title" style="font-size:1.35rem; margin-bottom:1.8rem;">Join the Exclusive 2026 Board Briefing
+        <span class="event-tag">Secure Your Place - Live 2027</span>
+        <h2 class="event-title" style="font-size:1.35rem; margin-bottom:1.8rem;">Join the Exclusive 2027 Board Briefing
         </h2>
 
         <form class="reg-form" id="registrationForm">
@@ -1363,11 +1363,11 @@
 
         <div class="event-detail">
           <span class="event-detail-icon"><i data-lucide="calendar"></i> Date</span>
-          <span id="eventDate">Friday, 17th July 2026</span>
+          <span id="eventDate">Friday, 20th November 2026</span>
         </div>
         <div class="event-detail">
           <span class="event-detail-icon"><i data-lucide="clock"></i> Time</span>
-          <span id="eventTime">12:00 PM BST</span>
+          <span id="eventTime">12:00 PM GMT</span>
         </div>
       </div>
     </div>
@@ -1471,7 +1471,7 @@
       <div class="audience-item">
         <i data-lucide="shield-check" style="color:var(--sky); margin-bottom:1rem; display:block;"></i>
         <h3>Regulatory & Audit Experts</h3>
-        <p>Senior partners and advisors prioritizing reputation protection and mastering 2026 governance standards.</p>
+        <p>Senior partners and advisors prioritizing reputation protection and mastering 2027 governance standards.</p>
       </div>
       <div class="audience-item">
         <i data-lucide="briefcase" style="color:var(--sky); margin-bottom:1rem; display:block;"></i>
@@ -1488,14 +1488,14 @@
     </div>
   </section>
 
-  <!-- WHY COMPETITIVE IN 2026 -->
+  <!-- WHY COMPETITIVE IN 2027 -->
   <div class="section-full dark-section">
     <div class="glow-bg"
       style="background: radial-gradient(circle at 10% 20%, rgba(34, 193, 201, 0.1) 0%, transparent 50%);"></div>
     <div class="section-inner">
       <div class="section-rule" style="background:var(--gold);"></div>
       <p class="section-label">Market Context</p>
-      <h2>Why Board Seats Are <em>More Competitive</em> in 2026</h2>
+      <h2>Why Board Seats Are <em>More Competitive</em> in 2027</h2>
       <p style="max-width:600px; margin-bottom:3rem;">The governance landscape has shifted structurally. What qualified
         a NED five years ago is no longer sufficient. Five forces have reset the benchmark.</p>
 
@@ -1586,7 +1586,7 @@
           </div>
           <div class="roadmap-wave-card">
             <h3>Positioning in the Fintech NED Landscape</h3>
-            <p>Where demand genuinely sits in 2026, how founders and VCs evaluate NED credibility, and how to articulate
+            <p>Where demand genuinely sits in 2027, how founders and VCs evaluate NED credibility, and how to articulate
               your value proposition to headhunters and investment committees.</p>
           </div>
         </div>
@@ -1745,7 +1745,7 @@
   <!-- FINAL CTA -->
   <div class="final-cta">
     <h2 class="final-quote">Your Board Career Will Not<br>Happen <em>by Accident.</em></h2>
-    <p class="final-sub">The executives who will secure competitive UK fintech board mandates in 2026 are already
+    <p class="final-sub">The executives who will secure competitive UK fintech board mandates in 2027 are already
       positioning deliberately. This is where that process begins.</p>
 
     <div class="final-cta-buttons">
@@ -1766,9 +1766,21 @@
       const backendUrl = 'https://broadcast.growthclub.org'; // Change this to your production backend URL
       const CLIENT_ID = 'fintech-circle';
 
+      /* Used only when the broker can't be reached, so the countdown and the
+         registration still point at the right session. Update it with each new
+         broadcast; once its date has passed it is ignored and the backend's own
+         default broadcast is used instead. */
+      const FALLBACK_BROADCAST = {
+        broadcast_id: 6989640,
+        broadcast_data: { date: 1795176000, readable_date: '2026-11-20 12:00:00', webinar_title: null } // 20 Nov 2026, 12:00 UTC
+      };
+
+      function fallbackBroadcast() {
+        return FALLBACK_BROADCAST.broadcast_data.date * 1000 > Date.now() ? FALLBACK_BROADCAST : null;
+      }
+
       // Google Sheets integration
       const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx7ByoZjkHSt4DUaB_ijZ_9S283nfvsbK0j-fLEckXDPFf9ZVL-38X8deSuv1TW7IkZZQ/exec';
-      const N8N_WEBHOOK_URL = 'https://n8n.growthclub.org/webhook/4035665d-84b6-4a22-a9e0-1a4723bc9978';
 
       /* GoHighLevel Inbound Webhook URL. Create a GHL workflow with the
          "Inbound Webhook" trigger, copy its URL here, then map the JSON keys
@@ -1883,28 +1895,6 @@
         }
       }
 
-      async function sendToN8n(formData) {
-        try {
-          const response = await fetch(N8N_WEBHOOK_URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-          });
-      
-          if (!response.ok) {
-            throw new Error(`n8n request failed: ${response.status}`);
-          }
-      
-          console.log('Data sent to n8n successfully');
-          return true;
-        } catch (error) {
-          console.error('Error sending to n8n:', error);
-          return false;
-        }
-      }
-
       let targetDate = null;
 
       // Function to fetch broadcast data and set countdown date
@@ -1924,13 +1914,13 @@
         }
 
         // Fallback to hardcoded date if API fails
-        if (!targetDate) {
-          targetDate = new Date('2026-09-18T11:00:00Z').getTime(); // Note: UTC time, displayed in British Time below
+        if (!targetDate && fallbackBroadcast()) {
+          targetDate = FALLBACK_BROADCAST.broadcast_data.date * 1000; // UTC, displayed in British time below
           console.log('Using fallback countdown date');
         }
 
         // Update the Date/Time display in the event card
-        updateEventDisplay(targetDate);
+        if (targetDate) updateEventDisplay(targetDate);
 
         // Start countdown
         setInterval(updateCountdown, 1000);
@@ -2096,6 +2086,10 @@
             } catch (broadcastError) {
               console.warn('Could not fetch broadcast data:', broadcastError);
             }
+            if (!broadcastData || !broadcastData.broadcast_id) {
+              broadcastData = fallbackBroadcast();
+              if (broadcastData) console.log('Using fallback broadcast:', broadcastData.broadcast_id);
+            }
 
             // Prepare registration data
             const registrationData = {
@@ -2149,7 +2143,6 @@
             if (result.success) {
               // Send data to Google Sheets (don't wait for it to complete)
               sendToGoogleSheets(googleSheetsData);
-              sendToN8n(googleSheetsData);
 
               /* ---------- GoHighLevel external form tracking ----------
                  The watch link only exists once WebinarGeek has responded, so
