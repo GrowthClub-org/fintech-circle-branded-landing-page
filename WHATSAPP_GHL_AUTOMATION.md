@@ -89,6 +89,7 @@ Create these on the **Contact** object (Settings → Custom Fields):
 | `readable_webinar_date` | Text | `Friday, 25th September 2026` |
 | `readable_webinar_time` | Text | `11:00 AM BST` |
 | `watch_link_webinargeek` | Text | Per-registrant join URL |
+| `webinar_broadcast_date` | Text | `2026-09-25 11:00:00` — machine-readable, for date maths in workflows |
 
 Use **Text**, not Date. You are sending a formatted display string for use in a
 message, not a date for GHL to calculate with — a Date field may reject or reformat it.
@@ -159,6 +160,7 @@ inputs parked off-screen:
   <input type="text" name="readable_webinar_date"  id="ghlWebinarDate" tabindex="-1" readonly autocomplete="off">
   <input type="text" name="readable_webinar_time"  id="ghlWebinarTime" tabindex="-1" readonly autocomplete="off">
   <input type="text" name="watch_link_webinargeek" id="ghlWatchLink"   tabindex="-1" readonly autocomplete="off">
+  <input type="text" name="webinar_broadcast_date" id="ghlBroadcastDate" tabindex="-1" readonly autocomplete="off">
 </div>
 ```
 
@@ -232,6 +234,7 @@ document.getElementById('ghlPhone').value       = phone;
 document.getElementById('ghlWebinarDate').value = formatWebinarDate(webinarUnix);
 document.getElementById('ghlWebinarTime').value = formatWebinarTime(webinarUnix);
 document.getElementById('ghlWatchLink').value   = watchLink;
+document.getElementById('ghlBroadcastDate').value = formatWebinarBroadcastDate(webinarUnix);
 
 if (typeof form.requestSubmit === 'function') {
   form.requestSubmit();
@@ -294,6 +297,31 @@ function formatWebinarTime(unixSeconds) {
 
 Produces `Friday, 25th September 2026` and `11:00 AM BST`, switching to `GMT`
 automatically in winter. Change the `tz` constant for a client in another region.
+
+For a machine-readable copy (date maths in workflows, sorting, or a Date-typed custom
+field), add a third formatter. `hourCycle: 'h23'` matters — without it midnight comes
+out as `24:00:00` in some engines:
+
+```js
+function formatWebinarBroadcastDate(unixSeconds) {
+  if (!unixSeconds) return '';
+  const d = new Date(unixSeconds * 1000);
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+    hourCycle: 'h23', timeZone: 'Europe/London'
+  }).formatToParts(d).reduce(function (acc, part) {
+    acc[part.type] = part.value;
+    return acc;
+  }, {});
+  return parts.year + '-' + parts.month + '-' + parts.day + ' ' +
+    parts.hour + ':' + parts.minute + ':' + parts.second;
+}
+```
+
+Produces `2026-09-25 11:00:00`. Build it in the **same timezone as the display
+fields**, or the stored value will disagree with the time the registrant was shown —
+the webinar API often returns UTC, which is an hour out from BST.
 
 ### Step 9: Split the name
 
