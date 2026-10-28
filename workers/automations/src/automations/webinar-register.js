@@ -1,19 +1,19 @@
 /* Automation: landing page registration → WebinarGeek
 
-   Stand-in for broadcast.growthclub.org's /api/v1/webinar/register while that
-   backend's WebinarGeek key is broken. The landing page posts the same body it
-   sent the backend; we subscribe the person to REGISTRATION_BROADCAST_ID with
-   our own key and answer in the backend's shape, { success, watchLink }, so the
-   page's success handling is unchanged.
+   Replaces broadcast.growthclub.org's /api/v1/webinar/register. The landing
+   page posts the same body it sent that backend; we subscribe the person to the
+   webinar's next published session (the same one /webinar/upcoming shows) and
+   answer in the backend's shape, { success, watchLink }, so the page's success
+   handling is unchanged.
 
-   The broadcast comes from config, never from the request, so the page can't
-   be used to register people for other sessions. WebinarGeek's own webhook
-   then syncs the registration to GHL through /webinargeek/ghl. */
+   The session is chosen here, never taken from the request, so the page can't
+   be used to register people for other sessions. REGISTRATION_BROADCAST_ID, if
+   set, pins a specific session instead. WebinarGeek's own webhook then syncs
+   the registration to GHL through /webinargeek/ghl. */
 
 import { json } from '../lib/http.js';
-
-// Every domain the landing page is served from.
-const ALLOWED_ORIGINS = new Set(['https://webinar.fintechcircle.com', 'https://fintechcirclepro.com', 'https://www.fintechcirclepro.com']);
+import { findUpcomingBroadcast } from '../lib/upcoming-broadcast.js';
+import { LP_ORIGINS as ALLOWED_ORIGINS } from './webinar-upcoming.js';
 const API = 'https://app.webinargeek.com/api/v2';
 
 export async function handleWebinarRegister(request, env) {
@@ -32,10 +32,21 @@ export async function handleWebinarRegister(request, env) {
   const subscriber = parseRegistration(data);
   if (!subscriber) return withCors(json({ success: false, message: 'Please enter your name and a valid email address' }, 400), cors);
 
-  const broadcastId = String(env.REGISTRATION_BROADCAST_ID || '').trim();
-  if (!/^\d+$/.test(broadcastId) || !env.WEBINARGEEK_API_KEY) {
-    console.error('Webinar register misconfigured: broadcast or API key missing');
+  if (!env.WEBINARGEEK_API_KEY) {
+    console.error('Webinar register misconfigured: WEBINARGEEK_API_KEY missing');
     return withCors(json({ success: false, message: 'Registration is temporarily unavailable' }, 503), cors);
+  }
+
+  let broadcastId;
+  try {
+    broadcastId = await resolveBroadcast(env);
+  } catch (err) {
+    console.error('Webinar register: session lookup failed', err.message);
+    return withCors(json({ success: false, message: 'Registration failed, please try again' }, 502), cors);
+  }
+  if (!broadcastId) {
+    console.error('Webinar register: no upcoming published session');
+    return withCors(json({ success: false, message: 'There is no upcoming session to register for yet' }, 503), cors);
   }
 
   try {
@@ -64,6 +75,14 @@ export function parseRegistration(data) {
   const phone = text(data.phone, 20);
   if (/^\+?[0-9 ()-]{7,20}$/.test(phone)) subscriber.phone = phone;
   return subscriber;
+}
+
+// A pinned session wins; otherwise the webinar's next published session.
+async function resolveBroadcast(env) {
+  const pinned = String(env.REGISTRATION_BROADCAST_ID || '').trim();
+  if (/^\d+$/.test(pinned)) return pinned;
+  const next = await findUpcomingBroadcast(env.WEBINARGEEK_API_KEY, env.WEBINAR_ID);
+  return next ? String(next.id) : null;
 }
 
 async function subscribe(apiKey, broadcastId, subscriber) {

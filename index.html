@@ -1762,14 +1762,18 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      // Backend URL - update for production deployment
-      const backendUrl = 'https://broadcast.growthclub.org'; // Change this to your production backend URL
+      /* Our Cloudflare Worker (workers/automations) talks to WebinarGeek for
+         the page: /webinar/upcoming returns the webinar's next published
+         session, /webinar/register subscribes people to it. Both answer in the
+         shape the old broadcast.growthclub.org backend used. */
+      const WORKER_URL = 'https://growthclub-automations.boards.workers.dev';
+      const UPCOMING_URL = `${WORKER_URL}/webinar/upcoming`;
+      const REGISTER_URL = `${WORKER_URL}/webinar/register`;
       const CLIENT_ID = 'fintech-circle';
 
-      /* Used only when the broker can't be reached, so the countdown and the
-         registration still point at the right session. Update it with each new
-         broadcast; once its date has passed it is ignored and the backend's own
-         default broadcast is used instead. */
+      /* Used only when the Worker can't be reached, so the countdown still
+         shows the right session. Update it with each new broadcast; once its
+         date has passed it is ignored. */
       const FALLBACK_BROADCAST = {
         broadcast_id: 6989640,
         broadcast_data: { date: 1795172400, readable_date: '2026-11-20 11:00:00', webinar_title: null } // 20 Nov 2026, 11:00 UTC
@@ -1778,13 +1782,6 @@
       function fallbackBroadcast() {
         return FALLBACK_BROADCAST.broadcast_data.date * 1000 > Date.now() ? FALLBACK_BROADCAST : null;
       }
-
-      /* Temporary: registrations go through our Cloudflare Worker, which
-         subscribes people to WebinarGeek with a working API key, because the
-         broker's key is broken. It answers in the broker's { success, watchLink }
-         shape. Set back to `${backendUrl}/api/v1/webinar/register` once the
-         broker is fixed. */
-      const REGISTER_URL = 'https://growthclub-automations.boards.workers.dev/webinar/register';
 
       // Google Sheets integration
       const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx7ByoZjkHSt4DUaB_ijZ_9S283nfvsbK0j-fLEckXDPFf9ZVL-38X8deSuv1TW7IkZZQ/exec';
@@ -1907,7 +1904,7 @@
       // Function to fetch broadcast data and set countdown date
       async function initializeCountdown() {
         try {
-          const response = await fetch(`${backendUrl}/api/v1/broadcast/upcoming-broadcast?clientId=${encodeURIComponent(CLIENT_ID)}`);
+          const response = await fetch(UPCOMING_URL);
           if (response.ok) {
             const data = await response.json();
             if (data.broadcast_data && data.broadcast_data.date) {
@@ -2086,7 +2083,7 @@
             // First, fetch broadcast data to get the broadcast_id
             let broadcastData = null;
             try {
-              const broadcastResponse = await fetch(`${backendUrl}/api/v1/broadcast/upcoming-broadcast?clientId=${encodeURIComponent(CLIENT_ID)}`);
+              const broadcastResponse = await fetch(UPCOMING_URL);
               if (broadcastResponse.ok) {
                 broadcastData = await broadcastResponse.json();
               }

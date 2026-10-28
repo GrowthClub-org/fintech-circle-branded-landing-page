@@ -16,9 +16,11 @@
     // destination; NOTIFY_FROM must be on a domain with Email Routing enabled.
     "NOTIFY_FROM": "forms@fintechcirclepro.com",
     "NOTIFY_TO": "boards@fintechcircle.com",
-    // The session /webinar/register subscribes people to (20 Nov 2026, 11:00 UTC).
-    // Update for each new session. Secret: WEBINARGEEK_API_KEY.
-    "REGISTRATION_BROADCAST_ID": "6989640"
+    // WebinarGeek webinar the landing page registers for. /webinar/upcoming and
+    // /webinar/register use its next published session automatically. To pin a
+    // specific session instead, add "REGISTRATION_BROADCAST_ID". Secret:
+    // WEBINARGEEK_API_KEY.
+    "WEBINAR_ID": "575538"
   },
 
   "send_email": [
