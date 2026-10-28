@@ -15,7 +15,10 @@
     // Website form notifications. NOTIFY_TO must be a verified Email Routing
     // destination; NOTIFY_FROM must be on a domain with Email Routing enabled.
     "NOTIFY_FROM": "forms@fintechcirclepro.com",
-    "NOTIFY_TO": "boards@fintechcircle.com"
+    "NOTIFY_TO": "boards@fintechcircle.com",
+    // The session /webinar/register subscribes people to (20 Nov 2026, 11:00 UTC).
+    // Update for each new session. Secret: WEBINARGEEK_API_KEY.
+    "REGISTRATION_BROADCAST_ID": "6989640"
   },
 
   "send_email": [

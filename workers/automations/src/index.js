@@ -7,6 +7,7 @@
 import { handleWebinarGeekToGhl } from './automations/webinargeek-to-ghl.js';
 import { summitFormHandler } from './automations/summit-forms.js';
 import { handleWebsiteForm } from './automations/website-forms.js';
+import { handleWebinarRegister } from './automations/webinar-register.js';
 import { json } from './lib/http.js';
 
 const ROUTES = {
@@ -15,6 +16,8 @@ const ROUTES = {
   'POST /summit/contact': summitFormHandler('contact'),
   'POST /website/form': handleWebsiteForm,
   'OPTIONS /website/form': handleWebsiteForm,
+  'POST /webinar/register': handleWebinarRegister,
+  'OPTIONS /webinar/register': handleWebinarRegister,
 };
 
 export default {

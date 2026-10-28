@@ -1779,6 +1779,13 @@
         return FALLBACK_BROADCAST.broadcast_data.date * 1000 > Date.now() ? FALLBACK_BROADCAST : null;
       }
 
+      /* Temporary: registrations go through our Cloudflare Worker, which
+         subscribes people to WebinarGeek with a working API key, because the
+         broker's key is broken. It answers in the broker's { success, watchLink }
+         shape. Set back to `${backendUrl}/api/v1/webinar/register` once the
+         broker is fixed. */
+      const REGISTER_URL = 'https://growthclub-automations.boards.workers.dev/webinar/register';
+
       // Google Sheets integration
       const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx7ByoZjkHSt4DUaB_ijZ_9S283nfvsbK0j-fLEckXDPFf9ZVL-38X8deSuv1TW7IkZZQ/exec';
 
@@ -2095,6 +2102,8 @@
             const registrationData = {
               name: name,
               email: email,
+              company: company,
+              phone: phone,
               submittedFromUrl: window.location.href,
               terms: true // Assuming they agree by submitting
             };
@@ -2122,7 +2131,7 @@
             };
 
             // Make API call
-            const response = await fetch(`${backendUrl}/api/v1/webinar/register`, {
+            const response = await fetch(REGISTER_URL, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
