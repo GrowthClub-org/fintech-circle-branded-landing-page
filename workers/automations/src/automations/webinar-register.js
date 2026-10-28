@@ -12,11 +12,22 @@
    the registration to GHL through /webinargeek/ghl. */
 
 import { json } from '../lib/http.js';
+import { sendEmail } from '../lib/email.js';
 import { findUpcomingBroadcast } from '../lib/upcoming-broadcast.js';
 import { LP_ORIGINS as ALLOWED_ORIGINS } from './webinar-upcoming.js';
 const API = 'https://app.webinargeek.com/api/v2';
+const WG_TIMEOUT_MS = 8000;
+// Background retries after the visitor has had their reply; Workers allow
+// about 30 s of work after the response.
+const RETRY_DELAYS_MS = [5000, 15000];
 
-export async function handleWebinarRegister(request, env) {
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+/* Visitors with valid details always see success. If WebinarGeek can't take
+   the registration right now, the reply is { success: true, pending: true },
+   the Worker retries in the background, and if that fails too the team is
+   emailed the details to add by hand. Only invalid input returns an error. */
+export async function handleWebinarRegister(request, env, ctx, deps = { sendEmail, sleep }) {
   const origin = request.headers.get('Origin');
   const cors = corsHeaders(origin);
   if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
@@ -32,31 +43,72 @@ export async function handleWebinarRegister(request, env) {
   const subscriber = parseRegistration(data);
   if (!subscriber) return withCors(json({ success: false, message: 'Please enter your name and a valid email address' }, 400), cors);
 
-  if (!env.WEBINARGEEK_API_KEY) {
-    console.error('Webinar register misconfigured: WEBINARGEEK_API_KEY missing');
-    return withCors(json({ success: false, message: 'Registration is temporarily unavailable' }, 503), cors);
-  }
-
-  let broadcastId;
   try {
-    broadcastId = await resolveBroadcast(env);
-  } catch (err) {
-    console.error('Webinar register: session lookup failed', err.message);
-    return withCors(json({ success: false, message: 'Registration failed, please try again' }, 502), cors);
-  }
-  if (!broadcastId) {
-    console.error('Webinar register: no upcoming published session');
-    return withCors(json({ success: false, message: 'There is no upcoming session to register for yet' }, 503), cors);
-  }
-
-  try {
-    const watchLink = await subscribe(env.WEBINARGEEK_API_KEY, broadcastId, subscriber);
+    const { broadcastId, watchLink } = await register(env, subscriber);
     console.log('Webinar register', broadcastId, subscriber.email, watchLink ? 'ok' : 'no watch link');
     return withCors(json({ success: true, watchLink, broadcastId: Number(broadcastId) }), cors);
   } catch (err) {
-    console.error('Webinar register failed', broadcastId, subscriber.email, err.message);
-    return withCors(json({ success: false, message: 'Registration failed, please try again' }, 502), cors);
+    console.error('Webinar register failed, retrying in background', subscriber.email, err.message);
+    const work = retryThenAlert(env, subscriber, data, err.message, deps);
+    if (ctx && ctx.waitUntil) ctx.waitUntil(work); else await work;
+    return withCors(json({ success: true, watchLink: '', pending: true }), cors);
   }
+}
+
+// Resolve the session and subscribe; throws on any failure.
+async function register(env, subscriber) {
+  if (!env.WEBINARGEEK_API_KEY) throw new Error('WEBINARGEEK_API_KEY missing');
+  const broadcastId = await resolveBroadcast(env);
+  if (!broadcastId) throw new Error('no upcoming published session');
+  const watchLink = await subscribe(env.WEBINARGEEK_API_KEY, broadcastId, subscriber);
+  return { broadcastId, watchLink };
+}
+
+async function retryThenAlert(env, subscriber, data, firstError, deps) {
+  let lastError = firstError;
+  for (const delay of RETRY_DELAYS_MS) {
+    await deps.sleep(delay);
+    try {
+      const { broadcastId } = await register(env, subscriber);
+      console.log('Webinar register succeeded on retry', broadcastId, subscriber.email);
+      return;
+    } catch (err) {
+      lastError = err.message;
+    }
+  }
+  console.error('Webinar register FAILED after retries, emailing team', subscriber.email, lastError);
+  try {
+    await deps.sendEmail(env.NOTIFY_EMAIL, failedRegistrationEmail(env, subscriber, data, lastError));
+  } catch (err) {
+    console.error('Webinar register: could not email the team either', subscriber.email, err.message);
+  }
+}
+
+export function failedRegistrationEmail(env, subscriber, data, error) {
+  const name = [subscriber.firstname, subscriber.surname].filter(Boolean).join(' ');
+  const lines = [
+    'Someone registered on the webinar landing page, but WebinarGeek could not take the registration,',
+    'even after retrying. They were shown the normal success page.',
+    '',
+    'Please add them to the upcoming session in WebinarGeek by hand:',
+    '',
+    `Name: ${name}`,
+    `Email: ${subscriber.email}`,
+    subscriber.company ? `Company: ${subscriber.company}` : null,
+    subscriber.phone ? `Phone: ${subscriber.phone}` : null,
+    `Page: ${text(data && data.submittedFromUrl, 500) || 'unknown'}`,
+    `Time: ${new Date().toISOString()}`,
+    '',
+    `Error: ${error}`,
+  ].filter(l => l !== null);
+  return {
+    from: env.NOTIFY_FROM,
+    fromName: 'FINTECH Circle Website',
+    to: env.NOTIFY_TO,
+    replyTo: subscriber.email,
+    subject: `ACTION NEEDED: webinar registration failed for ${name || subscriber.email}`,
+    text: lines.join('\n'),
+  };
 }
 
 /* Pure: validates the page's body and builds WebinarGeek's subscriber.
@@ -88,7 +140,7 @@ async function resolveBroadcast(env) {
 async function subscribe(apiKey, broadcastId, subscriber) {
   const headers = { 'Api-Token': apiKey, Accept: 'application/json', 'Content-Type': 'application/json' };
   const res = await fetch(`${API}/broadcasts/${broadcastId}/subscriptions`, {
-    method: 'POST', headers, body: JSON.stringify(subscriber),
+    method: 'POST', headers, body: JSON.stringify(subscriber), signal: AbortSignal.timeout(WG_TIMEOUT_MS),
   });
   if (res.ok) return (await res.json()).watch_link || '';
 

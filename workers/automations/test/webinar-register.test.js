@@ -40,7 +40,57 @@ test('handler: preflight, origin check and bad input', async () => {
   assert.equal(pre.headers.get('Access-Control-Allow-Origin'), 'https://webinar.fintechcircle.com');
   assert.equal((await handleWebinarRegister(req(BODY, 'https://evil.example'), ENV)).status, 403);
   assert.equal((await handleWebinarRegister(req({ ...BODY, email: 'x' }), ENV)).status, 400);
-  assert.equal((await handleWebinarRegister(req(BODY), { ...ENV, WEBINARGEEK_API_KEY: '' })).status, 503);
+});
+
+test('failure: visitor still sees success; retries, then emails the team', async () => {
+  const real = globalThis.fetch;
+  let posts = 0;
+  globalThis.fetch = async (url, init = {}) => {
+    if (init.method === 'POST') posts++;
+    return new Response('WebinarGeek down', { status: 500 });
+  };
+  try {
+    const sent = [], waits = [];
+    const deps = { sendEmail: async (b, m) => sent.push(m), sleep: async ms => waits.push(ms) };
+    let background;
+    const ctx = { waitUntil: p => { background = p; } };
+    const res = await handleWebinarRegister(req(BODY), { ...ENV, NOTIFY_TO: 'boards@fintechcircle.com', NOTIFY_FROM: 'forms@fintechcirclepro.com' }, ctx, deps);
+    assert.equal(res.status, 200);
+    assert.deepEqual(await res.json(), { success: true, watchLink: '', pending: true });
+    await background;
+    assert.equal(posts, 3, 'first try plus two retries');
+    assert.deepEqual(waits, [5000, 15000]);
+    assert.equal(sent.length, 1);
+    assert.match(sent[0].subject, /^ACTION NEEDED: webinar registration failed for Jane van der Berg/);
+    for (const line of ['Email: jane@example.com', 'Company: Acme', 'Phone: +447700900123', 'Error: WebinarGeek 500']) assert.ok(sent[0].text.includes(line), line);
+  } finally { globalThis.fetch = real; }
+});
+
+test('failure: a retry that succeeds sends no email', async () => {
+  const real = globalThis.fetch;
+  let posts = 0;
+  globalThis.fetch = async (url, init = {}) => {
+    if (init.method === 'POST' && ++posts > 1) return Response.json({ watch_link: 'https://wg/watch/late' }, { status: 201 });
+    return new Response('blip', { status: 503 });
+  };
+  try {
+    const sent = [];
+    let background;
+    const res = await handleWebinarRegister(req(BODY), ENV, { waitUntil: p => { background = p; } }, { sendEmail: async (b, m) => sent.push(m), sleep: async () => {} });
+    assert.equal((await res.json()).pending, true);
+    await background;
+    assert.equal(posts, 2);
+    assert.equal(sent.length, 0);
+  } finally { globalThis.fetch = real; }
+});
+
+test('missing API key is treated as a failure, not shown to the visitor', async () => {
+  const sent = [];
+  const res = await handleWebinarRegister(req(BODY), { ...ENV, WEBINARGEEK_API_KEY: '' }, {}, { sendEmail: async (b, m) => sent.push(m), sleep: async () => {} });
+  assert.equal(res.status, 200);
+  assert.equal((await res.json()).pending, true);
+  assert.equal(sent.length, 1);
+  assert.ok(sent[0].text.includes('WEBINARGEEK_API_KEY missing'));
 });
 
 test('handler: subscribes to the configured broadcast, ignoring the page', async () => {
