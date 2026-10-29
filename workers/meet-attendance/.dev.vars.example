@@ -1,0 +1,13 @@
+# Copy to .dev.vars for `npm run dev`. Never commit .dev.vars.
+GHL_PRIVATE_TOKEN=pit-REPLACE_ME
+GOOGLE_CLIENT_SECRET=REPLACE_ME
+# 32 random bytes, base64. Generate with:
+#   node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
+TOKEN_ENCRYPTION_KEY=REPLACE_ME
+
+# For deploying and reading logs only. Load it into the shell for wrangler;
+# never upload it as a Worker secret.
+CLOUDFLARE_API_TOKEN=REPLACE_ME
+
+# Any long random string; also a Worker secret. Unlocks GET /admin/report.
+ADMIN_TOKEN=REPLACE_ME

@@ -1,0 +1,67 @@
+{
+	// Google Meet attendance → GHL appointment status. Separate from
+	// growthclub-automations so neither can break the other.
+	"name": "fintech-meet-attendance",
+	"main": "src/index.js",
+	"account_id": "c5410597cd6c806573552d0a83bef461",
+	"compatibility_date": "2026-09-01",
+	"observability": {
+		"enabled": true
+	},
+	// Every 15 minutes: check the appointments that ended recently.
+	"triggers": {
+		"crons": [
+			"*/15 * * * *"
+		]
+	},
+	// Holds Susanne's encrypted Google connection, short-lived OAuth state and
+	// which appointments are already decided. Created with
+	// `npx wrangler kv namespace create STATE`.
+	"kv_namespaces": [
+		{
+			"binding": "STATE",
+			"id": "6977f8a99a8e46a6a1d9a28c8e2b68ac"
+		}
+	],
+	// Not secret, so they live here. Secrets are set with `wrangler secret put`
+	// (see README.md): GHL_PRIVATE_TOKEN, GOOGLE_CLIENT_SECRET, TOKEN_ENCRYPTION_KEY,
+	// ADMIN_TOKEN (for GET /admin/report).
+	"vars": {
+		// Must match the redirect URI on the Google OAuth client (+ /oauth/google/callback).
+		"PUBLIC_URL": "https://fintech-meet-attendance.boards.workers.dev",
+		"GHL_LOCATION_ID": "v9PRZECQMMf3nH4iagQQ",
+		// Both GHL calendars named "Your Board Positioning Journey Begins Today
+		// (Calendly) - Susanne Chishti". Each booking appears on both; the Worker
+		// treats the copies as one booking and updates every copy.
+		"GHL_CALENDAR_IDS": "jbVJscIGsDKx5MeVDz2Z,qlFYdvf8Be69t5meGouK",
+		// Sales Call Pipeline: no-show → "No Show", attended → "Call Completed".
+		// Only opportunities still at "Call Booked" or "Call Reminder Sent" are moved.
+		"GHL_PIPELINE_ID": "UeXxk4EPOCGpGWl7xwFI",
+		"GHL_STAGE_NO_SHOW": "5ea8de9b-d61a-4ef7-b593-15e5aeed7a62",
+		"GHL_STAGE_ATTENDED": "70fc7c39-fbff-45de-8e46-be6c5bfbce6b",
+		"GHL_STAGES_BEFORE_CALL": "5ea0b2ac-f301-4c58-bd85-6b68f74c3c42,e69c1c96-27f4-4575-8670-0cd3ded65f9d",
+		// From the OAuth client in Google Cloud (the client ID is not a secret).
+		"GOOGLE_CLIENT_ID": "475989290587-39g4gadgt68qfusunu1u7sjor8r7sogg.apps.googleusercontent.com",
+		// Only this account may connect; it must be the Meet organizer.
+		"GOOGLE_ACCOUNT_EMAIL": "susanne.chishti@fintechcircle.com",
+		// Extra staff Meet user ids ("users/123,users/456") who never count as the applicant.
+		// Susanne's own id is taken from her Google connection.
+		"HOST_USER_IDS": "",
+		// An applicant who was in the call this long counts as attended.
+		"MIN_ATTENDED_MINUTES": "5",
+		// After this long past the scheduled end, absence becomes a decision.
+		"FINAL_CHECK_MINUTES": "120",
+		// "true": decide and email the decision, but change nothing in GHL.
+		"DRY_RUN": "false",
+		"REPORT_TIMEZONE": "Europe/London",
+		// Same sender and recipient as growthclub-automations.
+		"NOTIFY_FROM": "forms@fintechcirclepro.com",
+		"NOTIFY_TO": "boards@fintechcircle.com"
+	},
+	"send_email": [
+		{
+			"name": "NOTIFY_EMAIL",
+			"destination_address": "boards@fintechcircle.com"
+		}
+	]
+}
