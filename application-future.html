@@ -736,7 +736,11 @@
             populateFutureMonths();
         });
 
-        // Lists the remaining months of this year through the next two years
+        // Lists cohort months from January 2027 (or the current month, if later)
+        // through the end of the year after next. No cohorts start in August or December.
+        const NO_COHORT_MONTHS = [7, 11];
+        const FIRST_COHORT = new Date(2027, 0, 1);
+
         function populateFutureMonths() {
             const selectEl = document.getElementById('futureCohortMonth');
             if (!selectEl) return;
@@ -749,12 +753,15 @@
             ];
 
             const now = new Date();
-            const currentYear = now.getFullYear();
-            const currentMonth = now.getMonth();
+            const lastYear = now.getFullYear() + 2;
+            const start = now > FIRST_COHORT ? now : FIRST_COHORT;
+            const startYear = start.getFullYear();
+            const startMonth = start.getMonth();
 
-            for (let year = currentYear; year <= currentYear + 2; year++) {
+            for (let year = startYear; year <= lastYear; year++) {
                 months.forEach((month, index) => {
-                    if (year === currentYear && index < currentMonth) return;
+                    if (year === startYear && index < startMonth) return;
+                    if (NO_COHORT_MONTHS.includes(index)) return;
                     const opt = document.createElement('option');
                     opt.value = month + ' ' + year;
                     opt.textContent = month + ' ' + year;
