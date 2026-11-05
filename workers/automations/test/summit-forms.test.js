@@ -157,3 +157,9 @@ test('sheet: off without SUMMIT_SHEET_URL; when on, posts after GHL and a sheet 
     } finally { globalThis.fetch = real; }
   }
 });
+
+test('email shows the tag as GHL stores it, in lowercase', async () => {
+  const { summitNotification } = await import('../src/automations/summit-forms.js');
+  const e = summitNotification('contact', { name: 'Sam Lee', email: 's@x.co' }, mapSummitForm('contact', { name: 'Sam Lee', email: 's@x.co' }), ENV);
+  assert.ok(e.text.includes('GHL tag: summit_contactus'));
+});

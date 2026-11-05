@@ -174,7 +174,7 @@ export function summitNotification(formKey, data, contact, env) {
     const v = text(value, 5000);
     if (v) lines.push(`${label}: ${v}`);
   }
-  lines.push('', `Page: ${contact.customFields.form_submitted_from_url || 'unknown'}`, `GHL tag: ${form.tag}`,
+  lines.push('', `Page: ${contact.customFields.form_submitted_from_url || 'unknown'}`, `GHL tag: ${form.tag.toLowerCase()}`,
     '', 'The contact has been added to GHL. Reply to this email to answer them directly.');
   return {
     from: env.NOTIFY_FROM,
