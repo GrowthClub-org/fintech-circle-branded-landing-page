@@ -113,3 +113,47 @@ test('handler: contact form email; GHL down still emails; both down is 502', asy
     assert.equal(bad.status, 502);
   }, { failUpsert: true });
 });
+
+import { summitSheetRow } from '../src/automations/summit-forms.js';
+
+test('sheet row: keyed by the tab headers, with contact id, tag and GHL-style time', () => {
+  const contact = mapSummitForm('apply', APPLY);
+  const p = summitSheetRow('apply', contact, 'Summit_Attendee', 'c9', new Date('2026-11-05T14:03:00Z'));
+  assert.equal(p.formType, 'summit-apply');
+  assert.equal(p.row['Contact Id'], 'c9');
+  assert.equal(p.row['First Name'], 'Jane');
+  assert.equal(p.row.Email, 'jane@example.com');
+  assert.equal(p.row['Business Name'], 'Acme');
+  assert.equal(p.row.Tags, 'summit_attendee');
+  assert.equal(p.row.role, 'Chair / Non-Executive Director');
+  assert.equal(p.row.form_type, 'summit-apply');
+  assert.equal(p.row['Last Activity'], 'Nov 5 2026 14:03');
+  const c = summitSheetRow('contact', mapSummitForm('contact', { name: 'Sam Lee', email: 's@x.co', organisation: 'Org', subject: 'Hi', message: 'Msg' }), 'Summit_ContactUs', 'c1');
+  assert.equal(c.formType, 'summit-contact');
+  assert.equal(c.row['Business Name'], 'Org');
+  assert.equal(c.row.enquiry_topic, 'Hi');
+});
+
+test('sheet: off without SUMMIT_SHEET_URL; when on, posts after GHL and a sheet failure never blocks', async () => {
+  for (const sheetUp of [true, false]) {
+    const calls = [];
+    const real = globalThis.fetch;
+    globalThis.fetch = async (url, init = {}) => {
+      calls.push({ url: String(url), body: init.body });
+      if (String(url).startsWith('https://sheet.example')) return sheetUp ? new Response('{"status":"success"}') : new Response('nope', { status: 500 });
+      if (String(url).includes('/customFields')) return Response.json({ customFields: [] });
+      if (String(url).endsWith('/contacts/upsert')) return Response.json({ contact: { id: 'c9' } });
+      return Response.json({});
+    };
+    try {
+      const off = await summitFormHandler('apply')(request(APPLY, 'shh-secret'), ENV, {}, { sendEmail: async () => {} });
+      assert.equal(off.status, 200);
+      assert.equal(calls.filter(c => c.url.startsWith('https://sheet.example')).length, 0, 'nothing sent while off');
+      const on = await summitFormHandler('apply')(request(APPLY, 'shh-secret'), { ...ENV, SUMMIT_SHEET_URL: 'https://sheet.example/exec' }, {}, { sendEmail: async () => {} });
+      assert.equal(on.status, 200, 'sheet ' + (sheetUp ? 'up' : 'down') + ' still succeeds');
+      const posted = calls.filter(c => c.url.startsWith('https://sheet.example'));
+      assert.equal(posted.length, 1);
+      assert.equal(JSON.parse(posted[0].body).row['Contact Id'], 'c9');
+    } finally { globalThis.fetch = real; }
+  }
+});

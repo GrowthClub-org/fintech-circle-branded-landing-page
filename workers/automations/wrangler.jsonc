@@ -20,7 +20,10 @@
     // /webinar/register use its next published session automatically. To pin a
     // specific session instead, add "REGISTRATION_BROADCAST_ID". Secret:
     // WEBINARGEEK_API_KEY.
-    "WEBINAR_ID": "575538"
+    "WEBINAR_ID": "575538",
+    // Apps Script web app that appends summit submissions to the
+    // "Summit Form Applicants" tab. Remove to switch the sheet write off.
+    "SUMMIT_SHEET_URL": "https://script.google.com/macros/s/AKfycbx7ByoZjkHSt4DUaB_ijZ_9S283nfvsbK0j-fLEckXDPFf9ZVL-38X8deSuv1TW7IkZZQ/exec"
   },
 
   "send_email": [

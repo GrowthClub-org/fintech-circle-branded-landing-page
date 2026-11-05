@@ -79,19 +79,83 @@ export function summitFormHandler(formKey) {
     const contact = mapSummitForm(formKey, data);
     if (!contact) return json({ ok: false, error: 'A valid email is required' }, 400);
 
+    // The sheet row carries the GHL contact id, so it waits for the GHL sync;
+    // the email does not.
+    const ghlThenSheet = syncToGhl(contact, form.tag, env).then(
+      contactId => ({ contactId, sheet: appendToSheet(env, summitSheetRow(formKey, contact, form.tag, contactId)) }),
+      err => appendToSheet(env, summitSheetRow(formKey, contact, form.tag, '')).then(() => { throw err; }),
+    );
     const [ghl, email] = await Promise.allSettled([
-      syncToGhl(contact, form.tag, env),
+      ghlThenSheet,
       deps.sendEmail(env.NOTIFY_EMAIL, summitNotification(formKey, data, contact, env)),
     ]);
+    const sheet = ghl.status === 'fulfilled' ? await ghl.value.sheet : 'skipped';
     if (ghl.status === 'rejected') console.error('Summit form → GHL failed', formKey, contact.email, ghl.reason?.message);
     if (email.status === 'rejected') console.error('Summit form → email failed', formKey, contact.email, email.reason?.message);
     if (ghl.status === 'rejected' && email.status === 'rejected') {
       return json({ ok: false, error: 'Submission failed' }, 502);
     }
 
-    console.log('Summit form', formKey, contact.email, 'ghl:', ghl.status === 'fulfilled' ? ghl.value : 'failed', form.tag, 'email:', email.status);
+    console.log('Summit form', formKey, contact.email, 'ghl:', ghl.status === 'fulfilled' ? ghl.value.contactId : 'failed', form.tag, 'email:', email.status, 'sheet:', sheet);
     return json({ ok: true, tag: form.tag });
   };
+}
+
+/* Pure: the row for the "Summit Form Applicants" tab, keyed by that tab's
+   column headers (GHL's export layout), so Apps Script can place each value
+   under its header wherever the column sits. */
+export function summitSheetRow(formKey, contact, tag, contactId, now = new Date()) {
+  const cf = contact.customFields || {};
+  return {
+    formType: 'summit-' + formKey,
+    row: {
+      'Contact Id': contactId || '',
+      'First Name': contact.firstName || '',
+      'Last Name': contact.lastName || '',
+      Phone: '',
+      Email: contact.email,
+      'Business Name': cf.company || cf.organisation || '',
+      Created: now.toISOString(),
+      'Last Activity': ghlActivityTime(now),
+      Tags: tag.toLowerCase(),
+      job_title: cf.job_title || '',
+      company: cf.company || '',
+      role: cf.role || '',
+      LinkedIn_Profile_URL: cf.linkedin_profile_url || '',
+      enquiry_topic: cf.enquiry_topic || '',
+      enquiry_message: cf.enquiry_message || '',
+      form_type: cf.form_type || '',
+      organisation: cf.organisation || '',
+      form_submitted_from_url: cf.form_submitted_from_url || '',
+    },
+  };
+}
+
+// "Nov 5 2026 14:03" in UK time, the format of GHL's export.
+function ghlActivityTime(date) {
+  const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Europe/London', month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+  }).formatToParts(date).map(x => [x.type, x.value]));
+  return `${p.month} ${p.day} ${p.year} ${p.hour}:${p.minute}`;
+}
+
+/* Posts the row to the spreadsheet's Apps Script web app. Off until
+   SUMMIT_SHEET_URL is set, so nothing is written before the script knows the
+   summit form types. Never throws: the sheet is a record, not a gate. */
+async function appendToSheet(env, payload) {
+  if (!env.SUMMIT_SHEET_URL) return 'off';
+  try {
+    const res = await fetch(env.SUMMIT_SHEET_URL, {
+      method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload), signal: AbortSignal.timeout(15000),
+    });
+    const out = await res.text();
+    if (!res.ok || !/"status"\s*:\s*"success"/.test(out)) throw new Error(`${res.status} ${out.slice(0, 200)}`);
+    return 'ok';
+  } catch (err) {
+    console.error('Summit form → sheet failed', payload.formType, payload.row.Email, err.message);
+    return 'failed';
+  }
 }
 
 async function syncToGhl(contact, tag, env) {
